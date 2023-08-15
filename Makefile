@@ -20,14 +20,19 @@ ERASE := \033[2K\033[1A\r
 DIR_SRCS := src
 DIR_OBJS := .objs
 
-OBJS =	$(addprefix $(DIR_OBJS)/, $(SRCS:.c=.o))
+OBJS +=	$(addprefix $(DIR_OBJS)/, $(SRCS:.c=.o))
+
+OBJS +=	$(addprefix getnextline/, $(GNL_SRC:.c=.o))
 
 NAME =	cub3d
 
-CFLAGS = -Wall -Werror -Wextra -I $(INC_DIR) -Imlx_linux -O3
-HEADERS = $(NAME).h
+CFLAGS = -Wall -Werror -Wextra -I $(INC_DIR) -mlx -lX11 -lXext -lz -lmlx -lm
+HEADERS = cub3d.h
 INC_DIR = includes
 INC		= $(addprefix $(INC_DIR)/, $(HEADERS))
+
+GLN_SRC = get_next_line.c \
+		get_next_line_utils.c
 
 SRCS =	main.c \
 		parsing.c
@@ -55,7 +60,7 @@ $(DIR_OBJS):
 clean:
 	echo "$(PURPLE)🧹Removing $(NAME).o files !"
 	rm -rf $(DIR_OBJS)
-	$(MAKE) clean -c mlx/
+	make clean -C mlx/
 
 fclean: clean
 	echo "$(PURPLE)🧹Removing $(NAME:.a=) !"
