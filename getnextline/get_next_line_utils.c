@@ -12,6 +12,18 @@
 
 #include "get_next_line.h"
 
+int	ft_len(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (i);
+	while(s[i])
+		i++;
+	return (i);
+}
+
 int	ft_strchr(char *s, int c)
 {
 	int	i;
@@ -30,7 +42,7 @@ int	ft_strchr(char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *buf, char *temp)
+char	*ft_strjoin_gnl(char *buf, char *temp)
 {
 	int		i;
 	int		j;
@@ -45,7 +57,7 @@ char	*ft_strjoin(char *buf, char *temp)
 	}
 	if (!temp)
 		return (free(buf = NULL), NULL);
-	str = malloc(sizeof(char) * (ft_strlen(buf) + ft_strlen(temp) + 1));
+	str = malloc(sizeof(char) * (ft_len(buf) + ft_len(temp) + 1));
 	if (!str)
 		return (free(buf), NULL);
 	i = -1;

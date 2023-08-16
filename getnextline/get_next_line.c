@@ -52,7 +52,7 @@ char	*ft_next_buf(char *buf)
 	j = 0;
 	if (!buf[i])
 		return (free(buf), NULL);
-	str = malloc(sizeof(char) * (ft_strlen(buf) - i));
+	str = malloc(sizeof(char) * (ft_len(buf) - i));
 	if (!str)
 		return (free(buf), NULL);
 	i++;
@@ -77,7 +77,7 @@ char	*ft_read_line(int fd, char *buf)
 		if (bytes == -1)
 			return (free(buf), free(temp), NULL);
 		temp[bytes] = '\0';
-		buf = ft_strjoin(buf, temp);
+		buf = ft_strjoin_gnl(buf, temp);
 	}
 	return (free(temp), buf);
 }

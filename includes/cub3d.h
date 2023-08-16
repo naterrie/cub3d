@@ -23,7 +23,15 @@
 # include <fcntl.h>
 
 //	Parsing	//
+int		parsing(char *file);
 
-int	parsing(char *file);
+// Pars char //
+int		check_start(char **map);
+int		check_chars(char **map);
+
+// Utils Pars //
+void	free_str(char **s);
+int		nbline(char *file);
+char	**get_map(char *file);
 
 #endif

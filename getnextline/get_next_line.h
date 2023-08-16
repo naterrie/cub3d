@@ -16,17 +16,20 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include "cub3d.h"
+# include "../libft/libft.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
 
 int		ft_strchr(char *s, int c);
+int		ft_len(char *s);
 
 char	*get_next_line(int fd);
 char	*ft_next_buf(char *buf);
 char	*ft_get_line(char *buf);
 char	*ft_read_line(int fd, char *buf);
-char	*ft_strjoin(char *buf, char *temp);
+char	*ft_strjoin_gnl(char *buf, char *temp);
 
 #endif
