@@ -33,20 +33,22 @@ INC		=	$(addprefix $(INC_DIR), $(HEADERS))
 GNL_DIR =	getnextline/
 GNL_SRC =	get_next_line.c \
 			get_next_line_utils.c
-FILES	+=	$(addprefix $(GNL_SRC), $(GNL_SRC:.c=.o))
+FILES	+=	$(addprefix $(GNL_DIR), $(GNL_SRC:.c=.o))
 
 
-PARS_DIR =	pars/
+PARS_DIR =	src/pars/
 PARS_SRC =	pars_char.c \
 			parsing.c \
 			utils_pars.c
-FILES 	+=	$(addprefix $(DIR_SRCS)$(PARS_DIR), $(PARS_SRC:.c=.o))
+FILES 	+=	$(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o))
 
 DIR_SRCS	=	src/
 SRCS 		=	main.c
 FILES		+=	$(addprefix $(DIR_SRCS)/, $(SRCS))
 
-OBJS  =	$(addprefix $(DIR_OBJS), $(FILES:.c=.o))
+OBJS  =	$(addprefix $(DIR_OBJS), $(SRCS:.c=.o)) \
+        $(addprefix $(GNL_DIR), $(GNL_SRC:.c=.o)) \
+        $(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o))
 
 all: $(NAME)
 

@@ -23,7 +23,7 @@
 #  define BUFFER_SIZE 1
 # endif
 
-int		ft_strchr(char *s, int c);
+int		gnl_strchr(char *s, int c);
 int		ft_len(char *s);
 
 char	*get_next_line(int fd);

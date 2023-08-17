@@ -71,7 +71,7 @@ char	*ft_read_line(int fd, char *buf)
 	if (!temp)
 		return (free(buf), buf = NULL, NULL);
 	bytes = 1;
-	while (!ft_strchr(buf, '\n') && bytes != 0)
+	while (!gnl_strchr(buf, '\n') && bytes != 0)
 	{
 		bytes = read(fd, temp, BUFFER_SIZE);
 		if (bytes == -1)
