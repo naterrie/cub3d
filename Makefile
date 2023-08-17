@@ -44,11 +44,11 @@ FILES 	+=	$(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o))
 
 DIR_SRCS	=	src/
 SRCS 		=	main.c
-FILES		+=	$(addprefix $(DIR_SRCS)/, $(SRCS))
+FILES		+=	$(addprefix $(DIR_SRCS), $(SRCS:.c=.o))
 
-OBJS  =	$(addprefix $(DIR_OBJS), $(SRCS:.c=.o)) \
-        $(addprefix $(GNL_DIR), $(GNL_SRC:.c=.o)) \
-        $(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o))
+OBJS	=	$(addprefix $(DIR_SRCS), $(SRCS:.c=.o)) \
+			$(addprefix $(GNL_DIR), $(GNL_SRC:.c=.o)) \
+			$(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o))
 
 all: $(NAME)
 
