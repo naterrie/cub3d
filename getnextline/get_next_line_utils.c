@@ -19,7 +19,7 @@ int	ft_len(char *s)
 	i = 0;
 	if (!s)
 		return (i);
-	while(s[i])
+	while (s[i])
 		i++;
 	return (i);
 }

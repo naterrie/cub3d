@@ -42,10 +42,10 @@ int	check_border(char **map)
 	int	j;
 
 	i = 0;
-	while(map[i])
+	while (map[i])
 	{
 		j = 0;
-		while(map[i][j])
+		while (map[i][j])
 		{
 			if (check_wall(map, i, j))
 				return (1);

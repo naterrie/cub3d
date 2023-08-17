@@ -17,33 +17,36 @@ RED := \033[31m
 RESET := \033[0m
 ERASE := \033[2K\033[1A\r
 
-DIR_OBJS :=	.objs
+DIR_OBJS :=	.objs/
 
 NAME	=	cub3d
 
 CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -mlx -lX11 -lXext -lz -lmlx -lm
 HEADERS	=	cub3d.h
 
-INC_DIR	=	includes
-INC		=	$(addprefix $(INC_DIR)/, $(HEADERS))
+LIB_DIR	=	libft/
+LIB_FILE	= $(addprefix $(LIB_DIR), libft.a)
 
-GNL_DIR =	getnextline
+INC_DIR	=	includes/
+INC		=	$(addprefix $(INC_DIR), $(HEADERS))
+
+GNL_DIR =	getnextline/
 GNL_SRC =	get_next_line.c \
 			get_next_line_utils.c
-FILES	+=	$(addprefix $(GNL_SRC)/, $(GNL_SRC))
+FILES	+=	$(addprefix $(GNL_SRC), $(GNL_SRC:.c=.o))
 
 
-PARS_DIR =	src/pars
+PARS_DIR =	pars/
 PARS_SRC =	pars_char.c \
 			parsing.c \
 			utils_pars.c
-FILES 	+=	$(addprefix $(PARS_DIR)/, $(PARS_SRC))
+FILES 	+=	$(addprefix $(DIR_SRCS)$(PARS_DIR), $(PARS_SRC:.c=.o))
 
-DIR_SRCS	=	src
+DIR_SRCS	=	src/
 SRCS 		=	main.c
 FILES		+=	$(addprefix $(DIR_SRCS)/, $(SRCS))
 
-OBJS  =	$(addprefix $(DIR_OBJS)/, $(FILES:.c=.o))
+OBJS  =	$(addprefix $(DIR_OBJS), $(FILES:.c=.o))
 
 all: $(NAME)
 
@@ -61,16 +64,21 @@ $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c $(INC) Makefile
 $(DIR_OBJS):
 	mkdir -p $@
 
+$(LIB): force
+	make -C ./$(LIB_DIR)
+
 mlx/libmlx.a:
 	make -C ./mlx
 
 clean:
 	echo "$(PURPLE)🧹Removing $(NAME).o files !"
 	rm -rf $(DIR_OBJS)
+	make clean -C ./$(LIB_DIR)
 
 fclean: clean
 	echo "$(PURPLE)🧹Removing $(NAME:.a=) !"
 	rm -f $(NAME)
+	make fclean -C ./$(LIB_DIR)
 
 re: fclean $(NAME)
 

@@ -102,7 +102,7 @@ clean:
 
 fclean:	clean
 	rm -f $(NAME)
-	echo "$(PURPLE)🧹Removing $(NAME:.a=) !"
+	echo "$(PURPLE)🧹Removing $(NAME:.a=).a !"
 re:	fclean $(NAME)
 
 .PHONY:	all clean fclean re bonus
