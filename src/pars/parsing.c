@@ -36,7 +36,7 @@ static int	check_wall(char **map, int x, int y)
 	return (0);
 }
 
-int	check_border(char **map)
+static void	check_border(char **map)
 {
 	int	i;
 	int	j;
@@ -48,12 +48,15 @@ int	check_border(char **map)
 		while (map[i][j])
 		{
 			if (check_wall(map, i, j))
-				return (1);
+			{
+				free_str(map);
+				write(2, "ERROR\n, WRONG BORDER\n", 22);
+				exit(1);
+			}
 			j++;
 		}
 		i++;
 	}
-	return (0);
 }
 
 static int	check_file_name(char *file)
@@ -76,7 +79,7 @@ static int	check_file_name(char *file)
 				return (0);
 		}
 	}
-	write(2, "ERROR\nWRONG FILE NAME", 21);
+	printf("ERROR\nWRONG FILE NAME\n");
 	return (1);
 }
 
@@ -89,11 +92,8 @@ int	parsing(char *file)
 	map = get_map(file);
 	if (!map)
 		return (1);
-	if (check_start(map) != 1)
-		return (free_str(map), 1);
-	if (check_chars(map))
-		return (free_str(map), 1);
-	if (check_border(map))
-		return (free(map), 1);
+	check_start(map);
+	check_chars(map);
+	check_border(map);
 	return (free_str(map), 0);
 }

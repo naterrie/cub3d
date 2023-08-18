@@ -26,8 +26,8 @@
 int		parsing(char *file);
 
 // Pars char //
-int		check_start(char **map);
-int		check_chars(char **map);
+void	check_start(char **map);
+void	check_chars(char **map);
 
 // Utils Pars //
 void	free_str(char **s);

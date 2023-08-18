@@ -12,12 +12,14 @@
 
 #include "cub3d.h"
 
-int	check_start(char **map)
+void	check_start(char **map)
 {
 	int	i;
 	int	j;
+	int	count;
 
 	i = 0;
+	count = 0;
 	while (map[i])
 	{
 		j = 0;
@@ -25,15 +27,20 @@ int	check_start(char **map)
 		{
 			if (map[i][j] == 'N' || map[i][j] == 'S' || \
 				map[i][j] == 'E' || map[i][j] == 'W')
-				i++;
+				count ++;
 			j++;
 		}
 		i++;
 	}
-	return (i);
+	if (count != 1)
+	{
+		write(2, "Error : Start incorrect\n", 24);
+		free_str(map);
+		exit(1);
+	}
 }
 
-int	check_chars(char **map)
+void	check_chars(char **map)
 {
 	int	i;
 	int	j;
@@ -49,11 +56,11 @@ int	check_chars(char **map)
 				&& map[i][j] != ' ' && map[i][j] != 10 && map[i][j] != 13)
 			{
 				printf("Error\nWrong character in map\n");
-				return (1);
+				free_str(map);
+				exit(1);
 			}
 			j++;
 		}
 		i++;
 	}
-	return (0);
 }

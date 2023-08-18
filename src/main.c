@@ -16,6 +16,6 @@ int	main(int argc, char **argv)
 {
 	if (argc != 2)
 		return (write(2, "Wrong number args\n", 18));
-	if (parsing(argv[1]) == -1)
-		return (write(2, "Parsing error\n", 14));
+	if (parsing(argv[1]))
+		return (1);
 }
