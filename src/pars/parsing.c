@@ -12,28 +12,33 @@
 
 #include "cub3d.h"
 
-static int	check_wall(char **map, int x, int y)
+static void	border_char(char **map, int x, int y)
 {
-	if (map[x][y] == '0')
+	int	i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	if (x < 0 || y < 0 || x >= i || y >= ft_strlen(map[x]) || \
+	(map[x][y] != '1' && map[x][y] != '0' && map[x][y] != 'E' && map[x][y] != 'N'\
+	&& map[x][y] != 'S' && map[x][y] != 'W'))
 	{
-		if (map[x + 1][y] != '1' || map[x + 1][y] != '0')
-			return (1);
-		if (map[x - 1][y] != '1' || map[x + 1][y] != '0')
-			return (1);
-		if (map[x][y + 1] != '1' || map[x + 1][y] != '0')
-			return (1);
-		if (map[x][y - 1] != '1' || map[x + 1][y] != '0')
-			return (1);
-		if (map[x + 1][y + 1] != '1' || map[x + 1][y] != '0')
-			return (1);
-		if (map[x + 1][y - 1] != '1' || map[x + 1][y] != '0')
-			return (1);
-		if (map[x - 1][y +1] != '1' || map[x + 1][y] != '0')
-			return (1);
-		if (map[x - 1][y -1] != '1' || map[x + 1][y] != '0')
-			return (1);
+		printf("ERROR: Invalid border\n");
+		free_str(map);
+		exit(1);
 	}
-	return (0);
+}
+
+static void	check_wall(char **map, int x, int y)
+{
+	border_char(map, x + 1, y);
+	border_char(map, x - 1, y);
+	border_char(map, x, y + 1);
+	border_char(map, x, y - 1);
+	border_char(map, x + 1, y + 1);
+	border_char(map, x - 1, y - 1);
+	border_char(map, x + 1, y - 1);
+	border_char(map, x - 1, y + 1);
 }
 
 static void	check_border(char **map)
@@ -47,12 +52,8 @@ static void	check_border(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (check_wall(map, i, j))
-			{
-				free_str(map);
-				write(2, "ERROR\n, WRONG BORDER\n", 22);
-				exit(1);
-			}
+			if (map[i][j] == '0')
+				check_wall(map, i, j);
 			j++;
 		}
 		i++;
