@@ -22,16 +22,33 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
+typedef struct	s_data
+{
+	char	**map;
+	char	*NO;
+	char	*SO;
+	char	*WE;
+	char	*EA;
+	int		F[3];
+	int		C[3];
+}	t_data;
+
 //	Parsing	//
-int		parsing(char *file);
+int		parsing(char *file, t_data *data);
 
 // Pars char //
-void	check_start(char **map);
-void	check_chars(char **map);
+int		check_start(char **map);
+int		check_chars(char **map);
+
+// Pars texture //
+int		check_texture(t_data *data);
+void	split_file(char **map, t_data *data);
 
 // Utils Pars //
-void	free_str(char **s);
 int		nbline(char *file);
 char	**get_map(char *file);
+void	ft_exit(t_data *data);
+
+void	print_map(t_data *data);
 
 #endif

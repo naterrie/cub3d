@@ -12,6 +12,21 @@
 
 #include "cub3d.h"
 
+void	ft_exit(t_data *data)
+{
+	if (data->NO != NULL)
+		free(data->NO);
+	if (data->SO != NULL)
+		free(data->SO);
+	if (data->WE != NULL)
+		free(data->WE);
+	if (data->EA != NULL)
+		free(data->EA);
+	if (data->map != NULL)
+		free_str(data->map);
+	exit(1);
+}
+
 int	nbline(char *file)
 {
 	int		line;
@@ -30,19 +45,6 @@ int	nbline(char *file)
 	}
 	close(fd);
 	return (line + 1);
-}
-
-void	free_str(char **s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		free(s[i]);
-		i++;
-	}
-	free(s);
 }
 
 char	**get_map(char *file)

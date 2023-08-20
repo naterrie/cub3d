@@ -21,11 +21,11 @@ DIR_OBJS :=	.objs/
 
 NAME	=	cub3d
 
-CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -mlx -lX11 -lXext -lz -lmlx -lm
+CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR)
 HEADERS	=	cub3d.h
 
 LIB_DIR	=	libft/
-LIB_FILE	= $(addprefix $(LIB_DIR), libft.a)
+LIBFT	= $(addprefix $(LIB_DIR), libft.a)
 
 INC_DIR	=	includes/
 INC		=	$(addprefix $(INC_DIR), $(HEADERS))
@@ -33,31 +33,38 @@ INC		=	$(addprefix $(INC_DIR), $(HEADERS))
 GNL_DIR =	getnextline/
 GNL_SRC =	get_next_line.c \
 			get_next_line_utils.c
+
 FILES	+=	$(addprefix $(GNL_DIR), $(GNL_SRC:.c=.o))
 
 
 PARS_DIR =	src/pars/
 PARS_SRC =	pars_char.c \
+			pars_texture.c \
 			parsing.c \
-			utils_pars.c
+			utils_pars.c \
+
 FILES 	+=	$(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o))
+
 
 DIR_SRCS	=	src/
 SRCS 		=	main.c
+
 FILES		+=	$(addprefix $(DIR_SRCS), $(SRCS:.c=.o))
+
 
 OBJS	=	$(addprefix $(DIR_SRCS), $(SRCS:.c=.o)) \
 			$(addprefix $(GNL_DIR), $(GNL_SRC:.c=.o)) \
 			$(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o))
 
+
 all: $(NAME)
 
-$(NAME): $(DIR_OBJS) $(OBJS) $(LIB)
-	cc $(CFLAGS) $(OBJS) mlx/libmlx.a $(LIB) -o $(NAME)
+$(NAME): $(LIBFT) $(DIR_OBJS) $(OBJS)
+	cc $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 	echo "$(GREEN)✅ $(NAME) compilated !"
 	@norminette | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
-$(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c $(INC) Makefile
+$(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c $(INC) Makefile | libft $(LIBFT)
 	echo "$(GREEN)⏳ Making $(NAME)"
 	printf "$(BLEU) ⮡ Making $(RESET)$@$(RED)"
 	cc $(CFLAGS) -c $< -o $@
@@ -66,15 +73,17 @@ $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c $(INC) Makefile
 $(DIR_OBJS):
 	mkdir -p $@
 
-$(LIB): force
-	make -C ./$(LIB_DIR)
+$(LIBFT): force
+	make -C libft
 
-mlx/libmlx.a:
-	make -C ./mlx
+force :
 
 clean:
 	echo "$(PURPLE)🧹Removing $(NAME).o files !"
 	rm -rf $(DIR_OBJS)
+	rm -rf getnextline/*.o
+	rm -rf src/pars/*.o
+	rm -rf src/*.o
 	make clean -C ./$(LIB_DIR)
 
 fclean: clean

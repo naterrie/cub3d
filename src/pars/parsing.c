@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static void	border_char(char **map, int x, int y)
+static int	border_char(char **map, int x, int y)
 {
 	int	i;
 
@@ -22,26 +22,26 @@ static void	border_char(char **map, int x, int y)
 	if (x < 0 || y < 0 || x >= i || y >= ft_strlen(map[x]) || \
 	(map[x][y] != '1' && map[x][y] != '0' && map[x][y] != 'E' && map[x][y] != 'N'\
 	&& map[x][y] != 'S' && map[x][y] != 'W'))
-	{
-		printf("ERROR: Invalid border\n");
-		free_str(map);
-		exit(1);
-	}
+		return (write(2, "Error : wrong border\n", 22), 1);
+	return (0);
 }
 
-static void	check_wall(char **map, int x, int y)
+static int	check_wall(char **map, int x, int y)
 {
-	border_char(map, x + 1, y);
-	border_char(map, x - 1, y);
-	border_char(map, x, y + 1);
-	border_char(map, x, y - 1);
-	border_char(map, x + 1, y + 1);
-	border_char(map, x - 1, y - 1);
-	border_char(map, x + 1, y - 1);
-	border_char(map, x - 1, y + 1);
+	int	i;
+
+	i = border_char(map, x + 1, y);
+	i = border_char(map, x - 1, y);
+	i = border_char(map, x, y + 1);
+	i = border_char(map, x, y - 1);
+	i = border_char(map, x + 1, y + 1);
+	i = border_char(map, x - 1, y - 1);
+	i = border_char(map, x + 1, y - 1);
+	i = border_char(map, x - 1, y + 1);
+	return (i);
 }
 
-static void	check_border(char **map)
+static int	check_border(char **map)
 {
 	int	i;
 	int	j;
@@ -53,11 +53,13 @@ static void	check_border(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == '0')
-				check_wall(map, i, j);
+				if (check_wall(map, i, j))
+					return (1);
 			j++;
 		}
 		i++;
 	}
+	return (0);
 }
 
 static int	check_file_name(char *file)
@@ -84,7 +86,7 @@ static int	check_file_name(char *file)
 	return (1);
 }
 
-int	parsing(char *file)
+int	parsing(char *file, t_data *data)
 {
 	char	**map;
 
@@ -93,8 +95,14 @@ int	parsing(char *file)
 	map = get_map(file);
 	if (!map)
 		return (1);
-	check_start(map);
-	check_chars(map);
-	check_border(map);
-	return (free_str(map), 0);
+	split_file(map, data);
+	if (check_texture(data))
+		ft_exit(data);
+	if (check_start(data->map))
+		ft_exit(data);
+	if (check_chars(data->map))
+		ft_exit(data);
+	if (check_border(map))
+		ft_exit(data);
+	return (0);
 }
