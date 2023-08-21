@@ -12,31 +12,30 @@
 
 #include "cub3d.h"
 
-void	print_map(char **map)
+void	ft_exit(t_data *data)
 {
-	int	i = 0;
-	if (!map)
-		return;
-	while(map[i])
+	int	i;
+
+	i = 0;
+	if (data->NO != NULL)
+		free(data->NO);
+	if (data->SO != NULL)
+		free(data->SO);
+	if (data->WE != NULL)
+		free(data->WE);
+	if (data->EA != NULL)
+		free(data->EA);
+	if (data->map != NULL)
 	{
-		printf("%s", map[i]);
-		i++;
+		while (data->map[i])
+		{
+			free(data->map[i]);
+			i++;
+		}
+		free(data->map);
 	}
+	exit(1);
 }
-
-// void	print_data(t_data *data)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	printf ("NO = %s\nSO = %s\nWE = %s\nEA = %s\n", data->NO, data->SO, data->WE, data->EA);
-// 	printf ("F = %d %d %d\nC = %d %d %d\n", data->F[0], data->F[1], data->F[2], data->C[0], data->C[1], data->C[2]);
-// 	while (data->map[i])
-// 	{
-// 		printf("%s", data->map[i]);
-// 		i++;
-// 	}
-// }
 
 static void	set_data(t_data *data)
 {
@@ -65,5 +64,6 @@ int	main(int argc, char **argv)
 	set_data(&data);
 	if (parsing(argv[1], &data))
 		return (1);
+	ft_exit(&data);
 	//print_map(&data);
 }

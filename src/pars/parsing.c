@@ -28,17 +28,23 @@ static int	border_char(char **map, int x, int y)
 
 static int	check_wall(char **map, int x, int y)
 {
-	int	i;
-
-	i = border_char(map, x + 1, y);
-	i = border_char(map, x - 1, y);
-	i = border_char(map, x, y + 1);
-	i = border_char(map, x, y - 1);
-	i = border_char(map, x + 1, y + 1);
-	i = border_char(map, x - 1, y - 1);
-	i = border_char(map, x + 1, y - 1);
-	i = border_char(map, x - 1, y + 1);
-	return (i);
+	if (border_char(map, x + 1, y))
+		return (1);
+	if (border_char(map, x - 1, y))
+		return (1);
+	if (border_char(map, x, y + 1))
+		return (1);
+	if (border_char(map, x, y - 1))
+		return (1);
+	if (border_char(map, x + 1, y + 1))
+		return (1);
+	if (border_char(map, x - 1, y - 1))
+		return (1);
+	if (border_char(map, x + 1, y - 1))
+		return (1);
+	if (border_char(map, x - 1, y + 1))
+		return (1);
+	return (0);
 }
 
 static int	check_border(char **map)
@@ -82,7 +88,7 @@ static int	check_file_name(char *file)
 				return (0);
 		}
 	}
-	printf("ERROR\nWRONG FILE NAME\n");
+	printf("Error : Wrong file name\n");
 	return (1);
 }
 
@@ -102,7 +108,7 @@ int	parsing(char *file, t_data *data)
 		ft_exit(data);
 	if (check_chars(data->map))
 		ft_exit(data);
-	if (check_border(map))
+	if (check_border(data->map))
 		ft_exit(data);
 	return (0);
 }

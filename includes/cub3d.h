@@ -37,7 +37,7 @@ typedef struct	s_data
 int		parsing(char *file, t_data *data);
 
 // Pars char //
-int		check_start(char **map);
+int	check_start(char **map);
 int		check_chars(char **map);
 
 // Pars texture //
@@ -46,11 +46,12 @@ void	split_file(char **map, t_data *data, char *file);
 
 // Utils Pars //
 int		nbline(char *file);
+int		line_null(char *str);
 char	**get_file(char *file);
-void	ft_exit(t_data *data);
 char	*get_texture(char *str);
+void	ft_split_atoi(char *s, char c, int t[3]);
 
-void	print_map(char **map);
-void	print_data(t_data *data);
+void	ft_exit(t_data *data);
+
 
 #endif

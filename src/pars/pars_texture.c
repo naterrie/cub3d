@@ -6,41 +6,16 @@ int	check_texture(t_data *data)
 
 	i= 0;
 	if (!data->NO || !data->SO || !data->WE || !data->EA || !data->F || !data->C)
-		return (write(2, "Error : Missing wall\n", 21), 1);
+		return (printf("Error : No texture\n"), 1);
 	if (!data->map)
-		return (write(2, "Error : Missing map\n", 20), 1);
+		return (printf("Error : No map detected\n"), 1);
 	while (i < 3)
 	{
 		if (data->F[i] < 0 || data->F[i] > 255 || data->C[i] < 0 || data->C[i] > 255)
-			return (write(2, "Error : Wrong color\n", 21), 1);
+			return (printf("Error : Wrong color\n"), 1);
 		i++;
 	}
 	return (0);
-}
-
-static void	ft_split_atoi(char *s, char c, int t[3])
-{
-	char	**temp;
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (s[i] != c)
-		i++;
-	i++;
-	temp = ft_split(s + i, ',');
-	while (temp[j])
-		j++;
-	if (j != 3)
-	{
-		write(2, "Error : Wrong color\n", 21);
-		return ;
-	}
-	t[0] = ft_atoi(temp[0]);
-	t[1] = ft_atoi(temp[1]);
-	t[2] = ft_atoi(temp[2]);
-	free_str(temp);
 }
 
 static int	is_map(char *line)
@@ -51,7 +26,8 @@ static int	is_map(char *line)
 	while (line[i] != '\n')
 	{
 		if (line[i] != ' ' && line[i] != '0' && line[i] != '1' && line[i] != 'N' \
-			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W')
+			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W' && line[i] \
+			&& line[i] != 13 && line[i] != 10)
 			return (0);
 		i++;
 	}
@@ -67,11 +43,10 @@ static void	ft_set_map(t_data *data, char **map, char *file)
 	j = 0;
 	while(map[i])
 	{
-		if (is_map(map[i]))
+		if (is_map(map[i]) && line_null(map[i]))
 			break ;
 		i++;
 	}
-	printf("i = %d\n", i);
 	if (!map[i])
 		return ;
 	data->map = malloc(sizeof(char *) * (nbline(file) - i));
@@ -79,7 +54,6 @@ static void	ft_set_map(t_data *data, char **map, char *file)
 		return ;
 	while (map[i])
 	{
-		printf("%s", map[i]);
 		data->map[j] = ft_strdup(map[i]);
 		i++;
 		j++;

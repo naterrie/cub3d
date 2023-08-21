@@ -12,29 +12,29 @@
 
 #include "cub3d.h"
 
-void	ft_exit(t_data *data)
+void	ft_split_atoi(char *s, char c, int t[3])
 {
+	char	**temp;
 	int	i;
+	int	j;
 
 	i = 0;
-	if (data->NO != NULL)
-		free(data->NO);
-	if (data->SO != NULL)
-		free(data->SO);
-	if (data->WE != NULL)
-		free(data->WE);
-	if (data->EA != NULL)
-		free(data->EA);
-	if (data->map != NULL)
+	j = 0;
+	while (s[i] != c)
+		i++;
+	i++;
+	temp = ft_split(s + i, ',');
+	while (temp[j])
+		j++;
+	if (j != 3)
 	{
-		while (data->map[i])
-		{
-			free(data->map[i]);
-			i++;
-		}
-		free(data->map);
+		write(2, "Error : Wrong color\n", 21);
+		return ;
 	}
-	exit(1);
+	t[0] = ft_atoi(temp[0]);
+	t[1] = ft_atoi(temp[1]);
+	t[2] = ft_atoi(temp[2]);
+	free_str(temp);
 }
 
 char	*get_texture(char *str)
@@ -68,6 +68,20 @@ int	nbline(char *file)
 	}
 	close(fd);
 	return (line + 1);
+}
+
+int	line_null(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != 10 && str[i] != 13)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 char	**get_file(char *file)
