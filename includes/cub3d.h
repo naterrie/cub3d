@@ -42,13 +42,15 @@ int		check_chars(char **map);
 
 // Pars texture //
 int		check_texture(t_data *data);
-void	split_file(char **map, t_data *data);
+void	split_file(char **map, t_data *data, char *file);
 
 // Utils Pars //
 int		nbline(char *file);
-char	**get_map(char *file);
+char	**get_file(char *file);
 void	ft_exit(t_data *data);
+char	*get_texture(char *str);
 
-void	print_map(t_data *data);
+void	print_map(char **map);
+void	print_data(t_data *data);
 
 #endif

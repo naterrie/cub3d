@@ -14,6 +14,9 @@
 
 void	ft_exit(t_data *data)
 {
+	int	i;
+
+	i = 0;
 	if (data->NO != NULL)
 		free(data->NO);
 	if (data->SO != NULL)
@@ -23,8 +26,28 @@ void	ft_exit(t_data *data)
 	if (data->EA != NULL)
 		free(data->EA);
 	if (data->map != NULL)
-		free_str(data->map);
+	{
+		while (data->map[i])
+		{
+			free(data->map[i]);
+			i++;
+		}
+		free(data->map);
+	}
 	exit(1);
+}
+
+char	*get_texture(char *str)
+{
+	char	**split;
+	char	*temp;
+
+	split = ft_split(str, ' ');
+	if (!split || !split[1])
+		return (NULL);
+	temp = ft_strdup(split[1]);
+	free_str(split);
+	return (temp);
 }
 
 int	nbline(char *file)
@@ -47,7 +70,7 @@ int	nbline(char *file)
 	return (line + 1);
 }
 
-char	**get_map(char *file)
+char	**get_file(char *file)
 {
 	char	**map;
 	int		i;

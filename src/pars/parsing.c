@@ -92,10 +92,10 @@ int	parsing(char *file, t_data *data)
 
 	if (check_file_name(file))
 		return (1);
-	map = get_map(file);
+	map = get_file(file);
 	if (!map)
 		return (1);
-	split_file(map, data);
+	split_file(map, data, file);
 	if (check_texture(data))
 		ft_exit(data);
 	if (check_start(data->map))
