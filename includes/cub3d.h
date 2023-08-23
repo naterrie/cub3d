@@ -54,7 +54,10 @@ int		parsing(char *file, t_data *data);
 //	Pars char	//
 int		check_start(char **map);
 int		check_chars(char **map);
+
+//	Check texture	//
 void	replace_texture(char *str);
+int		check_extension(t_data *data);
 
 //	Pars texture	//
 int		file_texture(t_data *data);

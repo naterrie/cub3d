@@ -44,6 +44,7 @@ PARS_SRC =	pars_char.c \
 			pars_texture.c \
 			parsing.c \
 			utils_pars.c \
+			check_texture.c
 
 GAME_DIR =	src/game/
 GAME_SRC =	start_game.c \

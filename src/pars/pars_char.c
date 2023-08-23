@@ -12,22 +12,6 @@
 
 #include "cub3d.h"
 
-void	replace_texture(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\n' || str[i] == 13)
-		{
-			str[i] = 0;
-			break ;
-		}
-		i++;
-	}
-}
-
 int	check_start(char **map)
 {
 	int	i;
