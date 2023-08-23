@@ -15,8 +15,8 @@
 void	ft_split_atoi(char *s, char c, int t[3])
 {
 	char	**temp;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;

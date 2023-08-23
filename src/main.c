@@ -14,26 +14,18 @@
 
 void	ft_exit(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	if (data->NO != NULL)
-		free(data->NO);
-	if (data->SO != NULL)
-		free(data->SO);
-	if (data->WE != NULL)
-		free(data->WE);
-	if (data->EA != NULL)
-		free(data->EA);
+	if (data->no != NULL)
+		free(data->no);
+	if (data->so != NULL)
+		free(data->so);
+	if (data->we != NULL)
+		free(data->we);
+	if (data->ea != NULL)
+		free(data->ea);
 	if (data->map != NULL)
-	{
-		while (data->map[i])
-		{
-			free(data->map[i]);
-			i++;
-		}
-		free(data->map);
-	}
+		free_str(data->map);
+	if (data->mlx != NULL)
+		free(data->mlx);
 	exit(1);
 }
 
@@ -43,14 +35,15 @@ static void	set_data(t_data *data)
 
 	i = 0;
 	data->map = NULL;
-	data->NO = NULL;
-	data->SO = NULL;
-	data->WE = NULL;
-	data->EA = NULL;
+	data->no = NULL;
+	data->so = NULL;
+	data->we = NULL;
+	data->ea = NULL;
+	data->win = NULL;
 	while (i < 3)
 	{
-		data->F[i] = -1;
-		data->C[i] = -1;
+		data->f[i] = -1;
+		data->c[i] = -1;
 		i++;
 	}
 }
@@ -64,6 +57,6 @@ int	main(int argc, char **argv)
 	set_data(&data);
 	if (parsing(argv[1], &data))
 		return (1);
+	start_game(&data);
 	ft_exit(&data);
-	//print_map(&data);
 }

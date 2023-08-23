@@ -24,6 +24,8 @@ NAME	=	cub3d
 CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR)
 HEADERS	=	cub3d.h
 
+MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
+
 LIB_DIR	=	libft/
 LIBFT	= $(addprefix $(LIB_DIR), libft.a)
 
@@ -43,6 +45,10 @@ PARS_SRC =	pars_char.c \
 			parsing.c \
 			utils_pars.c \
 
+GAME_DIR =	src/game/
+GAME_SRC =	start_game.c \
+			utils_game.c \
+
 FILES 	+=	$(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o))
 
 
@@ -54,21 +60,24 @@ FILES		+=	$(addprefix $(DIR_SRCS), $(SRCS:.c=.o))
 
 OBJS	=	$(addprefix $(DIR_SRCS), $(SRCS:.c=.o)) \
 			$(addprefix $(GNL_DIR), $(GNL_SRC:.c=.o)) \
-			$(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o))
+			$(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o)) \
+			$(addprefix $(GAME_DIR), $(GAME_SRC:.c=.o))
 
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(DIR_OBJS) $(OBJS)
-	cc $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(LIBFT) $(DIR_OBJS) mlx/libmlx.a $(OBJS)
+	cc $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(MLXFLAGS)
 	echo "$(GREEN)✅ $(NAME) compilated !"
-	@norminette | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
 $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c $(INC) Makefile | libft $(LIBFT)
 	echo "$(GREEN)⏳ Making $(NAME)"
 	printf "$(BLEU) ⮡ Making $(RESET)$@$(RED)"
 	cc $(CFLAGS) -c $< -o $@
 	printf "$(ERASE)"
+
+mlx/libmlx.a:
+	make -C mlx
 
 $(DIR_OBJS):
 	mkdir -p $@
@@ -83,7 +92,9 @@ clean:
 	rm -rf $(DIR_OBJS)
 	rm -rf getnextline/*.o
 	rm -rf src/pars/*.o
+	rm -rf src/game/*.o
 	rm -rf src/*.o
+	make clean -C mlx/
 	make clean -C ./$(LIB_DIR)
 
 fclean: clean

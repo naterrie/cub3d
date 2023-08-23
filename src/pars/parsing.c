@@ -20,8 +20,8 @@ static int	border_char(char **map, int x, int y)
 	while (map[i])
 		i++;
 	if (x < 0 || y < 0 || x >= i || y >= ft_strlen(map[x]) || \
-	(map[x][y] != '1' && map[x][y] != '0' && map[x][y] != 'E' && map[x][y] != 'N'\
-	&& map[x][y] != 'S' && map[x][y] != 'W'))
+	(map[x][y] != '1' && map[x][y] != '0' && map[x][y] != 'E' \
+	&& map[x][y] != 'N' && map[x][y] != 'S' && map[x][y] != 'W'))
 		return (write(2, "Error : wrong border\n", 22), 1);
 	return (0);
 }
