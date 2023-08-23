@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:21:48 by naterrie          #+#    #+#             */
-/*   Updated: 2023/08/23 16:22:30 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/08/23 16:36:24 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static int	file_extention(char *file)
 	while (file[i])
 		i++;
 	i--;
-	if (file[i] == 'X')
+	if (file[i] == 'm')
 	{
 		i--;
-		if (file[i] == 'P')
+		if (file[i] == 'p')
 		{
 			i--;
-			if (file[i] == 'M')
+			if (file[i] == 'x')
 				i--;
 			if (file[i] == '.')
 				return (0);

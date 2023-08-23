@@ -1,7 +1,7 @@
-NO includes/cub3d.h
-SO includes/cub3d.h
-WE includes/cub3d.h
-EA includes/cub3d.h
+NO texture/test.xpm
+SO texture/test.xpm
+WE texture/test.xpm
+EA texture/test.xpm
 
 F 220,100,0
 C 225,30,0
