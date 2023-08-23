@@ -98,3 +98,30 @@ void	split_file(char **map, t_data *data, char *file)
 	ft_set_map(data, map, file);
 	free_str(map);
 }
+
+int	file_texture(t_data *data)
+{
+	int	i;
+
+	replace_texture(data->no);
+	replace_texture(data->so);
+	replace_texture(data->we);
+	replace_texture(data->ea);
+	i = open(data->no, O_RDONLY);
+	if (i < 0)
+		return (printf("Error : Wrong path NO\n"), 1);
+	close(i);
+	i = open(data->so, O_RDONLY);
+	if (i < 0)
+		return (printf("Error : Wrong path SO\n"), 1);
+	close(i);
+	i = open(data->we, O_RDONLY);
+	if (i < 0)
+		return (printf("Error : Wrong path WE\n"), 1);
+	close(i);
+	i = open(data->ea, O_RDONLY);
+	if (i < 0)
+		return (printf("Error : Wrong path EA\n"), 1);
+	close(i);
+	return (0);
+}

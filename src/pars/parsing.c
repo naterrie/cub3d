@@ -104,6 +104,8 @@ int	parsing(char *file, t_data *data)
 	split_file(map, data, file);
 	if (check_texture(data))
 		ft_exit(data);
+	if (file_texture(data))
+		ft_exit(data);
 	if (check_start(data->map))
 		ft_exit(data);
 	if (check_chars(data->map))

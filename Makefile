@@ -47,7 +47,7 @@ PARS_SRC =	pars_char.c \
 
 GAME_DIR =	src/game/
 GAME_SRC =	start_game.c \
-			utils_game.c \
+			utils_game.c
 
 FILES 	+=	$(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o))
 
@@ -69,6 +69,7 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(DIR_OBJS) mlx/libmlx.a $(OBJS)
 	cc $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(MLXFLAGS)
 	echo "$(GREEN)✅ $(NAME) compilated !"
+	@norminette src/ | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
 $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c $(INC) Makefile | libft $(LIBFT)
 	echo "$(GREEN)⏳ Making $(NAME)"

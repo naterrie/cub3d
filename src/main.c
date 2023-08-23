@@ -24,8 +24,6 @@ void	ft_exit(t_data *data)
 		free(data->ea);
 	if (data->map != NULL)
 		free_str(data->map);
-	if (data->mlx != NULL)
-		free(data->mlx);
 	exit(1);
 }
 
@@ -40,6 +38,7 @@ static void	set_data(t_data *data)
 	data->we = NULL;
 	data->ea = NULL;
 	data->win = NULL;
+	data->mlx = NULL;
 	while (i < 3)
 	{
 		data->f[i] = -1;
@@ -58,5 +57,4 @@ int	main(int argc, char **argv)
 	if (parsing(argv[1], &data))
 		return (1);
 	start_game(&data);
-	ft_exit(&data);
 }
