@@ -21,6 +21,12 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <stdbool.h>
+
+# define MINI_SIZE 5
+# define MAP_ZOOM 10
+# define SCREEN_H 1800
+# define SCREEN_W 3200
 
 typedef struct s_image
 {
@@ -34,12 +40,20 @@ typedef struct s_data
 	void	*mlx;
 	void	*win;
 	char	**map;
+	char	*addr;
+	void	*img;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 	char	*no;
 	char	*so;
 	char	*we;
 	char	*ea;
+	bool	minimap;
 	int		f[3];
 	int		c[3];
+	int		x;
+	int		y;
 }	t_data;
 
 //	Start game	//
@@ -48,12 +62,22 @@ void	start_game(t_data *data);
 //	Utils game	//
 int		exit_game(t_data *data);
 
+
+// Minimap //
+void	minimap_full(t_data *data);
+void	minimap_player(t_data *data);
+
+//	Draw utils	//
+void	put_floor_ceiling(t_data *data);
+void	draw_square(t_data *data, int x, int y, int color);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
 //	Parsing	//
 int		parsing(char *file, t_data *data);
 
 //	Pars char	//
-int		check_start(char **map);
 int		check_chars(char **map);
+int		check_start(t_data *data);
 
 //	Check texture	//
 void	replace_texture(char *str);

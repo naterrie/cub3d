@@ -32,6 +32,7 @@ static void	set_data(t_data *data)
 	int	i;
 
 	i = 0;
+	data->addr = NULL;
 	data->map = NULL;
 	data->no = NULL;
 	data->so = NULL;
@@ -39,6 +40,8 @@ static void	set_data(t_data *data)
 	data->ea = NULL;
 	data->win = NULL;
 	data->mlx = NULL;
+	data->minimap = false;
+	data->img = NULL;
 	while (i < 3)
 	{
 		data->f[i] = -1;
@@ -57,4 +60,5 @@ int	main(int argc, char **argv)
 	if (parsing(argv[1], &data))
 		return (1);
 	start_game(&data);
+	return (0);
 }

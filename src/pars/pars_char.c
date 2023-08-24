@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	check_start(char **map)
+int	check_start(t_data *data)
 {
 	int	i;
 	int	j;
@@ -20,14 +20,18 @@ int	check_start(char **map)
 
 	i = 0;
 	count = 0;
-	while (map[i])
+	while (data->map[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (data->map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || \
-				map[i][j] == 'E' || map[i][j] == 'W')
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || \
+				data->map[i][j] == 'E' || data->map[i][j] == 'W')
+			{
+				data->x = i;
+				data->y = j;
 				count++;
+			}
 			j++;
 		}
 		i++;

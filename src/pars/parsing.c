@@ -108,7 +108,7 @@ int	parsing(char *file, t_data *data)
 		ft_exit(data);
 	if (check_extension(data))
 		ft_exit(data);
-	if (check_start(data->map))
+	if (check_start(data))
 		ft_exit(data);
 	if (check_chars(data->map))
 		ft_exit(data);
