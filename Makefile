@@ -19,9 +19,9 @@ ERASE := \033[2K\033[1A\r
 
 DIR_OBJS :=	.objs/
 
-NAME	=	cub3d
+NAME	=	cub3D
 
-CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR)
+CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -g3
 HEADERS	=	cub3d.h
 
 MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
@@ -69,7 +69,7 @@ OBJS	=	$(addprefix $(DIR_SRCS), $(SRCS:.c=.o)) \
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(DIR_OBJS) mlx/libmlx.a $(OBJS) $(INC) Makefile
+$(NAME): $(LIBFT) $(DIR_OBJS) mlx/libmlx.a $(OBJS)
 	cc $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(MLXFLAGS)
 	echo "$(GREEN)✅ $(NAME) compilated !"
 	@norminette src/ | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'

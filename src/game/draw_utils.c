@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:37:36 by naterrie          #+#    #+#             */
-/*   Updated: 2023/08/24 19:06:59 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/08/24 19:22:36 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,4 @@ void	put_floor_ceiling(t_data *data)
 		}
 		i++;
 	}
-	printf("%d\n", i);
 }

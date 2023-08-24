@@ -23,10 +23,10 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
-# define MINI_SIZE 5
+# define MINI_SIZE 10
 # define MAP_ZOOM 10
-# define SCREEN_H 1800
-# define SCREEN_W 3200
+# define SCREEN_H 1080
+# define SCREEN_W 1900
 
 typedef struct s_image
 {

@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:04:01 by naterrie          #+#    #+#             */
-/*   Updated: 2023/08/24 19:08:06 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/08/24 19:21:13 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	start_game(t_data *data)
 	data->img = mlx_new_image(data->mlx, SCREEN_W, SCREEN_H);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 			&data->line_length, &data->endian);
-	minimap_player(data);
 	put_floor_ceiling(data);
+	minimap_player(data);
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 17, 0, exit_game, data);
 	mlx_loop(data->mlx);

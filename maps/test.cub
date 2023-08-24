@@ -3,8 +3,8 @@ SO texture/test.xpm
 WE texture/test.xpm
 EA texture/test.xpm
 
-F 220,100,0
-C 225,30,0
+F 175,139,199
+C 144,139,255
 
         1111111111111111111111111
         1000000000110000000000001
