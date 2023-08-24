@@ -25,8 +25,8 @@
 
 # define MINI_SIZE 10
 # define MAP_ZOOM 10
-# define SCREEN_H 1080
-# define SCREEN_W 1900
+# define SCREEN_H 1800
+# define SCREEN_W 3200
 
 typedef struct s_image
 {
