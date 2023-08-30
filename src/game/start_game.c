@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:04:01 by naterrie          #+#    #+#             */
-/*   Updated: 2023/08/24 19:21:13 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/08/30 18:56:40 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,24 @@
 int	key_press(int keycode, t_data *data)
 {
 	put_floor_ceiling(data);
-	if (keycode == 65289 && data->minimap == false)
-	{
-		minimap_full(data);
-		data->minimap = true;
-	}
-	else if (keycode == 65289 && data->minimap == true)
-	{
-		minimap_player(data);
-		data->minimap = false;
-	}
-	else
-		minimap_player(data);
-	if (keycode == 65307)
+	if (keycode == 119)
+		move_up(data);
+	else if (keycode == 115)
+		move_down(data);
+	else if (keycode == 97)
+		move_left(data);
+	else if (keycode == 100)
+		move_right(data);
+	else if (keycode == 65307)
 		exit_game(data);
+	else if (keycode == 65289 && data->minimap == false)
+		data->minimap = true;
+	else if (keycode == 65289 && data->minimap == true)
+		data->minimap = false;
+	if (data->minimap == true)
+		minimap_full(data);
+	else if (data->minimap == false)
+		minimap_player(data);
 	return (0);
 }
 

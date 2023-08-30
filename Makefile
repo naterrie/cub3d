@@ -50,7 +50,8 @@ GAME_DIR =	src/game/
 GAME_SRC =	start_game.c \
 			utils_game.c \
 			minimap.c \
-			draw_utils.c
+			draw_utils.c \
+			movement.c
 
 FILES 	+=	$(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o))
 

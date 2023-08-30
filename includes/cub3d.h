@@ -35,26 +35,40 @@ typedef struct s_image
 	int		h;
 }	t_image;
 
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+}	t_player;
+
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
-	char	**map;
-	char	*addr;
-	void	*img;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	bool	minimap;
-	int		f[3];
-	int		c[3];
-	int		x;
-	int		y;
+	void		*mlx;
+	void		*win;
+	char		**map;
+	char		*addr;
+	void		*img;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	bool		minimap;
+	int			f[3];
+	int			c[3];
+	t_player	player;
 }	t_data;
+
+//	Movement	//
+void	move_up(t_data *data);
+void	move_down(t_data *data);
+void	move_right(t_data *data);
+void	move_left(t_data *data);
+
 
 //	Start game	//
 void	start_game(t_data *data);

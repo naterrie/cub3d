@@ -19,6 +19,32 @@ static int	char_start(char c)
 	return (0);
 }
 
+static void	set_player_info(t_data *data, char c, int i, int j)
+{
+	data->player.x = i + 0.5;
+	data->player.y = j + 0.5;
+	if (c == 'N')
+	{
+		data->player.dir_x = -1;
+		data->player.dir_y = 0;
+	}
+	else if (c == 'S')
+	{
+		data->player.dir_x = 1;
+		data->player.dir_y = 0;
+	}
+	else if (c == 'E')
+	{
+		data->player.dir_x = 0;
+		data->player.dir_y = 1;
+	}
+	else if (c == 'W')
+	{
+		data->player.dir_x = 0;
+		data->player.dir_y = -1;
+	}
+}
+
 int	check_start(t_data *data)
 {
 	int	i;
@@ -34,9 +60,8 @@ int	check_start(t_data *data)
 		{
 			if (char_start(data->map[i][j]))
 			{
+				set_player_info(data, data->map[i][j], i, j);
 				data->map[i][j] = '0';
-				data->x = i;
-				data->y = j;
 				count++;
 			}
 			j++;
