@@ -32,16 +32,16 @@ static void	set_data(t_data *data)
 	int	i;
 
 	i = 0;
-	data->addr = NULL;
+	data->mlx.addr = NULL;
+	data->mlx.win = NULL;
+	data->mlx.mlx = NULL;
+	data->mlx.img = NULL;
 	data->map = NULL;
 	data->no = NULL;
 	data->so = NULL;
 	data->we = NULL;
 	data->ea = NULL;
-	data->win = NULL;
-	data->mlx = NULL;
 	data->minimap = false;
-	data->img = NULL;
 	while (i < 3)
 	{
 		data->f[i] = -1;

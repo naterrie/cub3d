@@ -49,7 +49,8 @@ PARS_SRC =	pars_char.c \
 GAME_DIR =	src/game/
 GAME_SRC =	start_game.c \
 			utils_game.c \
-			minimap.c \
+			minimap_full.c \
+			minimap_player.c \
 			draw_utils.c \
 			movement.c
 

@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:37:36 by naterrie          #+#    #+#             */
-/*   Updated: 2023/08/24 19:22:36 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/08/31 15:59:07 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void	draw_square(t_data *data, int x, int y, int color)
 	int	j;
 
 	i = 0;
+	while (x < 0)
+		x++;
+	while (y < 0)
+		y++;
 	while (i < MAP_ZOOM)
 	{
 		j = 0;
@@ -34,7 +38,10 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	if (x < 0 || y < 0 || x >= SCREEN_W || y >= SCREEN_H)
+		return ;
+	dst = data->mlx.addr + (y * data->line_length + x * \
+								(data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 

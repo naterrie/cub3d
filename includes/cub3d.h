@@ -22,11 +22,14 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <math.h>
 
 # define MINI_SIZE 10
 # define MAP_ZOOM 10
 # define SCREEN_H 1800
 # define SCREEN_W 3200
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.1
 
 typedef struct s_image
 {
@@ -43,13 +46,18 @@ typedef struct s_player
 	double	dir_y;
 }	t_player;
 
-typedef struct s_data
+typedef struct s_mlx
 {
 	void		*mlx;
 	void		*win;
-	char		**map;
 	char		*addr;
 	void		*img;
+}	t_mlx;
+
+typedef struct s_data
+{
+	char		**map;
+	t_mlx		mlx;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
@@ -77,7 +85,7 @@ void	start_game(t_data *data);
 int		exit_game(t_data *data);
 
 
-// Minimap //
+//	Minimap	//
 void	minimap_full(t_data *data);
 void	minimap_player(t_data *data);
 
