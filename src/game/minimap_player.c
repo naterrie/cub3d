@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:38:07 by naterrie          #+#    #+#             */
-/*   Updated: 2023/08/31 15:39:11 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/09/02 04:25:32 by aviscogl         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,21 @@ static int	minimap_check(t_data *data, int i, int j, char c)
 
 static void	draw_player_mini(t_data *data)
 {
-	int	i;
-	int	j;
+	int	coma_i;
+	int	coma_j;
 	int	x;
 	int	y;
 
-	i = MINI_SIZE * MAP_ZOOM;
-	j = MINI_SIZE * MAP_ZOOM;
+	coma_i = (data->player.x - floor(data->player.x)) * 10;
+	coma_j = (data->player.y - floor(data->player.y)) * 10;
 	x = 2;
 	while (x < MAP_ZOOM - 2)
 	{
 		y = 2;
 		while (y < MAP_ZOOM - 2)
 		{
-			my_mlx_pixel_put(data, y + j, x + i, 0x00003399);
+			my_mlx_pixel_put(data, (y + MINI_SIZE * MAP_ZOOM) + coma_j, \
+					(x + MINI_SIZE * MAP_ZOOM) + coma_i, 0x00003399);
 			y++;
 		}
 		x++;
