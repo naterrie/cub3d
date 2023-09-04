@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:37:36 by naterrie          #+#    #+#             */
-/*   Updated: 2023/08/31 15:59:07 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/09/04 15:02:23 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@ void	draw_square(t_data *data, int x, int y, int color)
 	int	j;
 
 	i = 0;
-	while (x < 0)
-		x++;
-	while (y < 0)
-		y++;
 	while (i < MAP_ZOOM)
 	{
 		j = 0;

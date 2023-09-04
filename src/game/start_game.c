@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:04:01 by naterrie          #+#    #+#             */
-/*   Updated: 2023/08/31 15:26:27 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/09/04 14:51:36 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	key_press(int keycode, t_data *data)
 	else if (keycode == 65307)
 		exit_game(data);
 	if (data->minimap == true)
-		minimap_full(data);
-	else if (data->minimap == false)
 		minimap_player(data);
+	else if (data->minimap == false)
+		minimap_full(data);
 	return (0);
 }
 
@@ -48,7 +48,7 @@ void	start_game(t_data *data)
 	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->bits_per_pixel, \
 			&data->line_length, &data->endian);
 	put_floor_ceiling(data);
-	minimap_player(data);
+	minimap_full(data);
 	mlx_hook(data->mlx.win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->mlx.win, 17, 0, exit_game, data);
 	mlx_loop(data->mlx.mlx);
