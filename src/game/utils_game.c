@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:49:28 by naterrie          #+#    #+#             */
-/*   Updated: 2023/08/31 15:27:03 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/09/05 12:21:53 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	exit_game(t_data *data)
 		mlx_destroy_window(data->mlx.mlx, data->mlx.win);
 	if (data->mlx.mlx)
 		mlx_destroy_display(data->mlx.mlx);
+	free(data->mlx.mlx);
 	ft_exit(data);
 	return (0);
 }

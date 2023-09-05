@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:04:01 by naterrie          #+#    #+#             */
-/*   Updated: 2023/09/04 14:51:36 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/09/05 13:48:46 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	key_press(int keycode, t_data *data)
 {
-	put_floor_ceiling(data);
 	if (keycode == 65289 && data->minimap == true)
 		data->minimap = false;
 	else if (keycode == 65289 && data->minimap == false)
 		data->minimap = true;
-	else if (keycode == 119)
+	put_floor_ceiling(data);
+	if (keycode == 119)
 		move_up(data);
 	else if (keycode == 115)
 		move_down(data);

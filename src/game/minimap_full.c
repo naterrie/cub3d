@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:21:14 by naterrie          #+#    #+#             */
-/*   Updated: 2023/09/04 17:19:36 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/09/05 15:05:57 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,16 @@ static int	hit_wall(t_data *data, int i, int j)
 	while (data->map[x])
 		x++;
 	x *= MAP_ZOOM;
-	if (i > x && i < 0 && j < 0)
+	if (i < 0 || j < 0 || i > SCREEN_H || j > SCREEN_W)
 		return (0);
-	if (data->map[(int)floor(i) / MAP_ZOOM][(int)floor(j) / MAP_ZOOM])
-		if (data->map[(int)floor(i) / MAP_ZOOM][(int)floor(j) / MAP_ZOOM] == '1')
+	if (i < x && data->map[(int)floor(i) / MAP_ZOOM][(int)floor(j) / MAP_ZOOM])
+		if (data->map[(int)floor(i) / \
+				MAP_ZOOM][(int)floor(j) / MAP_ZOOM] == '1')
 			return (0);
 	return (1);
 }
 
-static void	draw_line(t_data *data)
+static void	draw_line(t_data *data, double x, double y)
 {
 	double	i;
 	double	j;
@@ -60,8 +61,8 @@ static void	draw_line(t_data *data)
 	while (hit_wall(data, i, j))
 	{
 		my_mlx_pixel_put(data, j, i, 0x00003399);
-		i += data->player.dir_x;
-		j += data->player.dir_y;
+		i += x;
+		j += y;
 	}
 }
 
@@ -84,7 +85,7 @@ void	minimap_full(t_data *data)
 		}
 		i++;
 	}
-	draw_line(data);
+	draw_line(data, data->player.dir_x, data->player.dir_y);
 	draw_player_full(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }

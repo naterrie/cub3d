@@ -43,6 +43,7 @@ cub3D
 *.su
 *.idb
 *.pdb
+callgrind*
 
 # Kernel Module Compile Results
 *.mod*

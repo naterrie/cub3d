@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:37:36 by naterrie          #+#    #+#             */
-/*   Updated: 2023/09/04 15:02:23 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/09/05 13:47:11 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,32 +32,33 @@ void	draw_square(t_data *data, int x, int y, int color)
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	char	*dst;
-
 	if (x < 0 || y < 0 || x >= SCREEN_W || y >= SCREEN_H)
 		return ;
-	dst = data->mlx.addr + (y * data->line_length + x * \
-								(data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	((int *)data->mlx.addr)[y * (data->line_length >> 2) + x] = color;
 }
 
 void	put_floor_ceiling(t_data *data)
 {
-	int	i;
-	int	j;
+	static int	c = -1;
+	static int	f = -1;
+	int			i;
+	int			j;
 
+	if (c == -1)
+	{
+		c = data->c[0] * 256 * 256 + data->c[1] * 256 + data->c[2];
+		f = data->f[0] * 256 * 256 + data->f[1] * 256 + data->f[2];
+	}
 	i = 0;
 	while (i < SCREEN_H)
 	{
 		j = 0;
 		while (j < SCREEN_W)
 		{
-			if (i < SCREEN_H / 2)
-				my_mlx_pixel_put(data, j, i, data->c[0] * 256 * 256 + \
-						data->c[1] * 256 + data->c[2]);
+			if (i < (SCREEN_H >> 1))
+				((int *)data->mlx.addr)[i * (data->line_length >> 2) + j] = c;
 			else
-				my_mlx_pixel_put(data, j, i, data->f[0] * 256 * 256 + \
-						data->f[1] * 256 + data->f[2]);
+				((int *)data->mlx.addr)[i * (data->line_length >> 2) + j] = f;
 			j++;
 		}
 		i++;
