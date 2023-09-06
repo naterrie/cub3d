@@ -57,7 +57,6 @@ typedef struct s_mlx
 typedef struct s_data
 {
 	char		**map;
-	t_mlx		mlx;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
@@ -68,6 +67,7 @@ typedef struct s_data
 	bool		minimap;
 	int			f[3];
 	int			c[3];
+	t_mlx		mlx;
 	t_player	player;
 }	t_data;
 

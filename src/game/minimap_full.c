@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:21:14 by naterrie          #+#    #+#             */
-/*   Updated: 2023/09/05 15:05:57 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/09/06 16:42:33 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,28 @@ static void	draw_line(t_data *data, double x, double y)
 
 	i = data->player.x * MAP_ZOOM;
 	j = data->player.y * MAP_ZOOM;
-	while (hit_wall(data, i, j))
+	while (hit_wall(data, i, j) && (x != 0 || y != 0))
 	{
 		my_mlx_pixel_put(data, j, i, 0x00003399);
 		i += x;
 		j += y;
+	}
+}
+
+static void	shoot_line(t_data *data)
+{
+	double	i;
+	double	j;
+	int		k;
+
+	k = 1;
+	i = data->player.dir_x;
+	draw_line(data, data->player.dir_x, data->player.dir_y);
+	while (k <= 4)
+	{
+		j = data->player.dir_y * (k * ROT_SPEED);
+		draw_line(data, i, j);
+		k++;
 	}
 }
 
@@ -86,6 +103,7 @@ void	minimap_full(t_data *data)
 		i++;
 	}
 	draw_line(data, data->player.dir_x, data->player.dir_y);
+	//shoot_line(data);
 	draw_player_full(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }
