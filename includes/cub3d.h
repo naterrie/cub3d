@@ -26,8 +26,8 @@
 
 # define MINI_SIZE 10
 # define MAP_ZOOM 10
-# define SCREEN_H 1800
-# define SCREEN_W 3200
+# define SCREEN_H 1080
+# define SCREEN_W 1920
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.1
 
@@ -65,8 +65,8 @@ typedef struct s_data
 	char		*we;
 	char		*ea;
 	bool		minimap;
-	int			f[3];
-	int			c[3];
+	int			floor;
+	int			ceil;
 	t_mlx		mlx;
 	t_player	player;
 }	t_data;
@@ -77,13 +77,11 @@ void	move_down(t_data *data);
 void	move_right(t_data *data);
 void	move_left(t_data *data);
 
-
 //	Start game	//
 void	start_game(t_data *data);
 
 //	Utils game	//
 int		exit_game(t_data *data);
-
 
 //	Minimap	//
 void	minimap_full(t_data *data);
@@ -92,7 +90,6 @@ void	minimap_player(t_data *data);
 //	Draw utils	//
 void	put_floor_ceiling(t_data *data);
 void	draw_square(t_data *data, int x, int y, int color);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 //	Parsing	//
 int		parsing(char *file, t_data *data);
@@ -102,6 +99,7 @@ int		check_chars(char **map);
 int		check_start(t_data *data);
 
 //	Check texture	//
+int		ft_pars_floor_ceil(char *str);
 void	replace_texture(char *str);
 int		check_extension(t_data *data);
 

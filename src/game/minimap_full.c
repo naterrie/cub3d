@@ -27,7 +27,8 @@ static void	draw_player_full(t_data *data)
 		y = 2;
 		while (y < MAP_ZOOM - 2)
 		{
-			my_mlx_pixel_put(data, y + j, x + i, 0x00003399);
+			if (i >= 0 && j >= 0 && i < SCREEN_H && j < SCREEN_W)
+				((int *)data->mlx.addr)[(x + i) * (data->line_length >> 2) + (y + j)] = 0x00003399;
 			y++;
 		}
 		x++;
@@ -60,26 +61,9 @@ static void	draw_line(t_data *data, double x, double y)
 	j = data->player.y * MAP_ZOOM;
 	while (hit_wall(data, i, j) && (x != 0 || y != 0))
 	{
-		my_mlx_pixel_put(data, j, i, 0x00003399);
+		((int *)data->mlx.addr)[(int)i * (data->line_length >> 2) + (int)j] = 0x00003399;
 		i += x;
 		j += y;
-	}
-}
-
-static void	shoot_line(t_data *data)
-{
-	double	i;
-	double	j;
-	int		k;
-
-	k = 1;
-	i = data->player.dir_x;
-	draw_line(data, data->player.dir_x, data->player.dir_y);
-	while (k <= 4)
-	{
-		j = data->player.dir_y * (k * ROT_SPEED);
-		draw_line(data, i, j);
-		k++;
 	}
 }
 
@@ -103,7 +87,6 @@ void	minimap_full(t_data *data)
 		i++;
 	}
 	draw_line(data, data->player.dir_x, data->player.dir_y);
-	//shoot_line(data);
 	draw_player_full(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }

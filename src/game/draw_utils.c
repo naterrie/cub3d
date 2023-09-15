@@ -23,32 +23,19 @@ void	draw_square(t_data *data, int x, int y, int color)
 		j = 0;
 		while (j < MAP_ZOOM)
 		{
-			my_mlx_pixel_put(data, y + j, x + i, color);
+			if (!(x < 0 || y < 0 || x >= SCREEN_W || y >= SCREEN_H))
+				((int *)data->mlx.addr)[(x + i) * (data->line_length >> 2) + (y + j)] = color;
 			j++;
 		}
 		i++;
 	}
 }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	if (x < 0 || y < 0 || x >= SCREEN_W || y >= SCREEN_H)
-		return ;
-	((int *)data->mlx.addr)[y * (data->line_length >> 2) + x] = color;
-}
-
 void	put_floor_ceiling(t_data *data)
 {
-	static int	c = -1;
-	static int	f = -1;
 	int			i;
 	int			j;
 
-	if (c == -1)
-	{
-		c = data->c[0] * 256 * 256 + data->c[1] * 256 + data->c[2];
-		f = data->f[0] * 256 * 256 + data->f[1] * 256 + data->f[2];
-	}
 	i = 0;
 	while (i < SCREEN_H)
 	{
@@ -56,9 +43,9 @@ void	put_floor_ceiling(t_data *data)
 		while (j < SCREEN_W)
 		{
 			if (i < (SCREEN_H >> 1))
-				((int *)data->mlx.addr)[i * (data->line_length >> 2) + j] = c;
+				((int *)data->mlx.addr)[i * (data->line_length >> 2) + j] = data->ceil;
 			else
-				((int *)data->mlx.addr)[i * (data->line_length >> 2) + j] = f;
+				((int *)data->mlx.addr)[i * (data->line_length >> 2) + j] = data->floor;
 			j++;
 		}
 		i++;

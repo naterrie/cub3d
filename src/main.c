@@ -29,9 +29,6 @@ void	ft_exit(t_data *data)
 
 static void	set_data(t_data *data)
 {
-	int	i;
-
-	i = 0;
 	data->mlx.addr = NULL;
 	data->mlx.win = NULL;
 	data->mlx.mlx = NULL;
@@ -42,12 +39,6 @@ static void	set_data(t_data *data)
 	data->we = NULL;
 	data->ea = NULL;
 	data->minimap = false;
-	while (i < 3)
-	{
-		data->f[i] = -1;
-		data->c[i] = -1;
-		i++;
-	}
 }
 
 int	main(int argc, char **argv)

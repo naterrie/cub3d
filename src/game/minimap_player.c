@@ -6,7 +6,7 @@
 /*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:38:07 by naterrie          #+#    #+#             */
-/*   Updated: 2023/09/02 04:25:32 by aviscogl         ###   ########lyon.fr   */
+/*   Updated: 2023/09/15 16:24:36 by aviscogl         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ static void	draw_player_mini(t_data *data)
 		y = 2;
 		while (y < MAP_ZOOM - 2)
 		{
-			my_mlx_pixel_put(data, (y + MINI_SIZE * MAP_ZOOM) + coma_j, \
-					(x + MINI_SIZE * MAP_ZOOM) + coma_i, 0x00003399);
+			if (x + MINI_SIZE * MAP_ZOOM + coma_i >= 0 && y + MINI_SIZE * MAP_ZOOM + coma_j >= 0\
+			&& x + MINI_SIZE * MAP_ZOOM + coma_i < SCREEN_H && y + MINI_SIZE * MAP_ZOOM + coma_j < SCREEN_W)
+				((int *)data->mlx.addr)[((x + MINI_SIZE * MAP_ZOOM) + coma_i) * \
+				(data->line_length >> 2) + ((y + MINI_SIZE * MAP_ZOOM) + coma_j)] = 0x00003399;
 			y++;
 		}
 		x++;

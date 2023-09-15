@@ -14,20 +14,12 @@
 
 int	check_texture(t_data *data)
 {
-	int	i;
-
-	i = 0;
+	if (data->ceil == -1 || data->floor == -1)
+		return (printf("Error : No color\n"), 1);
 	if (!data->no || !data->so || !data->we || !data->ea)
 		return (printf("Error : No texture\n"), 1);
 	if (!data->map)
 		return (printf("Error : No map detected\n"), 1);
-	while (i < 3)
-	{
-		if (data->f[i] < 0 || data->f[i] > 255 || data->c[i] < 0 || \
-			data->c[i] > 255)
-			return (printf("Error : Wrong color\n"), 1);
-		i++;
-	}
 	return (0);
 }
 
@@ -90,9 +82,9 @@ void	split_file(char **map, t_data *data, char *file)
 		else if (map[i][0] == 'E' && map[i][1] == 'A')
 			data->ea = get_texture(map[i]);
 		else if (map[i][0] == 'F')
-			ft_split_atoi(map[i], ' ', data->f);
+			data->floor = ft_pars_floor_ceil(map[i]);
 		else if (map[i][0] == 'C')
-			ft_split_atoi(map[i], ' ', data->c);
+			data->ceil = ft_pars_floor_ceil(map[i]);
 		i++;
 	}
 	ft_set_map(data, map, file);
