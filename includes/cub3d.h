@@ -91,30 +91,6 @@ void	minimap_player(t_data *data);
 void	put_floor_ceiling(t_data *data);
 void	draw_square(t_data *data, int x, int y, int color);
 
-//	Parsing	//
-int		parsing(char *file, t_data *data);
-
-//	Pars char	//
-int		check_chars(char **map);
-int		check_start(t_data *data);
-
-//	Check texture	//
-int		ft_pars_floor_ceil(char *str);
-void	replace_texture(char *str);
-int		check_extension(t_data *data);
-
-//	Pars texture	//
-int		file_texture(t_data *data);
-int		check_texture(t_data *data);
-void	split_file(char **map, t_data *data, char *file);
-
-//	Utils Pars	//
-int		nbline(char *file);
-int		line_null(char *str);
-char	**get_file(char *file);
-char	*get_texture(char *str);
-void	ft_split_atoi(char *s, char c, int t[3]);
-
 void	ft_exit(t_data *data);
 
 #endif

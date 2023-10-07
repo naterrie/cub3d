@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "pars.h"
 
 void	ft_split_atoi(char *s, char c, int t[3])
 {

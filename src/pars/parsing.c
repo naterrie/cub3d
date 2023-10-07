@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "pars.h"
 
 static int	border_char(char **map, int x, int y)
 {

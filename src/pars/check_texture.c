@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:21:48 by naterrie          #+#    #+#             */
-/*   Updated: 2023/09/12 05:25:06 by aviscogl         ###   ########lyon.fr   */
+/*   Updated: 2023/10/07 16:19:28 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "pars.h"
 
 int	ft_pars_floor_ceil(char *str)
 {
