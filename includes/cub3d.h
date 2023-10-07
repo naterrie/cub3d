@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
-# include "../getnextline/get_next_line.h"
+# include "get_next_line.h"
 
 # include <unistd.h>
 # include <stdio.h>
