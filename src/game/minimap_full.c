@@ -28,7 +28,8 @@ static void	draw_player_full(t_data *data)
 		while (y < MAP_ZOOM - 2)
 		{
 			if (i >= 0 && j >= 0 && i < SCREEN_H && j < SCREEN_W)
-				((int *)data->mlx.addr)[(x + i) * (data->line_length >> 2) + (y + j)] = 0x00003399;
+				((int *)data->mlx.addr)[(x + i) * \
+				(data->line_length >> 2) + (y + j)] = 0x00003399;
 			y++;
 		}
 		x++;
@@ -61,7 +62,8 @@ static void	draw_line(t_data *data, double x, double y)
 	j = data->player.y * MAP_ZOOM;
 	while (hit_wall(data, i, j) && (x != 0 || y != 0))
 	{
-		((int *)data->mlx.addr)[(int)i * (data->line_length >> 2) + (int)j] = 0x00003399;
+		((int *)data->mlx.addr)[(int)i * \
+		(data->line_length >> 2) + (int)j] = 0x00003399;
 		i += x;
 		j += y;
 	}

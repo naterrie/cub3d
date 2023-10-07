@@ -24,7 +24,8 @@ void	draw_square(t_data *data, int x, int y, int color)
 		while (j < MAP_ZOOM)
 		{
 			if (!(x < 0 || y < 0 || x >= SCREEN_W || y >= SCREEN_H))
-				((int *)data->mlx.addr)[(x + i) * (data->line_length >> 2) + (y + j)] = color;
+				((int *)data->mlx.addr)[(x + i) * \
+				(data->line_length >> 2) + (y + j)] = color;
 			j++;
 		}
 		i++;
@@ -43,9 +44,11 @@ void	put_floor_ceiling(t_data *data)
 		while (j < SCREEN_W)
 		{
 			if (i < (SCREEN_H >> 1))
-				((int *)data->mlx.addr)[i * (data->line_length >> 2) + j] = data->ceil;
+				((int *)data->mlx.addr)[i * \
+				(data->line_length >> 2) + j] = data->ceil;
 			else
-				((int *)data->mlx.addr)[i * (data->line_length >> 2) + j] = data->floor;
+				((int *)data->mlx.addr)[i * \
+				(data->line_length >> 2) + j] = data->floor;
 			j++;
 		}
 		i++;
