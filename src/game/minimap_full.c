@@ -46,7 +46,9 @@ static int	hit_wall(t_data *data, int i, int j)
 	x *= MAP_ZOOM;
 	if (i < 0 || j < 0 || i > SCREEN_H || j > SCREEN_W)
 		return (0);
-	if (i < x && data->map[(int)floor(i) / MAP_ZOOM][(int)floor(j) / MAP_ZOOM])
+	if (i < x && data->map[(int)floor(i) / MAP_ZOOM][(int)floor(j) \
+		/ MAP_ZOOM] && (int)floor(j) / MAP_ZOOM < \
+		ft_strlen(data->map[(int)floor(i) / MAP_ZOOM]))
 		if (data->map[(int)floor(i) / \
 				MAP_ZOOM][(int)floor(j) / MAP_ZOOM] == '1')
 			return (0);
@@ -63,7 +65,7 @@ static void	draw_line(t_data *data, double x, double y)
 	while (hit_wall(data, i, j) && (x != 0 || y != 0))
 	{
 		((int *)data->mlx.addr)[(int)i * \
-		(data->line_length >> 2) + (int)j] = 0x00003399;
+			(data->line_length >> 2) + (int)j] = 0x00003399;
 		i += x;
 		j += y;
 	}
