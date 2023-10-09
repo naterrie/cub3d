@@ -13,8 +13,13 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+//Linux
+//# include "../mlx/mlx.h"
+
+//macOs
+# include "../mlx_macos/mlx.h"
+
 # include "../libft/libft.h"
-# include "../mlx/mlx.h"
 # include "../getnextline/get_next_line.h"
 
 # include <unistd.h>

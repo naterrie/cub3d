@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:38:07 by naterrie          #+#    #+#             */
-/*   Updated: 2023/09/15 16:24:36 by aviscogl         ###   ########lyon.fr   */
+/*   Updated: 2023/10/04 11:43:31 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ static void	draw_player_mini(t_data *data)
 		{
 			if (x + MINI_SIZE * MAP_ZOOM + coma_i >= 0 && y + MINI_SIZE * MAP_ZOOM + coma_j >= 0\
 			&& x + MINI_SIZE * MAP_ZOOM + coma_i < SCREEN_H && y + MINI_SIZE * MAP_ZOOM + coma_j < SCREEN_W)
-				((int *)data->mlx.addr)[((x + MINI_SIZE * MAP_ZOOM) + coma_i) * \
-				(data->line_length >> 2) + ((y + MINI_SIZE * MAP_ZOOM) + coma_j)] = 0x00003399;
+				((int *)data->mlx.addr)[((x + MINI_SIZE * MAP_ZOOM) + coma_i) * (data->line_length >> 2) + ((y + MINI_SIZE * MAP_ZOOM) + coma_j)] = 0x00003399;
 			y++;
 		}
 		x++;

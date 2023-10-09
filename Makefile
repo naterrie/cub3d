@@ -21,32 +21,53 @@ DIR_OBJS :=	.objs/
 
 NAME	=	cub3D
 
-CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -g3
-HEADERS	=	cub3d.h
+HEADERS	=	cub3d.h\
+			#pars.h
 
-MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
+CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3
+
+#Linux
+#MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
+#MLX_PATH	=	./mlx/libmlx.a
+#MLX_PREFIX	=	mlx
+
+#macOs
+MLXFLAGS	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
+MLX_PATH	=	mlx_macos/libmlx.a
+MLX_PREFIX	=	mlx_macos
 
 LIB_DIR	=	libft/
+
 LIBFT	= $(addprefix $(LIB_DIR), libft.a)
 
 INC_DIR	=	includes/
+
 INC		=	$(addprefix $(INC_DIR), $(HEADERS))
 
 GNL_DIR =	getnextline/
+
 GNL_SRC =	get_next_line.c \
 			get_next_line_utils.c
 
-FILES	+=	$(addprefix $(GNL_DIR), $(GNL_SRC:.c=.o))
+INC_GNL	=	get_next_line.h
+INC		+=	$(addprefix $(GNL_DIR), $(INC_GNL))
 
+OBJS	=	$(addprefix $(DIR_OBJS), $(GNL_SRC:.c=.o))
 
-PARS_DIR =	src/pars/
+DIR_SRCS	=	src/
+
+FILES		=	main.c
+
+PARS_DIR =	pars/
 PARS_SRC =	pars_char.c \
 			pars_texture.c \
 			parsing.c \
 			utils_pars.c \
 			check_texture.c
 
-GAME_DIR =	src/game/
+FILES	+=	$(addprefix $(PARS_DIR), $(PARS_SRC))
+
+GAME_DIR =	game/
 GAME_SRC =	start_game.c \
 			utils_game.c \
 			minimap_full.c \
@@ -54,39 +75,34 @@ GAME_SRC =	start_game.c \
 			draw_utils.c \
 			movement.c
 
-FILES 	+=	$(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o))
+FILES	 +=	$(addprefix $(GAME_DIR), $(GAME_SRC))
 
-
-DIR_SRCS	=	src/
-SRCS 		=	main.c
-
-FILES		+=	$(addprefix $(DIR_SRCS), $(SRCS:.c=.o))
-
-
-OBJS	=	$(addprefix $(DIR_SRCS), $(SRCS:.c=.o)) \
-			$(addprefix $(GNL_DIR), $(GNL_SRC:.c=.o)) \
-			$(addprefix $(PARS_DIR), $(PARS_SRC:.c=.o)) \
-			$(addprefix $(GAME_DIR), $(GAME_SRC:.c=.o))
-
+OBJS	+=	$(addprefix $(DIR_OBJS), $(FILES:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(DIR_OBJS) mlx/libmlx.a $(OBJS)
+$(NAME): $(LIBFT) $(DIR_OBJS) $(MLX_PATH) $(OBJS) $(LIBFT)
 	cc $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(MLXFLAGS)
 	echo "$(GREEN)✅ $(NAME) compilated !"
-	@norminette src/ | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+#	@norminette src/ | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
-$(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c $(INC) Makefile | libft $(LIBFT)
+$(DIR_OBJS)%.o: $(DIR_SRCS)%.c $(INC) Makefile
 	echo "$(GREEN)⏳ Making $(NAME)"
 	printf "$(BLEU) ⮡ Making $(RESET)$@$(RED)"
 	cc $(CFLAGS) -c $< -o $@
 	printf "$(ERASE)"
 
-mlx/libmlx.a:
-	make -C mlx
+$(DIR_OBJS)%.o: $(GNL_DIR)%.c $(INC) Makefile
+	echo "$(GREEN)⏳ Making $(NAME)"
+	printf "$(BLEU) ⮡ Making $(RESET)$@$(RED)"
+	cc $(CFLAGS) -c $< -o $@
+	printf "$(ERASE)"
+
+$(MLX_PATH):
+	make -C $(MLX_PREFIX)
 
 $(DIR_OBJS):
-	mkdir -p $@
+	mkdir -p $@/$(PARS_DIR) $@/$(GAME_DIR)
 
 $(LIBFT): force
 	make -C libft
@@ -96,11 +112,7 @@ force :
 clean:
 	echo "$(PURPLE)🧹Removing $(NAME).o files !"
 	rm -rf $(DIR_OBJS)
-	rm -rf getnextline/*.o
-	rm -rf src/pars/*.o
-	rm -rf src/game/*.o
-	rm -rf src/*.o
-	make clean -C mlx/
+	make clean -C $(MLX_PREFIX)/
 	make clean -C ./$(LIB_DIR)
 
 fclean: clean
