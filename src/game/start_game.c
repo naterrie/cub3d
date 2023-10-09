@@ -14,7 +14,6 @@
 
 int	key_press(int keycode, t_data *data)
 {
-	dprintf(2, "%d\n", keycode);
 	if (keycode == KEY_MINIMAP && data->minimap == true)
 		data->minimap = false;
 	else if (keycode == KEY_MINIMAP && data->minimap == false)
