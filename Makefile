@@ -40,6 +40,7 @@ LIB_DIR	=	libft/
 
 LIBFT	= $(addprefix $(LIB_DIR), libft.a)
 
+
 INC_DIR	=	includes/
 
 INC		=	$(addprefix $(INC_DIR), $(HEADERS))
@@ -48,6 +49,8 @@ GNL_DIR =	getnextline/
 
 GNL_SRC =	get_next_line.c \
 			get_next_line_utils.c
+INC_GNL	=	get_next_line.h
+INC		+=	$(addprefix $(GNL_DIR), $(INC_GNL))
 
 INC_GNL	=	get_next_line.h
 INC		+=	$(addprefix $(GNL_DIR), $(INC_GNL))
