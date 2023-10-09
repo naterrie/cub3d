@@ -24,30 +24,14 @@ void	move_down(t_data *data)
 	data->player.y -= data->player.dir_y * MOVE_SPEED;
 }
 
-void	move_left(t_data *data)
-{
-	double	old_dir_x;
-
-	data->player.angle += ROT_SPEED;
-	if (data->player.angle > 2 * M_PI)
-		data->player.angle = 0;
-	old_dir_x = data->player.dir_x;
-	data->player.dir_x = data->player.dir_x * \
-		cos(ROT_SPEED) - data->player.dir_y * sin(ROT_SPEED);
-	data->player.dir_y = old_dir_x * sin(ROT_SPEED) \
-		+ data->player.dir_y * cos(ROT_SPEED);
-}
-
 void	move_right(t_data *data)
 {
-	double	old_dir_x;
+	data->player.x += data->player.dir_y * MOVE_SPEED;
+	data->player.y -= data->player.dir_x * MOVE_SPEED;
+}
 
-	data->player.angle -= ROT_SPEED;
-	if (data->player.angle < -2 * M_PI)
-		data->player.angle = 0;
-	old_dir_x = data->player.dir_x;
-	data->player.dir_x = data->player.dir_x * \
-		cos(-ROT_SPEED) - data->player.dir_y * sin(-ROT_SPEED);
-	data->player.dir_y = old_dir_x * sin(-ROT_SPEED) \
-		+ data->player.dir_y * cos(-ROT_SPEED);
+void	move_left(t_data *data)
+{
+	data->player.x -= data->player.dir_y * MOVE_SPEED;
+	data->player.y += data->player.dir_x * MOVE_SPEED;
 }

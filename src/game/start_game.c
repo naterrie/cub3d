@@ -14,20 +14,24 @@
 
 int	key_press(int keycode, t_data *data)
 {
-	if (keycode == 65289 && data->minimap == true)
+	if (keycode == KEY_MINIMAP && data->minimap == true)
 		data->minimap = false;
-	else if (keycode == 65289 && data->minimap == false)
+	else if (keycode == KEY_MINIMAP && data->minimap == false)
 		data->minimap = true;
 	put_floor_ceiling(data);
-	if (keycode == 119)
+	if (keycode == KEY_UP)
 		move_up(data);
-	else if (keycode == 115)
+	else if (keycode == KEY_DOWN)
 		move_down(data);
-	else if (keycode == 97)
+	else if (keycode == KEY_LEFT)
 		move_left(data);
-	else if (keycode == 100)
+	else if (keycode == KEY_RIGHT)
 		move_right(data);
-	else if (keycode == 65307)
+	else if (keycode == KEY_POV_LEFT)
+		look_left(data);
+	else if (keycode == KEY_POV_RIGHT)
+		look_right(data);
+	else if (keycode == KEY_ESC)
 		exit_game(data);
 	if (data->minimap == true)
 		minimap_player(data);

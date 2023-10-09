@@ -13,6 +13,12 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+// Linux
+# include "../mlx/mlx.h"
+
+// //macOs
+// # include "../mlx_macos/mlx.h"
+
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 # include "get_next_line.h"
@@ -30,6 +36,33 @@
 # define SCREEN_W 1920
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.1
+
+
+//linux
+typedef enum e_key
+{
+	KEY_UP = 119,
+	KEY_DOWN = 115,
+	KEY_RIGHT = 100,
+	KEY_LEFT = 97,
+	KEY_ESC = 65307,
+	KEY_POV_RIGHT = 65363,
+	KEY_POV_LEFT = 65361,
+	KEY_MINIMAP = 65289,
+}	t_key;
+
+//macos
+// typedef enum e_key
+// {
+// 	KEY_UP = 13,
+// 	KEY_DOWN = 1,
+// 	KEY_RIGHT = 2,
+// 	KEY_LEFT = 0,
+// 	KEY_ESC = 53,
+// 	KEY_POV_RIGHT = 65363,
+// 	KEY_POV_LEFT = 65361,
+// 	KEY_MINIMAP = 48,
+// }	t_key;
 
 typedef struct s_image
 {
@@ -77,6 +110,10 @@ void	move_up(t_data *data);
 void	move_down(t_data *data);
 void	move_right(t_data *data);
 void	move_left(t_data *data);
+
+//	Look	//
+void	look_right(t_data *data);
+void	look_left(t_data *data);
 
 //	Start game	//
 void	start_game(t_data *data);
