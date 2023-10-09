@@ -26,14 +26,14 @@ CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3
 CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3
 
 #Linux
-MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
-MLX_PATH	=	./mlx/libmlx.a
-MLX_PREFIX	=	mlx
+# MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
+# MLX_PATH	=	./mlx/libmlx.a
+# MLX_PREFIX	=	mlx
 
 #macOs
-# MLXFLAGS	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
-# MLX_PATH	=	mlx_macos/libmlx.a
-# MLX_PREFIX	=	mlx_macos
+MLXFLAGS	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
+MLX_PATH	=	mlx_macos/libmlx.a
+MLX_PREFIX	=	mlx_macos
 
 LIB_DIR	=	libft/
 
@@ -48,8 +48,10 @@ INC		=	$(addprefix $(INC_DIR), $(HEADERS))
 GNL_DIR =	getnextline/
 
 GNL_SRC =	get_next_line.c \
-			get_next_line_utils.c
+			get_next_line_utils.c\
+
 INC_GNL	=	get_next_line.h
+
 INC		+=	$(addprefix $(GNL_DIR), $(INC_GNL))
 
 OBJS	=	$(addprefix $(DIR_OBJS), $(GNL_SRC:.c=.o))
@@ -82,10 +84,10 @@ OBJS	+=	$(addprefix $(DIR_OBJS), $(FILES:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(DIR_OBJS) mlx/libmlx.a $(OBJS) $(LIBFT)
+$(NAME): $(LIBFT) $(DIR_OBJS) $(MLX_PATH) $(OBJS) $(LIBFT)
 	cc $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(MLXFLAGS)
 	echo "$(GREEN)✅ $(NAME) compilated !"
-	@norminette src/ | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+#	@norminette src/ | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
 $(DIR_OBJS)%.o: $(DIR_SRCS)%.c $(INC) Makefile
 	echo "$(GREEN)⏳ Making $(NAME)"
@@ -108,8 +110,13 @@ $(DIR_OBJS)%.o: $(GNL_DIR)%.c $(INC) Makefile
 $(MLX_PATH):
 	make -C $(MLX_PREFIX)
 
+#mac_Os
 $(DIR_OBJS):
-	mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
+	mkdir -p $@/$(PARS_DIR) $@/$(GAME_DIR)
+
+#Linux
+#	$(DIR_OBJS):
+#	mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
 
 $(LIBFT): force
 	make -C libft
