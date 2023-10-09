@@ -44,6 +44,7 @@ typedef struct s_player
 	double	y;
 	double	dir_x;
 	double	dir_y;
+	double	angle;
 }	t_player;
 
 typedef struct s_mlx
