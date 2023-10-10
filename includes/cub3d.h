@@ -34,6 +34,7 @@
 # define SCREEN_W 1920
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.1
+# define FOV 45
 
 
 //linux
@@ -76,6 +77,7 @@ typedef struct s_player
 	double	dir_x;
 	double	dir_y;
 	double	angle;
+	double	angle_fov;
 }	t_player;
 
 typedef struct s_mlx
