@@ -46,16 +46,13 @@ static int	hit_wall(t_data *data, int i, int j)
 	x *= MAP_ZOOM;
 	if (i < 0 || j < 0 || i > SCREEN_H || j > SCREEN_W)
 		return (0);
-	if (i < x && data->map[(int)floor(i) / MAP_ZOOM][(int)floor(j) \
-		/ MAP_ZOOM] && (int)floor(j) / MAP_ZOOM < \
-		ft_strlen(data->map[(int)floor(i) / MAP_ZOOM]))
-		if (data->map[(int)floor(i) / \
-				MAP_ZOOM][(int)floor(j) / MAP_ZOOM] == '1')
+	if (i < x && data->map[(int)floor(i) / MAP_ZOOM][(int)floor(j) / MAP_ZOOM] && (int)floor(j) / MAP_ZOOM < ft_strlen(data->map[(int)floor(i) / MAP_ZOOM]))
+		if (data->map[(int)floor(i) / MAP_ZOOM][(int)floor(j) / MAP_ZOOM] == '1')
 			return (0);
 	return (1);
 }
 
-static void	draw_line(t_data *data, double x, double y)
+static void	draw_line(t_data *data, double x, double y, int color)
 {
 	double	i;
 	double	j;
@@ -64,8 +61,7 @@ static void	draw_line(t_data *data, double x, double y)
 	j = data->player.y * MAP_ZOOM;
 	while (hit_wall(data, i, j) && (x != 0 || y != 0))
 	{
-		((int *)data->mlx.addr)[(int)i * \
-			(data->line_length >> 2) + (int)j] = 0x00003399;
+		((int *)data->mlx.addr)[(int)i * (data->line_length >> 2) + (int)j] = color;
 		i += x;
 		j += y;
 	}
@@ -77,6 +73,7 @@ void	minimap_full(t_data *data)
 	int	j;
 
 	i = 0;
+	data->player.angle_fov = (FOV * (M_PI / 180) / 2);
 	while (data->map[i])
 	{
 		j = 0;
@@ -90,7 +87,22 @@ void	minimap_full(t_data *data)
 		}
 		i++;
 	}
-	draw_line(data, data->player.dir_x, data->player.dir_y);
+	dprintf(2, "fov = %f\n", data->player.angle_fov);
+	dprintf(2, "dir_x = %f  dir_y = %f\n", data->player.dir_x, data->player.dir_y);
+	dprintf(2, "dir_x+a = %f  dir_y+a = %f\n", data->player.dir_x - (data->player.angle_fov), data->player.dir_y - (data->player.angle_fov));
+	dprintf(2, "dir_x+b = %f  dir_y+b = %f\n\n\n", data->player.dir_x - (data->player.angle_fov), data->player.dir_y + (data->player.angle_fov));
+	draw_line(data, data->player.dir_x, data->player.dir_y, 0x00CC933);
+	if (data->player.dir_y > 0 || data->player.dir_x > 0)
+	{
+		draw_line(data, data->player.dir_x - data->player.angle_fov, data->player.dir_y - data->player.angle_fov, 0x00FFF66FF); //rose
+		//draw_line(data, data->player.dir_x - data->player.angle_fov, data->player.dir_y + data->player.angle_fov, 0x0000000FF); //bleue
+	}
+	else
+	{
+		//draw_line(data, fabs(data->player.dir_x + data->player.angle_fov), fabs(data->player.dir_y + data->player.angle_fov), 0x00FFF66FF); //rose
+		//draw_line(data, data->player.dir_x - data->player.angle_fov, data->player.dir_y + data->player.angle_fov, 0x0000000FF); //bleue
+	}
+	//bleue
 	draw_player_full(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }
