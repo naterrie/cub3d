@@ -18,7 +18,7 @@ int	key_press(int keycode, t_data *data)
 		data->minimap = false;
 	else if (keycode == KEY_MINIMAP && data->minimap == false)
 		data->minimap = true;
-	put_floor_ceiling(data);
+	//put_floor_ceiling(data);
 	if (keycode == KEY_UP)
 		move_up(data);
 	else if (keycode == KEY_DOWN)

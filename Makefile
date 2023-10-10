@@ -74,7 +74,8 @@ GAME_SRC =	start_game.c \
 			minimap_player.c \
 			draw_utils.c \
 			movement.c \
-			look.c
+			look.c \
+			raycast.c
 
 FILES	 +=	$(addprefix $(GAME_DIR), $(GAME_SRC))
 
