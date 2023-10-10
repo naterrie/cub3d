@@ -47,8 +47,7 @@ static int	hit_wall(t_data *data, int i, int j)
 	if (i < 0 || j < 0 || i > SCREEN_H || j > SCREEN_W)
 		return (0);
 	if (i < x && data->map[(int)floor(i) / MAP_ZOOM][(int)floor(j) / MAP_ZOOM])
-		if (data->map[(int)floor(i) / \
-				MAP_ZOOM][(int)floor(j) / MAP_ZOOM] == '1')
+		if (data->map[(int)floor(i) / MAP_ZOOM][(int)floor(j) / MAP_ZOOM] == '1')
 			return (0);
 	return (1);
 }
