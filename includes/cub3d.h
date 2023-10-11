@@ -127,7 +127,7 @@ int		exit_game(t_data *data);
 //	Minimap	//
 void	minimap_full(t_data *data);
 void	minimap_player(t_data *data);
-int		draw_line(t_data *data, double x, double y);
+double		draw_line(t_data *data, double x, double y);
 
 //	Draw utils	//
 void	put_floor_ceiling(t_data *data);
