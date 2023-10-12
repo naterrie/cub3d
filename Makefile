@@ -82,6 +82,10 @@ FILES	 +=	$(addprefix $(GAME_DIR), $(GAME_SRC))
 
 OBJS	+=	$(addprefix $(DIR_OBJS), $(FILES:.c=.o))
 
+#########################
+# 		RULES			#
+#########################
+
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(DIR_OBJS) $(MLX_PATH) $(OBJS) $(LIBFT)
@@ -120,6 +124,10 @@ $(DIR_OBJS):
 
 $(LIBFT): force
 	make -C libft
+
+#########################
+# 	CLEAN COMMANDS		#
+#########################
 
 force :
 

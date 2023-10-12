@@ -28,14 +28,17 @@
 # include <stdbool.h>
 # include <math.h>
 
-# define MINI_SIZE 10
+# define MINI_SIZE 16
 # define MAP_ZOOM 10
-# define SCREEN_H 1080
-# define SCREEN_W 1920
-# define MOVE_SPEED 0.1
-# define ROT_SPEED 0.1
+# define SCREEN_W 1950
+# define SCREEN_H 1050
+# define MOVE_SPEED 7
+# define ROT_SPEED 0.3
 # define FOV 45
 
+/*########################
+#	 	Input key		 #
+########################*/
 
 //linux
 typedef enum e_key
@@ -63,22 +66,33 @@ typedef enum e_key
 // 	KEY_MINIMAP = 48,
 // }	t_key;
 
+/*########################
+#	 	 enum_utils		 #
+########################*/
+
+typedef enum e_decor
+{
+	WALL = '1',
+	EMPTY = '0',
+}	t_decor;
+
+typedef struct s_pos
+{
+	double	x;
+	double	y;
+}	t_pos;
+
+
+/*########################
+#	 	 struc_MLX		 #
+########################*/
+
 typedef struct s_image
 {
 	void	*img;
 	int		w;
 	int		h;
 }	t_image;
-
-typedef struct s_player
-{
-	double	x;
-	double	y;
-	double	dir_x;
-	double	dir_y;
-	double	angle;
-	double	angle_fov;
-}	t_player;
 
 typedef struct s_mlx
 {
@@ -88,44 +102,86 @@ typedef struct s_mlx
 	void		*img;
 }	t_mlx;
 
+/*########################
+#	 struct_parsing		 #
+########################*/
+
+typedef struct s_parsing
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		floor;
+	int		ceil;
+	char	**map;
+}	t_parsing;
+
+/*########################
+#	 struct_player		 #
+########################*/
+
+typedef struct s_player
+{
+	double	dx;
+	double	dy;
+	t_pos	position;
+	t_pos	direction;
+	double	angle;
+	double	angle_fov;
+}	t_player;
+
+/*########################
+#	 struct_dqta		 #
+########################*/
+
 typedef struct s_data
 {
-	char		**map;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
 	bool		minimap;
-	int			floor;
-	int			ceil;
+	t_parsing	parsing;
 	t_mlx		mlx;
 	t_player	player;
 }	t_data;
 
-//	Movement	//
+/*########################
+#	 	Movement		 #
+########################*/
+
 void	move_up(t_data *data);
 void	move_down(t_data *data);
 void	move_right(t_data *data);
 void	move_left(t_data *data);
 
-//	Look	//
+/*########################
+#	 	  Look	    	 #
+########################*/
 void	look_right(t_data *data);
 void	look_left(t_data *data);
 
-//	Start game	//
+/*########################
+#	 	Start game		 #
+########################*/
 void	start_game(t_data *data);
 
-//	Utils game	//
+/*########################
+#	 	Utils game		 #
+########################*/
 int		exit_game(t_data *data);
 
-//	Minimap	//
+
+/*########################
+#	 	Minimap 		 #
+########################*/
 void	minimap_full(t_data *data);
 void	minimap_player(t_data *data);
 
-//	Draw utils	//
+
+/*########################
+#	 	Draw utils		 #
+########################*/
 void	put_floor_ceiling(t_data *data);
 void	draw_square(t_data *data, int x, int y, int color);
 
