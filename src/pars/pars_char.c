@@ -12,7 +12,7 @@
 
 #include "pars.h"
 
-static int	char_start(char c, int i, int j, t_data *data)
+static int	char_start(char c, int j, int i, t_data *data)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
@@ -28,26 +28,26 @@ static void	set_player_info(t_data *data, char c)
 	if (c == 'N')
 	{
 		data->player.angle = M_PI_2;
-		data->player.dir_x = -1;
-		data->player.dir_y = 0;
+		data->player.dir_x = 0;
+		data->player.dir_y = -1;
 	}
 	else if (c == 'S')
 	{
 		data->player.angle = -M_PI_2;
-		data->player.dir_x = 1;
-		data->player.dir_y = 0;
+		data->player.dir_x = 0;
+		data->player.dir_y = 1;
 	}
 	else if (c == 'E')
 	{
 		data->player.angle = 0;
-		data->player.dir_x = 0;
-		data->player.dir_y = 1;
+		data->player.dir_x = 1;
+		data->player.dir_y = 0;
 	}
 	else if (c == 'W')
 	{
 		data->player.angle = -M_PI;
-		data->player.dir_x = 0;
-		data->player.dir_y = -1;
+		data->player.dir_x = -1;
+		data->player.dir_y = 0;
 	}
 }
 

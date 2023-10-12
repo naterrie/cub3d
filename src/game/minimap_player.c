@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:38:07 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/09 14:39:46 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 00:40:03 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	draw_player_mini(t_data *data)
 	int	x;
 	int	y;
 
-	coma_i = (data->player.x - floor(data->player.x)) * 10;
-	coma_j = (data->player.y - floor(data->player.y)) * 10;
+	coma_j = (data->player.x - floor(data->player.x)) * 10;
+	coma_i = (data->player.y - floor(data->player.y)) * 10;
 	x = 2;
 	while (x < MAP_ZOOM - 2)
 	{

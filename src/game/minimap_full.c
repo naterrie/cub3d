@@ -87,22 +87,39 @@ void	minimap_full(t_data *data)
 		}
 		i++;
 	}
-	dprintf(2, "fov = %f\n", data->player.angle_fov);
-	dprintf(2, "dir_x = %f  dir_y = %f\n", data->player.dir_x, data->player.dir_y);
-	dprintf(2, "dir_x+a = %f  dir_y+a = %f\n", data->player.dir_x - (data->player.angle_fov), data->player.dir_y - (data->player.angle_fov));
-	dprintf(2, "dir_x+b = %f  dir_y+b = %f\n\n\n", data->player.dir_x - (data->player.angle_fov), data->player.dir_y + (data->player.angle_fov));
+	// float	lol = data->player.dir_x + data->player.angle_fov;
+	// //float	lal = data->player.dir_y + data->player.angle_fov;
+	// //float	lil = data->player.dir_x - data->player.angle_fov;
+	// float	lpl = data->player.dir_y - data->player.angle_fov;
+	// dprintf(2, "%f\n", (data->player.dir_x - data->player.dir_y));
+	// draw_line(data, lol, data->player.dir_y, 0x00FFF66FF); //rose
+	// draw_line(data, data->player.dir_x, lpl, 0x0000000FF); //bleue
 	draw_line(data, data->player.dir_x, data->player.dir_y, 0x00CC933);
-	if (data->player.dir_y > 0 || data->player.dir_x > 0)
+	draw_line(data, data->player.dir_x - data->player.angle_fov, data->player.dir_y, 0x00FFFF33); //jaune
+	if (data->player.dir_x <= 0)
 	{
-		draw_line(data, data->player.dir_x - data->player.angle_fov, data->player.dir_y - data->player.angle_fov, 0x00FFF66FF); //rose
-		//draw_line(data, data->player.dir_x - data->player.angle_fov, data->player.dir_y + data->player.angle_fov, 0x0000000FF); //bleue
+		if (data->player.dir_y >= 0)
+		{
+			draw_line(data, data->player.dir_x - data->player.angle_fov, data->player.dir_y - data->player.angle_fov, 0x00FFF66FF); //rose
+			draw_line(data, data->player.dir_x + data->player.angle_fov, data->player.dir_y, 0x0099FFFF); //bleu claire
+		}
+		else
+		{
+			//draw_line(data, data->player.dir_x + data->player.angle_fov, data->player.dir_y - data->player.angle_fov, 0x00FFF66FF); //rose
+			draw_line(data, data->player.dir_x - data->player.angle_fov, data->player.dir_y + data->player.angle_fov, 0x0000000FF); //bleue
+		}
 	}
 	else
 	{
-		//draw_line(data, fabs(data->player.dir_x + data->player.angle_fov), fabs(data->player.dir_y + data->player.angle_fov), 0x00FFF66FF); //rose
-		//draw_line(data, data->player.dir_x - data->player.angle_fov, data->player.dir_y + data->player.angle_fov, 0x0000000FF); //bleue
+		if (data->player.dir_y <= 0)
+		{
+			draw_line(data, data->player.dir_x + data->player.angle_fov, data->player.dir_y + data->player.angle_fov, 0x00FFF66FF); //rose
+		}
+		else
+		{
+			draw_line(data, data->player.dir_x + data->player.angle_fov, data->player.dir_y - data->player.angle_fov, 0x0099FFFF); //bleue claire
+		}
 	}
-	//bleue
 	draw_player_full(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }

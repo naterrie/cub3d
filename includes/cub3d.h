@@ -14,10 +14,10 @@
 # define CUB3D_H
 
 // Linux
-# include "../mlx/mlx.h"
+//# include "../mlx/mlx.h"
 
 // //macOs
-// # include "../mlx_macos/mlx.h"
+# include "../mlx_macos/mlx.h"
 
 # include "../libft/libft.h"
 # include "get_next_line.h"
@@ -30,38 +30,38 @@
 
 # define MINI_SIZE 10
 # define MAP_ZOOM 10
-# define SCREEN_H 1080
-# define SCREEN_W 1920
-# define MOVE_SPEED 0.1
+# define SCREEN_H 750
+# define SCREEN_W 920
+# define MOVE_SPEED 0.5
 # define ROT_SPEED 0.1
 # define FOV 45
 
 
 //linux
-typedef enum e_key
-{
-	KEY_UP = 119,
-	KEY_DOWN = 115,
-	KEY_RIGHT = 100,
-	KEY_LEFT = 97,
-	KEY_ESC = 65307,
-	KEY_POV_RIGHT = 65363,
-	KEY_POV_LEFT = 65361,
-	KEY_MINIMAP = 65289,
-}	t_key;
-
-//macos
 // typedef enum e_key
 // {
-// 	KEY_UP = 13,
-// 	KEY_DOWN = 1,
-// 	KEY_RIGHT = 2,
-// 	KEY_LEFT = 0,
-// 	KEY_ESC = 53,
-// 	KEY_POV_RIGHT = 124,
-// 	KEY_POV_LEFT = 123,
-// 	KEY_MINIMAP = 48,
+// 	KEY_UP = 119,
+// 	KEY_DOWN = 115,
+// 	KEY_RIGHT = 100,
+// 	KEY_LEFT = 97,
+// 	KEY_ESC = 65307,
+// 	KEY_POV_RIGHT = 65363,
+// 	KEY_POV_LEFT = 65361,
+// 	KEY_MINIMAP = 65289,
 // }	t_key;
+
+//macos
+typedef enum e_key
+{
+	KEY_UP = 13,
+	KEY_DOWN = 1,
+	KEY_RIGHT = 2,
+	KEY_LEFT = 0,
+	KEY_ESC = 53,
+	KEY_POV_RIGHT = 124,
+	KEY_POV_LEFT = 123,
+	KEY_MINIMAP = 48,
+}	t_key;
 
 typedef struct s_image
 {
