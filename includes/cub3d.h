@@ -34,7 +34,7 @@
 # define SCREEN_H 1050
 # define MOVE_SPEED 3
 # define ROT_SPEED 0.1
-# define FOV 45
+# define FOV 60
 
 /*########################
 #	 	Input key		 #
