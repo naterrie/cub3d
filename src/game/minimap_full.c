@@ -12,29 +12,29 @@
 
 #include "cub3d.h"
 
-static void	draw_player_full(t_data *data)
-{
-	int	i;
-	int	j;
-	int	x;
-	int	y;
+// static void	draw_player_full(t_data *data)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	x;
+// 	int	y;
 
-	i = data->player.x * MAP_ZOOM - 5;
-	j = data->player.y * MAP_ZOOM - 5;
-	x = 2;
-	while (x < MAP_ZOOM - 2)
-	{
-		y = 2;
-		while (y < MAP_ZOOM - 2)
-		{
-			if (i >= 0 && j >= 0 && i < SCREEN_H && j < SCREEN_W)
-				((int *)data->mlx.addr)[(x + i) * \
-				(data->line_length >> 2) + (y + j)] = 0x00003399;
-			y++;
-		}
-		x++;
-	}
-}
+// 	i = data->player.x * MAP_ZOOM - 5;
+// 	j = data->player.y * MAP_ZOOM - 5;
+// 	x = 2;
+// 	while (x < MAP_ZOOM - 2)
+// 	{
+// 		y = 2;
+// 		while (y < MAP_ZOOM - 2)
+// 		{
+// 			if (i >= 0 && j >= 0 && i < SCREEN_H && j < SCREEN_W)
+// 				((int *)data->mlx.addr)[(x + i) * \
+// 				(data->line_length >> 2) + (y + j)] = 0x00003399;
+// 			y++;
+// 		}
+// 		x++;
+// 	}
+// }
 
 void	minimap_full(t_data *data)
 {
@@ -56,6 +56,6 @@ void	minimap_full(t_data *data)
 		i++;
 	}
 	raycast(data);
-	draw_player_full(data);
+	//draw_player_full(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }

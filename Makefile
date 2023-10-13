@@ -23,8 +23,6 @@ NAME	=	cub3D
 
 CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3
 
-CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3
-
 #Linux
 MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
 MLX_PATH	=	./mlx/libmlx.a

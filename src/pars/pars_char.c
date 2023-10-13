@@ -27,13 +27,13 @@ static void	set_player_info(t_data *data, char c)
 {
 	if (c == 'N')
 	{
-		data->player.angle = M_PI_2;
+		data->player.angle = -M_PI_2;
 		data->player.dir_x = -1;
 		data->player.dir_y = 0;
 	}
 	else if (c == 'S')
 	{
-		data->player.angle = -M_PI_2;
+		data->player.angle = M_PI_2;
 		data->player.dir_x = 1;
 		data->player.dir_y = 0;
 	}
