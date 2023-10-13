@@ -32,8 +32,8 @@
 # define MAP_ZOOM 10
 # define SCREEN_W 1950
 # define SCREEN_H 1050
-# define MOVE_SPEED 7
-# define ROT_SPEED 0.3
+# define MOVE_SPEED 3
+# define ROT_SPEED 0.1
 # define FOV 45
 
 /*########################
@@ -132,7 +132,7 @@ typedef struct s_player
 }	t_player;
 
 /*########################
-#	 struct_dqta		 #
+#	 struct_data		 #
 ########################*/
 
 typedef struct s_data

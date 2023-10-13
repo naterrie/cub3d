@@ -24,13 +24,13 @@ void	move_down(t_data *data)
 	data->player.position.y -= data->player.direction.y * MOVE_SPEED;
 }
 
-void	move_right(t_data *data)
+void	move_left(t_data *data)
 {
 	data->player.position.x += data->player.direction.y * MOVE_SPEED;
 	data->player.position.y -= data->player.direction.x * MOVE_SPEED;
 }
 
-void	move_left(t_data *data)
+void	move_right(t_data *data)
 {
 	data->player.position.x -= data->player.direction.y * MOVE_SPEED;
 	data->player.position.y += data->player.direction.x * MOVE_SPEED;

@@ -14,13 +14,9 @@
 
 void	my_mlx_pixel_put(t_data	*data, int x, int y, int color)
 {
-	char	*dst;
-
 	if (x < 0 || y < 0)
 		return ;
-	dst = data->mlx.addr + (y * data->line_length + x * \
-	(data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	((int *)data->mlx.addr)[(y) * (data->line_length >> 2) + (x)] = color;
 }
 
 // static void	draw_player_full(t_data *data)
