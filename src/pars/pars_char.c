@@ -16,8 +16,8 @@ static int	char_start(char c, int j, int i, t_data *data)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
-		data->player.x = i + 0.5;
-		data->player.y = j + 0.5;
+		data->player.position.x = i * MAP_ZOOM + MAP_ZOOM * 0.5;
+		data->player.position.y = j * MAP_ZOOM + MAP_ZOOM * 0.5;
 		return (1);
 	}
 	return (0);
@@ -28,26 +28,26 @@ static void	set_player_info(t_data *data, char c)
 	if (c == 'N')
 	{
 		data->player.angle = M_PI_2;
-		data->player.dir_x = 0;
-		data->player.dir_y = -1;
+		data->player.direction.x = 0;
+		data->player.direction.y = -1;
 	}
 	else if (c == 'S')
 	{
 		data->player.angle = -M_PI_2;
-		data->player.dir_x = 0;
-		data->player.dir_y = 1;
+		data->player.direction.x = 0;
+		data->player.direction.y = 1;
 	}
 	else if (c == 'E')
 	{
 		data->player.angle = 0;
-		data->player.dir_x = 1;
-		data->player.dir_y = 0;
+		data->player.direction.x = 1;
+		data->player.direction.y = 0;
 	}
 	else if (c == 'W')
 	{
-		data->player.angle = -M_PI;
-		data->player.dir_x = -1;
-		data->player.dir_y = 0;
+		data->player.angle += -M_PI;
+		data->player.direction.x = -1;
+		data->player.direction.y = 0;
 	}
 }
 
@@ -59,15 +59,15 @@ int	check_start(t_data *data)
 
 	i = 0;
 	count = 0;
-	while (data->map[i])
+	while (data->parsing.map[i])
 	{
 		j = 0;
-		while (data->map[i][j])
+		while (data->parsing.map[i][j])
 		{
-			if (char_start(data->map[i][j], i, j, data))
+			if (char_start(data->parsing.map[i][j], i, j, data))
 			{
-				set_player_info(data, data->map[i][j]);
-				data->map[i][j] = '0';
+				set_player_info(data, data->parsing.map[i][j]);
+				data->parsing.map[i][j] = EMPTY;
 				count++;
 			}
 			j++;
@@ -90,9 +90,10 @@ int	check_chars(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' \
-			&& map[i][j] != 'S' && map[i][j] != 'E' && map[i][j] != 'W' \
-			&& map[i][j] != ' ' && map[i][j] != 10 && map[i][j] != 13)
+			if (map[i][j] != EMPTY && map[i][j] != WALL && \
+			map[i][j] != 'N' && map[i][j] != 'S' && \
+			map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] \
+			!= ' ' && map[i][j] != 10 && map[i][j] != 13)
 				return (write(2, "Error : Invalid char\n", 22), 1);
 			j++;
 		}

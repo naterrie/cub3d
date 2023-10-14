@@ -45,10 +45,10 @@ void	put_floor_ceiling(t_data *data)
 		{
 			if (i < (SCREEN_H >> 1))
 				((int *)data->mlx.addr)[i * \
-				(data->line_length >> 2) + j] = data->ceil;
+				(data->line_length >> 2) + j] = data->parsing.ceil;
 			else
 				((int *)data->mlx.addr)[i * \
-				(data->line_length >> 2) + j] = data->floor;
+				(data->line_length >> 2) + j] = data->parsing.floor;
 			j++;
 		}
 		i++;

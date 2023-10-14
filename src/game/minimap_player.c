@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:38:07 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/12 00:40:03 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/10/12 18:22:35 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 static int	minimap_check(t_data *data, int i, int j, char c)
 {
 	if (c == 'N')
-		if (data->map[(int)data->player.x + i][(int)data->player.y + j])
+		if (data->parsing.map[(int)data->player.position.x + i] \
+		[(int)data->player.position.y + j])
 			return (1);
-	if (data->map[(int)data->player.x + i][(int)data->player.y + j] == c)
+	if (data->parsing.map[(int)data->player.position.x + i] \
+	[(int)data->player.position.y + j] == c)
 		return (1);
 	return (0);
 }
@@ -29,8 +31,8 @@ static void	draw_player_mini(t_data *data)
 	int	x;
 	int	y;
 
-	coma_j = (data->player.x - floor(data->player.x)) * 10;
-	coma_i = (data->player.y - floor(data->player.y)) * 10;
+	coma_i = (data->player.position.x - floor(data->player.position.x)) * 10;
+	coma_j = (data->player.position.y - floor(data->player.position.y)) * 10;
 	x = 2;
 	while (x < MAP_ZOOM - 2)
 	{
@@ -56,12 +58,12 @@ void	minimap_player(t_data *data)
 	int	j;
 
 	i = -MINI_SIZE;
-	while (data->player.x + i < 0)
+	while (data->player.position.x + i < 0)
 		i++;
-	while (i < MINI_SIZE && data->map[(int)data->player.x + i])
+	while (i < MINI_SIZE && data->parsing.map[(int)data->player.position.x + i])
 	{
 		j = -MINI_SIZE;
-		while (data->player.y + j < 0)
+		while (data->player.position.y + j < 0)
 			j++;
 		while (j < MINI_SIZE && minimap_check(data, i, j, 'N'))
 		{

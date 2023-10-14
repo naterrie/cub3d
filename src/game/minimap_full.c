@@ -12,58 +12,83 @@
 
 #include "cub3d.h"
 
-static void	draw_player_full(t_data *data)
+void	my_mlx_pixel_put(t_data	*data, int x, int y, int color)
 {
-	int	i;
-	int	j;
-	int	x;
-	int	y;
+	char	*dst;
 
-	i = data->player.x * MAP_ZOOM - 5;
-	j = data->player.y * MAP_ZOOM - 5;
-	x = 2;
-	while (x < MAP_ZOOM - 2)
-	{
-		y = 2;
-		while (y < MAP_ZOOM - 2)
-		{
-			if (i >= 0 && j >= 0 && i < SCREEN_H && j < SCREEN_W)
-				((int *)data->mlx.addr)[(x + i) * \
-				(data->line_length >> 2) + (y + j)] = 0x00003399;
-			y++;
-		}
-		x++;
-	}
+	if (x < 0 || y < 0)
+		return ;
+	dst = data->mlx.addr + (y * data->line_length + x * \
+	(data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
+
+// static void	draw_player_full(t_data *data)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	x;
+// 	int	y;
+
+// 	// i = data->player.position.x * MAP_ZOOM + MAP_ZOOM * 0.5;
+// 	// j = data->player.position.y * MAP_ZOOM + MAP_ZOOM * 0.5;
+// 	x = 2;
+// 	while (x < MAP_ZOOM - 2)
+// 	{
+// 		y = 2;
+// 		while (y < MAP_ZOOM - 2)
+// 		{
+// 			if (i >= 0 && j >= 0 && i < SCREEN_H && j < SCREEN_W)
+// 				((int *)data->mlx.addr)[(x + i) * \
+// 				(data->line_length >> 2) + (y + j)] = 0x00003399;
+// 			y++;
+// 		}
+// 		x++;
+// 	}
+// }
 
 static int	hit_wall(t_data *data, int i, int j)
 {
 	int	x;
 
 	x = 0;
-	while (data->map[x])
+	while (data->parsing.map[x])
 		x++;
 	x *= MAP_ZOOM;
 	if (i < 0 || j < 0 || i > SCREEN_H || j > SCREEN_W)
 		return (0);
-	if (i < x && data->map[(int)floor(i) / MAP_ZOOM][(int)floor(j) / MAP_ZOOM] && (int)floor(j) / MAP_ZOOM < ft_strlen(data->map[(int)floor(i) / MAP_ZOOM]))
-		if (data->map[(int)floor(i) / MAP_ZOOM][(int)floor(j) / MAP_ZOOM] == '1')
+	if (i < x && data->parsing.map[(int)floor(i) / MAP_ZOOM] \
+	[(int)floor(j) / MAP_ZOOM] && (int)floor(j) / MAP_ZOOM < \
+	ft_strlen(data->parsing.map[(int)floor(i) / MAP_ZOOM]))
+		if (data->parsing.map[(int)floor(i) / MAP_ZOOM] \
+		[(int)floor(j) / MAP_ZOOM] == '1')
 			return (0);
 	return (1);
 }
 
-static void	draw_line(t_data *data, double x, double y, int color)
+static void	draw_line(t_data *data, double angle_fov)
 {
 	double	i;
 	double	j;
+	double	new_x;
+	double	new_y;
+	int		step;
 
-	i = data->player.x * MAP_ZOOM;
-	j = data->player.y * MAP_ZOOM;
-	while (hit_wall(data, i, j) && (x != 0 || y != 0))
+	i = data->player.position.x;
+	j = data->player.position.y;
+	data->player.dx = cos(data->player.angle + angle_fov);
+	data->player.dy = sin(data->player.angle + angle_fov);
+	step = 1;
+	new_x = 0;
+	new_y = 0;
+	while (hit_wall(data, j, i))
 	{
-		((int *)data->mlx.addr)[(int)i * (data->line_length >> 2) + (int)j] = color;
-		i += x;
-		j += y;
+		new_x += step * data->player.dx;
+		new_y += step * data->player.dy;
+		my_mlx_pixel_put(data, data->player.position.x + \
+		new_x, data->player.position.y + new_y, 0x00FF66FF);
+		i += data->player.dx;
+		j += data->player.dy;
 	}
 }
 
@@ -74,52 +99,22 @@ void	minimap_full(t_data *data)
 
 	i = 0;
 	data->player.angle_fov = (FOV * (M_PI / 180) / 2);
-	while (data->map[i])
+	while (data->parsing.map[i])
 	{
 		j = 0;
-		while (data->map[i][j])
+		while (data->parsing.map[i][j])
 		{
-			if (data->map[i][j] == '1')
+			if (data->parsing.map[i][j] == WALL)
 				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0xFF9E9E9E);
-			else if (data->map[i][j] == '0')
+			else if (data->parsing.map[i][j] == EMPTY)
 				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0x00FFFFFF);
 			j++;
 		}
 		i++;
 	}
-	// float	lol = data->player.dir_x + data->player.angle_fov;
-	// //float	lal = data->player.dir_y + data->player.angle_fov;
-	// //float	lil = data->player.dir_x - data->player.angle_fov;
-	// float	lpl = data->player.dir_y - data->player.angle_fov;
-	// dprintf(2, "%f\n", (data->player.dir_x - data->player.dir_y));
-	// draw_line(data, lol, data->player.dir_y, 0x00FFF66FF); //rose
-	// draw_line(data, data->player.dir_x, lpl, 0x0000000FF); //bleue
-	draw_line(data, data->player.dir_x, data->player.dir_y, 0x00CC933);
-	draw_line(data, data->player.dir_x - data->player.angle_fov, data->player.dir_y, 0x00FFFF33); //jaune
-	if (data->player.dir_x <= 0)
-	{
-		if (data->player.dir_y >= 0)
-		{
-			draw_line(data, data->player.dir_x - data->player.angle_fov, data->player.dir_y - data->player.angle_fov, 0x00FFF66FF); //rose
-			draw_line(data, data->player.dir_x + data->player.angle_fov, data->player.dir_y, 0x0099FFFF); //bleu claire
-		}
-		else
-		{
-			//draw_line(data, data->player.dir_x + data->player.angle_fov, data->player.dir_y - data->player.angle_fov, 0x00FFF66FF); //rose
-			draw_line(data, data->player.dir_x - data->player.angle_fov, data->player.dir_y + data->player.angle_fov, 0x0000000FF); //bleue
-		}
-	}
-	else
-	{
-		if (data->player.dir_y <= 0)
-		{
-			draw_line(data, data->player.dir_x + data->player.angle_fov, data->player.dir_y + data->player.angle_fov, 0x00FFF66FF); //rose
-		}
-		else
-		{
-			draw_line(data, data->player.dir_x + data->player.angle_fov, data->player.dir_y - data->player.angle_fov, 0x0099FFFF); //bleue claire
-		}
-	}
-	draw_player_full(data);
+	draw_line(data, 0);
+	draw_line(data, data->player.angle_fov);
+	draw_line(data, -data->player.angle_fov);
+	//draw_player_full(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }

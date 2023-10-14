@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:21:48 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/07 16:19:28 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 13:35:02 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ static int	file_extention(char *file)
 
 int	check_extension(t_data *data)
 {
-	if (file_extention(data->no))
+	if (file_extention(data->parsing.no))
 		return (printf("Error : Wrong extention\n"), 1);
-	if (file_extention(data->so))
+	if (file_extention(data->parsing.so))
 		return (printf("Error : Wrong extention\n"), 1);
-	if (file_extention(data->ea))
+	if (file_extention(data->parsing.ea))
 		return (printf("Error : Wrong extention\n"), 1);
-	if (file_extention(data->we))
+	if (file_extention(data->parsing.we))
 		return (printf("Error : Wrong extention\n"), 1);
 	return (0);
 }
