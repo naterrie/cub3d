@@ -52,5 +52,6 @@ int	main(int argc, char **argv)
 	if (parsing(argv[1], &data))
 		return (1);
 	start_game(&data);
+	mlx_loop(data.mlx.mlx);
 	return (0);
 }
