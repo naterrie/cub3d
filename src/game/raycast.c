@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:31:47 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/13 18:28:03 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/10/16 15:35:20 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ static int	hit_wall(t_data *data, int i, int j)
 	return (1);
 }
 
+double	d_coord(double x, double y, double xy, double yy)
+{
+	double	i;
+	double	j;
+
+	i = x - xy;
+	j = y - yy;
+	return (sqrt(i * i + j * j));
+}
 
 double	draw_line(t_data *data, double x, double y)
 {
@@ -46,12 +55,9 @@ double	draw_line(t_data *data, double x, double y)
 		i += x;
 		j += y;
 	}
-	printf("i = %f, j = %f, x = %f, y = %f\n", i, j, data->player.x * MAP_ZOOM, data->player.y * MAP_ZOOM);
-	printf("angle = %f, %f\n", data->player.angle, sqrt(pow(i / 10 - data->player.x, 2) + pow(j / 10 - data->player.y, 2)));
-	//return (sqrt(pow(data->player.x - i) + pow(data->player.y - j));
-	return (((data->player.x * MAP_ZOOM)- i) / -sin(M_PI- data->player.angle));
+	return (d_coord(data->player.x, \
+		data->player.y, i / MAP_ZOOM, j / MAP_ZOOM));
 }
-
 
 void	raycast(t_data *data)
 {
