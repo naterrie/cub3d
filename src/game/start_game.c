@@ -136,6 +136,6 @@ void	start_game(t_data *data)
 	mlx_hook(data->mlx.win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->mlx.win, 3, (1L << 1), key_event_release, data);
 	mlx_hook(data->mlx.win, 17, 0, exit_game, data);
-	//mlx_loop_hook(data->mlx.win, render, data);
+	mlx_loop_hook(data->mlx.win, render, data);
 	mlx_loop_hook(data->mlx.win, hook_loop, data);
 }
