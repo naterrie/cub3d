@@ -14,13 +14,9 @@
 
 void	my_mlx_pixel_put(t_data	*data, int x, int y, int color)
 {
-	char	*dst;
-
 	if (x < 0 || y < 0)
 		return ;
-	dst = data->mlx.addr + (y * data->line_length + x * \
-	(data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	((int *)data->mlx.addr)[(y) * (data->line_length >> 2) + (x)] = color;
 }
 
 // static void	draw_player_full(t_data *data)
@@ -94,8 +90,9 @@ static void	draw_line(t_data *data, double angle_fov)
 
 void	minimap_full(t_data *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	double	ray_cast;
 
 	i = 0;
 	data->player.angle_fov = (FOV * (M_PI / 180) / 2);
@@ -112,9 +109,15 @@ void	minimap_full(t_data *data)
 		}
 		i++;
 	}
-	draw_line(data, 0);
-	draw_line(data, data->player.angle_fov);
-	draw_line(data, -data->player.angle_fov);
+	//calculer correctemeent l'angle a incrementer pour qu'il est la meme distance. si non on va avoir une vue plongante.
+	ray_cast = -data->player.angle_fov;
+	i = 0;
+	while (i < SCREEN_H)
+	{
+		draw_line(data, ray_cast);
+		ray_cast += data->player.angle_fov / (SCREEN_H * 0.5);
+		i++;
+	}
 	//draw_player_full(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }

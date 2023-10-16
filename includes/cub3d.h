@@ -30,11 +30,11 @@
 
 # define MINI_SIZE 16
 # define MAP_ZOOM 10
-# define SCREEN_W 1950
-# define SCREEN_H 1050
-# define MOVE_SPEED 7
-# define ROT_SPEED 0.3
-# define FOV 45
+# define SCREEN_W 950
+# define SCREEN_H 750
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.02
+# define FOV 60
 
 /*########################
 #	 	Input key		 #
@@ -58,16 +58,27 @@ typedef enum e_key
 {
 	KEY_UP = 13,
 	KEY_DOWN = 1,
-	KEY_RIGHT = 2,
 	KEY_LEFT = 0,
+	KEY_RIGHT = 2,
 	KEY_ESC = 53,
 	KEY_POV_RIGHT = 124,
 	KEY_POV_LEFT = 123,
 	KEY_MINIMAP = 48,
 }	t_key;
 
+typedef enum e_keypress
+{
+	KP_ERROR = -1,
+	KP_UP,
+	KP_DOWN,
+	KP_LEFT,
+	KP_RIGHT,
+	K_POV_R,
+	K_POV_L,
+}	t_keypress;
+
 /*########################
-#	 	 enum_utils		 #
+#	 	   utils		 #
 ########################*/
 
 typedef enum e_decor
@@ -82,6 +93,11 @@ typedef struct s_pos
 	double	y;
 }	t_pos;
 
+typedef enum e_bool
+{
+	FALSE,
+	TRUE,
+}	t_bool;
 
 /*########################
 #	 	 struc_MLX		 #
@@ -132,7 +148,7 @@ typedef struct s_player
 }	t_player;
 
 /*########################
-#	 struct_dqta		 #
+#	 struct_data		 #
 ########################*/
 
 typedef struct s_data
@@ -144,6 +160,7 @@ typedef struct s_data
 	t_parsing	parsing;
 	t_mlx		mlx;
 	t_player	player;
+	t_bool		keypress[6];
 }	t_data;
 
 /*########################
