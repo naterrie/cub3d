@@ -115,7 +115,11 @@ int	render(t_data *data)
 		}
 		k++;
 	}
-	usleep(6500);
+	usleep(3000);
+	if (data->minimap == true)
+		minimap_player(data);
+	else
+		minimap_full(data);
 	return (EXIT_SUCCESS);
 }
 

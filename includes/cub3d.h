@@ -32,7 +32,7 @@
 # define MAP_ZOOM 10
 # define SCREEN_W 950
 # define SCREEN_H 750
-# define MOVE_SPEED 0.1
+# define MOVE_SPEED 0.5
 # define ROT_SPEED 0.02
 # define FOV 60
 

@@ -62,7 +62,17 @@ static int	hit_wall(t_data *data, int i, int j)
 	return (1);
 }
 
-static void	draw_line(t_data *data, double angle_fov)
+double d_coord(double x, double y, double i, double j)
+{
+	double	k;
+	double	l;
+
+	k = x - i;
+	l = y - j;
+	return (sqrt(k * k + l * l));
+}
+
+double	draw_line(t_data *data, double angle_fov)
 {
 	double	i;
 	double	j;
@@ -86,6 +96,7 @@ static void	draw_line(t_data *data, double angle_fov)
 		i += data->player.dx;
 		j += data->player.dy;
 	}
+	return (d_coord(data->player.position.x * MAP_ZOOM, data->player.position.y * MAP_ZOOM, i, j));
 }
 
 void	minimap_full(t_data *data)
