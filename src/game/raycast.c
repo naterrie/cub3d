@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:31:47 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/17 15:54:38 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/10/19 04:10:55 by aviscogl         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,23 @@ double	d_coord(double x, double y, double xy, double yy)
 double	closest_x(t_data *data, double x)
 {
 	int		tempx;
-	double	angle;
-	//int		posx;
+	double	anglec;
+	double	ab;
+	double	bc;
 	double	ac;
+	double	anglea;
 
-	angle = 180 + (data->player.angle * 180 / M_PI);
+	anglec = 90 + (data->player.angle * 180 / M_PI);
+	anglea = 90 - anglec;
+	if (anglec <= 0.000000 || anglec >= 90.000000)
+		return (0);
 	tempx = data->player.x;
 	if (x > 0)
 		tempx += 1;
-	ac = (data->player.x - tempx) / sin(180 - angle);
-	printf("bc = %f angle %f\n", ac, 180 - angle);
-	printf("angle = %f ", 180 - angle);
-	printf("d = %f\n\n", data->player.x - tempx);
+	bc = data->player.x - tempx;
+	ac = bc / sin(anglea * M_PI / 180);
+	ab = ac * cos(anglea * M_PI / 180);
+	printf("Triangle abc, carre en b, angle bAc = %f, angle aBc %d, angle aCb = %f\nab = %f, bc = %f, ac = %f\n\n", anglea, 90, anglec, ab, bc, ac);
 	return (data->player.x);
 }
 
