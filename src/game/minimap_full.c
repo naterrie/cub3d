@@ -12,36 +12,41 @@
 
 #include "cub3d.h"
 
-void	my_mlx_pixel_put(t_data	*data, int x, int y, int color)
+static int	hit_wall(t_data *data, int i, int j);
+static void	draw_line(t_data *data, double angle_fov);
+
+void	minimap_full(t_data *data)
 {
-	if (x < 0 || y < 0)
-		return ;
-	((int *)data->mlx.addr)[(y) * (data->line_length >> 2) + (x)] = color;
+	int		i;
+	int		j;
+	double	ray_cast;
+
+	i = 0;
+	data->player.angle_fov = (FOV * (M_PI / 180) / 2);
+	while (data->parsing.map[i])
+	{
+		j = 0;
+		while (data->parsing.map[i][j])
+		{
+			if (data->parsing.map[i][j] == WALL)
+				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0xFF9E9E9E);
+			else if (data->parsing.map[i][j] == EMPTY)
+				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0x00FFFFFF);
+			j++;
+		}
+		i++;
+	}
+	//calculer correctemeent l'angle a incrementer pour qu'il est la meme distance. si non on va avoir une vue plongante.
+	ray_cast = -data->player.angle_fov;
+	i = 0;
+	while (i < SCREEN_H)
+	{
+		draw_line(data, ray_cast);
+		ray_cast += data->player.angle_fov / (SCREEN_H * 0.5);
+		i++;
+	}
+	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }
-
-// static void	draw_player_full(t_data *data)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	x;
-// 	int	y;
-
-// 	// i = data->player.position.x * MAP_ZOOM + MAP_ZOOM * 0.5;
-// 	// j = data->player.position.y * MAP_ZOOM + MAP_ZOOM * 0.5;
-// 	x = 2;
-// 	while (x < MAP_ZOOM - 2)
-// 	{
-// 		y = 2;
-// 		while (y < MAP_ZOOM - 2)
-// 		{
-// 			if (i >= 0 && j >= 0 && i < SCREEN_H && j < SCREEN_W)
-// 				((int *)data->mlx.addr)[(x + i) * \
-// 				(data->line_length >> 2) + (y + j)] = 0x00003399;
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// }
 
 static int	hit_wall(t_data *data, int i, int j)
 {
@@ -88,36 +93,3 @@ static void	draw_line(t_data *data, double angle_fov)
 	}
 }
 
-void	minimap_full(t_data *data)
-{
-	int		i;
-	int		j;
-	double	ray_cast;
-
-	i = 0;
-	data->player.angle_fov = (FOV * (M_PI / 180) / 2);
-	while (data->parsing.map[i])
-	{
-		j = 0;
-		while (data->parsing.map[i][j])
-		{
-			if (data->parsing.map[i][j] == WALL)
-				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0xFF9E9E9E);
-			else if (data->parsing.map[i][j] == EMPTY)
-				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0x00FFFFFF);
-			j++;
-		}
-		i++;
-	}
-	//calculer correctemeent l'angle a incrementer pour qu'il est la meme distance. si non on va avoir une vue plongante.
-	ray_cast = -data->player.angle_fov;
-	i = 0;
-	while (i < SCREEN_H)
-	{
-		draw_line(data, ray_cast);
-		ray_cast += data->player.angle_fov / (SCREEN_H * 0.5);
-		i++;
-	}
-	//draw_player_full(data);
-	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
-}

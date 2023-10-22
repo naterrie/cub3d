@@ -74,7 +74,8 @@ GAME_SRC =	start_game.c \
 			minimap_player.c \
 			draw_utils.c \
 			movement.c \
-			look.c
+			look.c \
+			input_key.c
 
 FILES	 +=	$(addprefix $(GAME_DIR), $(GAME_SRC))
 
@@ -89,7 +90,7 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(DIR_OBJS) $(MLX_PATH) $(OBJS) $(LIBFT)
 	cc $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(MLXFLAGS)
 	echo "$(GREEN)✅ $(NAME) compilated !"
-	@norminette src/ | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+#	@norminette src/ | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
 $(DIR_OBJS)%.o: $(DIR_SRCS)%.c $(INC) Makefile
 	echo "$(GREEN)⏳ Making $(NAME)"
@@ -117,8 +118,8 @@ $(MLX_PATH):
 # 	mkdir -p $@/$(PARS_DIR) $@/$(GAME_DIR)
 
 #Linux
-$(DIR_OBJS):
-	mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
+	$(DIR_OBJS):
+		mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
 
 $(LIBFT): force
 	make -C libft

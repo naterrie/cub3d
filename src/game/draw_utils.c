@@ -54,3 +54,10 @@ void	put_floor_ceiling(t_data *data)
 		i++;
 	}
 }
+
+void	my_mlx_pixel_put(t_data	*data, int x, int y, int color)
+{
+	if (x < 0 || y < 0)
+		return ;
+	((int *)data->mlx.addr)[(y) * (data->line_length >> 2) + (x)] = color;
+}

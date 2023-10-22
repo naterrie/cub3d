@@ -30,12 +30,11 @@
 
 # define MINI_SIZE 16
 # define MAP_ZOOM 10
-# define SCREEN_W 1950
-# define SCREEN_H 1050
-# define MOVE_SPEED 1.5
-# define ROT_SPEED 0.1
+# define SCREEN_W 720
+# define SCREEN_H 550
+# define MOVE_SPEED 0.3
+# define ROT_SPEED 0.02
 # define FOV 60
-# define KEY_DIR 6
 
 /*########################
 #	 	Input key		 #
@@ -59,8 +58,8 @@ typedef enum e_key
 // {
 // 	KEY_UP = 13,
 // 	KEY_DOWN = 1,
-// 	KEY_RIGHT = 2,
 // 	KEY_LEFT = 0,
+// 	KEY_RIGHT = 2,
 // 	KEY_ESC = 53,
 // 	KEY_POV_RIGHT = 124,
 // 	KEY_POV_LEFT = 123,
@@ -113,10 +112,10 @@ typedef struct s_image
 
 typedef struct s_mlx
 {
-	void		*mlx;
-	void		*win;
-	char		*addr;
-	void		*img;
+	void	*mlx;
+	void	*win;
+	char	*addr;
+	void	*img;
 }	t_mlx;
 
 /*########################
@@ -161,17 +160,13 @@ typedef struct s_data
 	t_parsing	parsing;
 	t_mlx		mlx;
 	t_player	player;
-	t_bool		keypress[KEY_DIR];
+	t_bool		keypress[6];
 }	t_data;
 
 /*########################
 #	 	Movement		 #
 ########################*/
-
-void	move_up(t_data *data);
-void	move_down(t_data *data);
-void	move_right(t_data *data);
-void	move_left(t_data *data);
+void	player_move(t_data *data);
 
 /*########################
 #	 	  Look	    	 #
@@ -196,13 +191,19 @@ int		exit_game(t_data *data);
 void	minimap_full(t_data *data);
 void	minimap_player(t_data *data);
 
+/*########################
+#	 	Input_key		 #
+########################*/
+int		key_event_release(int keycode, t_data *data);
+int		key_press(int keycode, t_data *data);
+void	init_key(t_data *data);
 
 /*########################
 #	 	Draw utils		 #
 ########################*/
 void	put_floor_ceiling(t_data *data);
 void	draw_square(t_data *data, int x, int y, int color);
-
+void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
 void	ft_exit(t_data *data);
 
 #endif
