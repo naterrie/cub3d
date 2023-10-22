@@ -29,7 +29,7 @@
 # include <math.h>
 
 # define MINI_SIZE 16
-# define MAP_ZOOM 10
+# define MAP_ZOOM 50
 # define SCREEN_W 950
 # define SCREEN_H 750
 # define MOVE_SPEED 0.5
@@ -122,6 +122,7 @@ typedef struct s_mlx
 #	 struct_parsing		 #
 ########################*/
 
+
 typedef struct s_parsing
 {
 	char	*no;
@@ -131,7 +132,22 @@ typedef struct s_parsing
 	int		floor;
 	int		ceil;
 	char	**map;
+	t_pos	map_max;
 }	t_parsing;
+
+/*########################
+#	 struct_raycasting	 #
+########################*/
+
+typedef	struct	s_raycast
+{
+	//distance entre pos du player et position du mur
+	t_pos	dir;
+	t_pos	step;
+	t_pos	side_dist;
+	t_pos	delt_dist;
+}	t_raycast;
+
 
 /*########################
 #	 struct_player		 #
@@ -139,8 +155,7 @@ typedef struct s_parsing
 
 typedef struct s_player
 {
-	double	dx;
-	double	dy;
+	t_pos	d;
 	t_pos	position;
 	t_pos	direction;
 	double	angle;
@@ -162,6 +177,22 @@ typedef struct s_data
 	t_player	player;
 	t_bool		keypress[6];
 }	t_data;
+
+/*---------------------------------------*/
+typedef struct {
+    double x;
+    double y;
+} t_vector2_d;
+
+typedef struct {
+    float x;
+    float y;
+} t_vector2_f;
+
+typedef struct {
+    int cell_size;
+    int tab[SCREEN_W][SCREEN_H]; // Remplacez GRID_HEIGHT et GRID_WIDTH par les dimensions réelles
+} t_lala;
 
 /*########################
 #	 	Movement		 #
@@ -203,5 +234,7 @@ void	put_floor_ceiling(t_data *data);
 void	draw_square(t_data *data, int x, int y, int color);
 
 void	ft_exit(t_data *data);
-
+void    draw_fov(t_data *data);
+void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
+t_pos dda(t_data *data, t_pos dest) ;
 #endif

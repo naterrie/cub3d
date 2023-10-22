@@ -63,7 +63,7 @@ PARS_SRC =	pars_char.c \
 			pars_texture.c \
 			parsing.c \
 			utils_pars.c \
-			check_texture.c
+			check_texture.c \
 
 FILES	+=	$(addprefix $(PARS_DIR), $(PARS_SRC))
 
@@ -74,6 +74,7 @@ GAME_SRC =	start_game.c \
 			minimap_player.c \
 			draw_utils.c \
 			movement.c \
+			draw_fov.c \
 			look.c
 
 FILES	 +=	$(addprefix $(GAME_DIR), $(GAME_SRC))
