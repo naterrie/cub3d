@@ -74,8 +74,9 @@ GAME_SRC =	start_game.c \
 			minimap_player.c \
 			draw_utils.c \
 			movement.c \
-			draw_fov.c \
-			look.c
+			look.c \
+			input_key.c \
+			draw_fov.c
 
 FILES	 +=	$(addprefix $(GAME_DIR), $(GAME_SRC))
 
@@ -118,8 +119,8 @@ $(DIR_OBJS):
 	mkdir -p $@/$(PARS_DIR) $@/$(GAME_DIR)
 
 #Linux
-# $(DIR_OBJS):
-# 	mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
+	# $(DIR_OBJS):
+	# 	mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
 
 $(LIBFT): force
 	make -C libft

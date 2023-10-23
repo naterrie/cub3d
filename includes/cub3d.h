@@ -112,10 +112,10 @@ typedef struct s_image
 
 typedef struct s_mlx
 {
-	void		*mlx;
-	void		*win;
-	char		*addr;
-	void		*img;
+	void	*mlx;
+	void	*win;
+	char	*addr;
+	void	*img;
 }	t_mlx;
 
 /*########################
@@ -197,11 +197,7 @@ typedef struct {
 /*########################
 #	 	Movement		 #
 ########################*/
-
-void	move_up(t_data *data);
-void	move_down(t_data *data);
-void	move_right(t_data *data);
-void	move_left(t_data *data);
+void	player_move(t_data *data);
 
 /*########################
 #	 	  Look	    	 #
@@ -226,13 +222,19 @@ int		exit_game(t_data *data);
 void	minimap_full(t_data *data);
 void	minimap_player(t_data *data);
 
+/*########################
+#	 	Input_key		 #
+########################*/
+int		key_event_release(int keycode, t_data *data);
+int		key_press(int keycode, t_data *data);
+void	init_key(t_data *data);
 
 /*########################
 #	 	Draw utils		 #
 ########################*/
 void	put_floor_ceiling(t_data *data);
 void	draw_square(t_data *data, int x, int y, int color);
-
+void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
 void	ft_exit(t_data *data);
 void    draw_fov(t_data *data);
 void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);

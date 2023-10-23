@@ -6,19 +6,19 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:34:56 by nicolasbern       #+#    #+#             */
-/*   Updated: 2023/10/22 18:35:28 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/10/22 19:46:49 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 # include <math.h>
 
-void	my_mlx_pixel_put(t_data	*data, int x, int y, int color)
-{
-	if (x < 0 || y < 0)
-		return ;
-	((int *)data->mlx.addr)[(y) * (data->line_length >> 2) + (x)] = color;
-}
+// void	my_mlx_pixel_put(t_data	*data, int x, int y, int color)
+// {
+// 	if (x < 0 || y < 0)
+// 		return ;
+// 	((int *)data->mlx.addr)[(y) * (data->line_length >> 2) + (x)] = color;
+// }
 
 // Fonction DDA pour le lancer de rayons
 t_pos dda(t_data *data, t_pos dest) 

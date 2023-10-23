@@ -3,14 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
+/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:38:07 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/12 18:22:35 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/10/17 14:21:18 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	draw_player_mini(t_data *data);
+static int	minimap_check(t_data *data, int i, int j, char c);
+
+void	minimap_player(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = -MINI_SIZE;
+	while (data->player.position.x + i < 0)
+		i++;
+	while (i < MINI_SIZE && data->parsing.map[(int)data->player.position.x + i])
+	{
+		j = -MINI_SIZE;
+		while (data->player.position.y + j < 0)
+			j++;
+		while (j < MINI_SIZE && minimap_check(data, i, j, 'N'))
+		{
+			if (minimap_check(data, i, j, '1'))
+				draw_square(data, (i + MINI_SIZE) * MAP_ZOOM, \
+					(j + MINI_SIZE) * MAP_ZOOM, 0xFF9E9E9E);
+			else if (minimap_check(data, i, j, '0'))
+				draw_square(data, (i + MINI_SIZE) * MAP_ZOOM, \
+					(j + MINI_SIZE) * MAP_ZOOM, 0x00FFFFFF);
+			j++;
+		}
+		i++;
+	}
+	draw_player_mini(data);
+	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
+}
 
 static int	minimap_check(t_data *data, int i, int j, char c)
 {
@@ -50,33 +82,4 @@ static void	draw_player_mini(t_data *data)
 		}
 		x++;
 	}
-}
-
-void	minimap_player(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = -MINI_SIZE;
-	while (data->player.position.x + i < 0)
-		i++;
-	while (i < MINI_SIZE && data->parsing.map[(int)data->player.position.x + i])
-	{
-		j = -MINI_SIZE;
-		while (data->player.position.y + j < 0)
-			j++;
-		while (j < MINI_SIZE && minimap_check(data, i, j, 'N'))
-		{
-			if (minimap_check(data, i, j, '1'))
-				draw_square(data, (i + MINI_SIZE) * MAP_ZOOM, \
-					(j + MINI_SIZE) * MAP_ZOOM, 0xFF9E9E9E);
-			else if (minimap_check(data, i, j, '0'))
-				draw_square(data, (i + MINI_SIZE) * MAP_ZOOM, \
-					(j + MINI_SIZE) * MAP_ZOOM, 0x00FFFFFF);
-			j++;
-		}
-		i++;
-	}
-	draw_player_mini(data);
-	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }
