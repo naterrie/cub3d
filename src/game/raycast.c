@@ -6,7 +6,7 @@
 /*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:31:47 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/20 14:44:50 by aviscogl         ###   ########lyon.fr   */
+/*   Updated: 2023/10/25 15:16:00 by aviscogl         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,13 @@ double	closest_x(t_data *data, double x)
 {
 	int		tempx;
 	double	anglec;
-	double	ab;
 	double	bc;
 	double	ac;
 	double	anglea;
 
 	anglec = 90 + (data->player.angle * 180 / M_PI);
-	while (anglec > 90.000000)
-		anglec -= 90.000000;
-	while (anglec < 0)
-		anglec += 90.000000;
+	if (anglec > 90 || anglec < 0)
+		return (0);
 	anglea = 90 - anglec;
 	tempx = data->player.x;
 	if (anglec == 0 || anglec == 90)
@@ -65,8 +62,7 @@ double	closest_x(t_data *data, double x)
 	if (bc < 0)
 		bc = -bc;
 	ac = bc / sin(anglea * M_PI / 180);
-	ab = ac * cos(anglea * M_PI / 180);
-	printf("Triangle abc, carre en b, angle bAc = %f, angle aBc %d, angle aCb = %f\nab = %f, bc = %f, ac = %f\n\n", anglea, 90, anglec, ab, bc, ac);
+	printf("angle C = %f, angle A = %f\nBC = %f, AC = %f\n", anglec, anglea, bc, ac);
 	return (data->player.x);
 }
 
