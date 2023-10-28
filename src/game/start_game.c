@@ -40,7 +40,7 @@ static int	render(t_data *data)
 		minimap_player(data);
 	else
 		minimap_full(data);
-	usleep(3500);
+	usleep(350);
 	return (EXIT_SUCCESS);
 }
 

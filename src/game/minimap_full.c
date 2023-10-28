@@ -42,13 +42,6 @@ double  add_case_neg(double nbr)
     return (len);
 }
 
-// void	my_mlx_pixel_put(t_data	*data, int x, int y, int color)
-// {
-// 	if (x < 0 || y < 0)
-// 		return ;
-// 	((int *)data->mlx.addr)[(y) * (data->line_length >> 2) + (x)] = color;
-// }
-
 // static void	draw_player_full(t_data *data)
 // {
 // 	int	i;
@@ -126,6 +119,7 @@ t_pos	draw_li(t_data *data, double angle_fov)
 		new_x += step * data->player.d.x;
 		new_y += step * data->player.d.y;
 		my_mlx_pixel_put(data, data->player.position.x + new_x, data->player.position.y + new_y, 0x00FF66FF);
+		//((int *)data->mlx.addr)[(data->player.position.x + new_x) * (data->line_length >> 2) + (data->player.position.y + new_y)] = 0x00FF66FF;
 		dest.x += data->player.d.x;
 		dest.y += data->player.d.y;
 	}
@@ -217,7 +211,7 @@ void	minimap_full(t_data *data)
 {
 	int		i;
 	int		j;
-	//t_lala dala;
+
 	i = 0;
 	data->player.angle_fov = (FOV * (M_PI / 180) / 2);
 	while (data->parsing.map[i])
@@ -235,10 +229,9 @@ void	minimap_full(t_data *data)
 		i++;
 	}
 
-	//draw_li(data, 0);
+	draw_li(data, 0);
 	//draw_linne(data, 0);
-	//draw_fov(data);
 	//draw_player_full(data);
-	dda(data, draw_li(data, 0));
+	//dda(data, draw_li(data, 0));
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }

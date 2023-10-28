@@ -24,14 +24,14 @@ NAME	=	cub3D
 CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3
 
 #Linux
-# MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
-# MLX_PATH	=	./mlx/libmlx.a
-# MLX_PREFIX	=	mlx
+MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
+MLX_PATH	=	./mlx/libmlx.a
+MLX_PREFIX	=	mlx
 
 #macOs
-MLXFLAGS	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
-MLX_PATH	=	mlx_macos/libmlx.a
-MLX_PREFIX	=	mlx_macos
+# MLXFLAGS	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
+# MLX_PATH	=	mlx_macos/libmlx.a
+# MLX_PREFIX	=	mlx_macos
 
 LIB_DIR	=	libft/
 
@@ -119,8 +119,8 @@ $(DIR_OBJS):
 	mkdir -p $@/$(PARS_DIR) $@/$(GAME_DIR)
 
 #Linux
-	# $(DIR_OBJS):
-	# 	mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
+# 		$(DIR_OBJS):
+# 		mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
 
 $(LIBFT): force
 	make -C libft
