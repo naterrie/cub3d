@@ -74,11 +74,9 @@ int	check_start(t_data *data)
 		}
 		i++;
 	}
-	//trouver le mur max en x et en y
-	// data->parsing.map_max.x = (j - 1) * MAP_ZOOM;
-	// data->parsing.map_max.y = i * MAP_ZOOM;
-	// data->parsing.map_max.x = data->parsing.map_max.x - MAP_ZOOM;
-	// data->parsing.map_max.y = data->parsing.map_max.y - MAP_ZOOM;
+	//trouver piexl max en x et y
+	data->parsing.map_max.x = (j - 1) * MAP_ZOOM;
+	data->parsing.map_max.y = i * MAP_ZOOM;
 
 	if (count != 1)
 		return (write(2, "Error : Start incorrect\n", 24), 1);

@@ -21,17 +21,22 @@ DIR_OBJS :=	.objs/
 
 NAME	=	cub3D
 
-CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3
+CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3 -fsanitize=address
 
-#Linux
+UNAME	=	$(shell uname -s)
+
+ifeq ($(UNAME) , mac_Os)
+MLXFLAGS	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
+MLX_PATH	=	mlx_macos/libmlx.a
+MLX_PREFIX	=	mlx_macos
+endif
+
+ifeq ($(UNAME) , Linux)
 MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
 MLX_PATH	=	./mlx/libmlx.a
 MLX_PREFIX	=	mlx
+endif
 
-#macOs
-# MLXFLAGS	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
-# MLX_PATH	=	mlx_macos/libmlx.a
-# MLX_PREFIX	=	mlx_macos
 
 LIB_DIR	=	libft/
 
@@ -76,7 +81,7 @@ GAME_SRC =	start_game.c \
 			movement.c \
 			look.c \
 			input_key.c \
-			draw_fov.c
+			raycasting.c
 
 FILES	 +=	$(addprefix $(GAME_DIR), $(GAME_SRC))
 

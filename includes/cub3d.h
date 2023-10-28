@@ -13,11 +13,14 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-// Linux
-# include "../mlx/mlx.h"
 
-// //macOs
-//# include "../mlx_macos/mlx.h"
+# ifdef __APPLE__
+# include "../mlx_macos/mlx.h"
+#endif
+
+# ifdef __linux__
+# include "../mlx/mlx.h"
+#endif
 
 # include "../libft/libft.h"
 # include "get_next_line.h"
@@ -34,7 +37,7 @@
 # define SCREEN_H 950
 # define MOVE_SPEED 0.5
 # define ROT_SPEED 0.02
-# define FOV 60
+# define FOV 90
 
 /*########################
 #	 	Input key		 #
@@ -93,6 +96,12 @@ typedef struct s_pos
 	double	y;
 }	t_pos;
 
+typedef struct s_int
+{
+	int	x;
+	int	y;
+}	t_int;
+
 typedef enum e_bool
 {
 	FALSE,
@@ -139,14 +148,14 @@ typedef struct s_parsing
 #	 struct_raycasting	 #
 ########################*/
 
-typedef	struct	s_raycast
+typedef struct s_ray
 {
-	//distance entre pos du player et position du mur
-	t_pos	dir;
-	t_pos	step;
-	t_pos	side_dist;
-	t_pos	delt_dist;
-}	t_raycast;
+	t_pos	dist_player_to_side;
+	t_pos	step_dist;
+	t_pos	direction;
+	t_int	dda_position;
+	t_int	dda_step;
+}   t_ray;
 
 
 /*########################
@@ -158,7 +167,9 @@ typedef struct s_player
 	t_pos	d;
 	t_pos	position;
 	t_pos	direction;
+	t_pos	map;
 	double	angle;
+	t_pos	fov;
 	double	angle_fov;
 }	t_player;
 
@@ -175,6 +186,7 @@ typedef struct s_data
 	t_parsing	parsing;
 	t_mlx		mlx;
 	t_player	player;
+	t_pos		cam;
 	t_bool		keypress[6];
 }	t_data;
 
@@ -237,5 +249,6 @@ void	draw_square(t_data *data, int x, int y, int color);
 void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
 void	ft_exit(t_data *data);
 void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
-t_pos	dda(t_data *data, t_pos dest);
+//t_pos 	dda(t_data *data, t_pos ray) ;
+void	display_game(t_data *data);
 #endif
