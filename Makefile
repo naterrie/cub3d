@@ -21,7 +21,7 @@ DIR_OBJS :=	.objs/
 
 NAME	=	cub3D
 
-CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3
+CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3 -fsanitize=address
 
 #Linux
 # MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
@@ -76,7 +76,7 @@ GAME_SRC =	start_game.c \
 			movement.c \
 			look.c \
 			input_key.c \
-			draw_fov.c
+			raycasting.c
 
 FILES	 +=	$(addprefix $(GAME_DIR), $(GAME_SRC))
 
