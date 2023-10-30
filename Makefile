@@ -43,7 +43,11 @@ LIB_DIR	=	libft/
 LIBFT	= $(addprefix $(LIB_DIR), libft.a)
 
 HEADERS	=	cub3d.h\
-			pars.h
+			keypress.h\
+			processing.h\
+			typedef.h\
+			utils.h
+
 INC_DIR	=	includes/
 
 INC		=	$(addprefix $(INC_DIR), $(HEADERS))
@@ -119,13 +123,8 @@ $(DIR_OBJS)%.o: $(GNL_DIR)%.c $(INC) Makefile
 $(MLX_PATH):
 	make -C $(MLX_PREFIX)
 
-#mac_Os
 $(DIR_OBJS):
 	mkdir -p $@/$(PARS_DIR) $@/$(GAME_DIR)
-
-#Linux
-# 		$(DIR_OBJS):
-# 		mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
 
 $(LIBFT): force
 	make -C libft

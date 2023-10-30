@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
+#include "cub3d.h"
 
 void	ft_split_atoi(char *s, char c, int t[3])
 {
@@ -28,7 +28,7 @@ void	ft_split_atoi(char *s, char c, int t[3])
 		j++;
 	if (j != 3)
 	{
-		write(2, "Error : Wrong color\n", 21);
+		write(2, ERR_COLOR, 21);
 		return ;
 	}
 	t[0] = ft_atoi(temp[0]);
@@ -95,7 +95,7 @@ char	**get_file(char *file)
 	i = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (write (2, "Error, wrong file\n", 18), NULL);
+		return (write (2, ERR_FILE, 23), NULL);
 	line = nbline(file);
 	map = malloc(sizeof(char *) * line);
 	if (!map)
