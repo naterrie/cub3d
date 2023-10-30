@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:31:47 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/30 18:01:53 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/10/30 18:19:03 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,6 @@ double	d_coord(double x, double y, double xy, double yy)
 	j = y - yy;
 	return (sqrt(i * i + j * j));
 }
-
-// double	closest_x(t_data *data, double x, double angle)
-// {
-// 	int		tempx;
-
-// }
 
 double	closest_x(t_data *data, double x, double angle)
 {
@@ -94,6 +88,13 @@ double	draw_line(t_data *data, double x, double y)
 
 void	raycast(t_data *data)
 {
-	closest_x(data, data->player.direction.x, data->player.angle);
-	draw_line(data, data->player.direction.x, data->player.direction.y);
+	int	i;
+
+	i = 0;
+	while (i < SCREEN_W)
+	{
+		closest_x(data, data->player.direction.x, data->player.angle);
+		draw_line(data, data->player.direction.x, data->player.direction.y);
+		i++;
+	}
 }
