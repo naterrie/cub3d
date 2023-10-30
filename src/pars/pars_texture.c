@@ -73,13 +73,13 @@ void	split_file(char **map, t_data *data, char *file)
 	i = 0;
 	while (map[i])
 	{
-		if (map[i][0] == 'N' && map[i][1] == 'O')
+		if (map[i][0] == 'N' && map[i][1] == 'O' && map[i][2] == ' ')
 			data->no = get_texture(map[i]);
-		else if (map[i][0] == 'S' && map[i][1] == 'O')
+		else if (map[i][0] == 'S' && map[i][1] == 'O' && map[i][2] == ' ')
 			data->so = get_texture(map[i]);
-		else if (map[i][0] == 'W' && map[i][1] == 'E')
+		else if (map[i][0] == 'W' && map[i][1] == 'E' && map[i][2] == ' ')
 			data->we = get_texture(map[i]);
-		else if (map[i][0] == 'E' && map[i][1] == 'A')
+		else if (map[i][0] == 'E' && map[i][1] == 'A' && map[i][2] == ' ')
 			data->ea = get_texture(map[i]);
 		else if (map[i][0] == 'F')
 			data->floor = ft_pars_floor_ceil(map[i]);

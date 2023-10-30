@@ -86,6 +86,10 @@ typedef struct s_mlx
 	void		*win;
 	char		*addr;
 	void		*img;
+	void		*no;
+	void		*so;
+	void		*we;
+	void		*ea;
 }	t_mlx;
 
 typedef struct s_data

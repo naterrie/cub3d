@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:31:47 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/25 15:16:00 by aviscogl         ###   ########lyon.fr   */
+/*   Updated: 2023/10/30 15:08:56 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	d_coord(double x, double y, double xy, double yy)
 	return (sqrt(i * i + j * j));
 }
 
-double	closest_x(t_data *data, double x)
+double	closest_x(t_data *data, double x, double angle)
 {
 	int		tempx;
 	double	anglec;
@@ -49,13 +49,13 @@ double	closest_x(t_data *data, double x)
 	double	ac;
 	double	anglea;
 
-	anglec = 90 + (data->player.angle * 180 / M_PI);
-	if (anglec > 90 || anglec < 0)
-		return (0);
+	anglec = 90 + (angle * 180 / M_PI);
+	if (anglec < -90)
+		anglec = 180 - anglec;
+	if (anglec < 0)
+		anglec = -anglec;
 	anglea = 90 - anglec;
 	tempx = data->player.x;
-	if (anglec == 0 || anglec == 90)
-		return (0);
 	if (x > 0)
 		tempx += 1;
 	bc = data->player.x - tempx;
@@ -64,25 +64,6 @@ double	closest_x(t_data *data, double x)
 	ac = bc / sin(anglea * M_PI / 180);
 	printf("angle C = %f, angle A = %f\nBC = %f, AC = %f\n", anglec, anglea, bc, ac);
 	return (data->player.x);
-}
-
-double	try_line(t_data *data, double x, double y)
-{
-	int	i;
-	int	j;
-
-	i = data->player.x;
-	j = data->player.y;
-	while (0)
-	{
-		if (x <= 0 || y <= 0 || x >= SCREEN_H || y >= SCREEN_W)
-			return (0);
-		((int *)data->mlx.addr)[(int)i * \
-			(data->line_length >> 2) + (int)j] = 0x0831838;
-		i += x;
-		j += y;
-	}
-	return (0);
 }
 
 double	draw_line(t_data *data, double x, double y)
@@ -99,15 +80,12 @@ double	draw_line(t_data *data, double x, double y)
 		i += x;
 		j += y;
 	}
-	//printf("%f %f\n", i, j);
 	return (d_coord(data->player.x * MAP_ZOOM, \
 		data->player.y * MAP_ZOOM, i, j));
 }
 
 void	raycast(t_data *data)
 {
-	closest_x(data, data->player.dir_x);
+	closest_x(data, data->player.dir_x, data->player.angle);
 	draw_line(data, data->player.dir_x, data->player.dir_y);
-	//printf("%f\n", try_line(data, data->player.dir_x, data->player.dir_y));
-
 }
