@@ -21,24 +21,33 @@ DIR_OBJS :=	.objs/
 
 NAME	=	cub3D
 
-CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3
+CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3 -fsanitize=address
 
-#Linux
-# MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
-# MLX_PATH	=	./mlx/libmlx.a
-# MLX_PREFIX	=	mlx
+UNAME	=	$(shell uname -s)
 
-#macOs
+ifeq ($(UNAME) , mac_Os)
 MLXFLAGS	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
 MLX_PATH	=	mlx_macos/libmlx.a
 MLX_PREFIX	=	mlx_macos
+endif
+
+ifeq ($(UNAME) , Linux)
+MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
+MLX_PATH	=	./mlx/libmlx.a
+MLX_PREFIX	=	mlx
+endif
+
 
 LIB_DIR	=	libft/
 
 LIBFT	= $(addprefix $(LIB_DIR), libft.a)
 
 HEADERS	=	cub3d.h\
-			pars.h
+			keypress.h\
+			processing.h\
+			typedef.h\
+			utils.h
+
 INC_DIR	=	includes/
 
 INC		=	$(addprefix $(INC_DIR), $(HEADERS))
@@ -76,8 +85,7 @@ GAME_SRC =	start_game.c \
 			movement.c \
 			look.c \
 			input_key.c \
-			draw_fov.c \
-			raycast.c \
+			raycast.c
 
 FILES	 +=	$(addprefix $(GAME_DIR), $(GAME_SRC))
 
@@ -115,13 +123,8 @@ $(DIR_OBJS)%.o: $(GNL_DIR)%.c $(INC) Makefile
 $(MLX_PATH):
 	make -C $(MLX_PREFIX)
 
-#mac_Os
 $(DIR_OBJS):
 	mkdir -p $@/$(PARS_DIR) $@/$(GAME_DIR)
-
-#Linux
-	# $(DIR_OBJS):
-	# 	mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
 
 $(LIBFT): force
 	make -C libft

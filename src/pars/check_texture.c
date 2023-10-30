@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:21:48 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/12 13:35:02 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:00:21 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
+#include "cub3d.h"
 
 int	ft_pars_floor_ceil(char *str)
 {
@@ -20,7 +20,7 @@ int	ft_pars_floor_ceil(char *str)
 	if (temp[0] < 0 || temp[0] > 255 || temp[1] < 0 || temp[1] > 255 || \
 		temp[2] < 0 || temp[2] > 255)
 	{
-		write(2, "Error : Wrong color\n", 21);
+		write(2, ERR_COLOR, 21);
 		return (-1);
 	}
 	return (temp[0] * 256 * 256 + temp[1] * 256 + temp[2]);
@@ -68,12 +68,12 @@ static int	file_extention(char *file)
 int	check_extension(t_data *data)
 {
 	if (file_extention(data->parsing.no))
-		return (printf("Error : Wrong extention\n"), 1);
+		return (printf(ERR_EXTENTION), 1);
 	if (file_extention(data->parsing.so))
-		return (printf("Error : Wrong extention\n"), 1);
+		return (printf(ERR_EXTENTION), 1);
 	if (file_extention(data->parsing.ea))
-		return (printf("Error : Wrong extention\n"), 1);
+		return (printf(ERR_EXTENTION), 1);
 	if (file_extention(data->parsing.we))
-		return (printf("Error : Wrong extention\n"), 1);
+		return (printf(ERR_EXTENTION), 1);
 	return (0);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
+#include "cub3d.h"
 
 static int	char_start(char c, int j, int i, t_data *data)
 {
@@ -75,7 +75,7 @@ int	check_start(t_data *data)
 		i++;
 	}
 	if (count != 1)
-		return (write(2, "Error : Start incorrect\n", 24), 1);
+		return (write(2, ERR_NO_PLAYER, 30), 1);
 	return (0);
 }
 
@@ -94,7 +94,7 @@ int	check_chars(char **map)
 			map[i][j] != 'N' && map[i][j] != 'S' && \
 			map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] \
 			!= ' ' && map[i][j] != 10 && map[i][j] != 13)
-				return (write(2, "Error : Invalid char\n", 22), 1);
+				return (write(2, ERR_CHAR, 22), 1);
 			j++;
 		}
 		i++;

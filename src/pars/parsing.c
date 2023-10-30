@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
+#include "cub3d.h"
 
 static int	border_char(char **map, int x, int y)
 {
@@ -22,7 +22,7 @@ static int	border_char(char **map, int x, int y)
 	if (x < 0 || y < 0 || x >= i || y >= ft_strlen(map[x]) || \
 	(map[x][y] != WALL && map[x][y] != EMPTY && map[x][y] != 'E' \
 	&& map[x][y] != 'N' && map[x][y] != 'S' && map[x][y] != 'W'))
-		return (write(2, "Error : wrong border\n", 22), 1);
+		return (write(2, ERR_MAP_BORDER, 22), 1);
 	return (0);
 }
 
@@ -88,7 +88,7 @@ static int	check_file_name(char *file)
 				return (0);
 		}
 	}
-	printf("Error : Wrong file name\n");
+	printf(ERR_FILE);
 	return (1);
 }
 
