@@ -18,15 +18,37 @@ void	minimap_full(t_data *data)
 	int	j;
 
 	i = 0;
-	while (data->map[i])
+	while (i < MAP_ZOOM)
 	{
 		j = 0;
-		while (data->map[i][j])
+		while (j < MAP_ZOOM)
 		{
-			if (data->map[i][j] == '1')
+			if (i == 0 || j == 0)
+				((int *)data->mlx.addr)[(x + i) * \
+				(data->line_length >> 2) + (y + j)] = color;
+			j++;
+		}
+		i++;
+	}
+}
+
+
+void	minimap_full(t_data *data)
+{
+	int		i;
+	int		j;
+	i = 0;
+	data->player.angle_fov = (FOV * (M_PI / 180) / 2);
+	while (data->parsing.map[i])
+	{
+		j = 0;
+		while (data->parsing.map[i][j])
+		{
+			if (data->parsing.map[i][j] == WALL)
 				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0xFF9E9E9E);
-			else if (data->map[i][j] == '0')
+			else if (data->parsing.map[i][j] == EMPTY)
 				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0x00FFFFFF);
+			draw_squarelol(data, i * MAP_ZOOM, j * MAP_ZOOM, 0xFF9E9E9E);
 			j++;
 		}
 		i++;

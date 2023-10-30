@@ -12,33 +12,7 @@
 
 #include "cub3d.h"
 
-int	key_press(int keycode, t_data *data)
-{
-	if (keycode == KEY_MINIMAP && data->minimap == true)
-		data->minimap = false;
-	else if (keycode == KEY_MINIMAP && data->minimap == false)
-		data->minimap = true;
-	put_floor_ceiling(data);
-	if (keycode == KEY_UP)
-		move_up(data);
-	else if (keycode == KEY_DOWN)
-		move_down(data);
-	else if (keycode == KEY_LEFT)
-		move_left(data);
-	else if (keycode == KEY_RIGHT)
-		move_right(data);
-	else if (keycode == KEY_POV_LEFT)
-		look_left(data);
-	else if (keycode == KEY_POV_RIGHT)
-		look_right(data);
-	else if (keycode == KEY_ESC)
-		exit_game(data);
-	if (data->minimap == true)
-		minimap_player(data);
-	else if (data->minimap == false)
-		minimap_full(data);
-	return (0);
-}
+static int	render(t_data *data);
 
 void	start_game(t_data *data)
 {
@@ -52,8 +26,21 @@ void	start_game(t_data *data)
 	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->bits_per_pixel, \
 			&data->line_length, &data->endian);
 	put_floor_ceiling(data);
-	minimap_full(data);
-	mlx_hook(data->mlx.win, 2, 1L << 0, key_press, data);
+	init_key(data);
+	mlx_hook(data->mlx.win, 2, (1L << 0), key_press, data);
+	mlx_hook(data->mlx.win, 3, (1L << 1), key_event_release, data);
 	mlx_hook(data->mlx.win, 17, 0, exit_game, data);
-	mlx_loop(data->mlx.mlx);
+	mlx_loop_hook(data->mlx.mlx, render, data);
 }
+
+static int	render(t_data *data)
+{
+	player_move(data);
+	if (data->minimap == true)
+		minimap_player(data);
+	else
+		minimap_full(data);
+	usleep(3500);
+	return (EXIT_SUCCESS);
+}
+

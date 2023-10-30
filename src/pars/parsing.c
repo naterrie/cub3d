@@ -20,7 +20,7 @@ static int	border_char(char **map, int x, int y)
 	while (map[i])
 		i++;
 	if (x < 0 || y < 0 || x >= i || y >= ft_strlen(map[x]) || \
-	(map[x][y] != '1' && map[x][y] != '0' && map[x][y] != 'E' \
+	(map[x][y] != WALL && map[x][y] != EMPTY && map[x][y] != 'E' \
 	&& map[x][y] != 'N' && map[x][y] != 'S' && map[x][y] != 'W'))
 		return (write(2, "Error : wrong border\n", 22), 1);
 	return (0);
@@ -58,7 +58,7 @@ static int	check_border(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '0')
+			if (map[i][j] == EMPTY)
 				if (check_wall(map, i, j))
 					return (1);
 			j++;
@@ -110,9 +110,9 @@ int	parsing(char *file, t_data *data)
 		ft_exit(data);
 	if (check_start(data))
 		ft_exit(data);
-	if (check_chars(data->map))
+	if (check_chars(data->parsing.map))
 		ft_exit(data);
-	if (check_border(data->map))
+	if (check_border(data->parsing.map))
 		ft_exit(data);
 	return (0);
 }

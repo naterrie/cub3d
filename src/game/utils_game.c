@@ -18,8 +18,8 @@ int	exit_game(t_data *data)
 		mlx_destroy_image(data->mlx.mlx, data->mlx.img);
 	if (data->mlx.win && data->mlx.mlx)
 		mlx_destroy_window(data->mlx.mlx, data->mlx.win);
-	if (data->mlx.mlx)
-		mlx_destroy_display(data->mlx.mlx);
+	// if (data->mlx.mlx)
+	// 	mlx_destroy_display(data->mlx.mlx);
 	free(data->mlx.mlx);
 	ft_exit(data);
 	return (0);

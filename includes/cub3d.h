@@ -14,15 +14,13 @@
 # define CUB3D_H
 
 // Linux
-# include "../mlx/mlx.h"
+//# include "../mlx/mlx.h"
 
 // //macOs
-// # include "../mlx_macos/mlx.h"
+# include "../mlx_macos/mlx.h"
 
 # include "../libft/libft.h"
-# include "../mlx/mlx.h"
 # include "get_next_line.h"
-
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -30,39 +28,80 @@
 # include <stdbool.h>
 # include <math.h>
 
-# define MINI_SIZE 10
-# define MAP_ZOOM 10
-# define SCREEN_H 1080
-# define SCREEN_W 1920
-# define MOVE_SPEED 0.1
-# define ROT_SPEED 0.1
+# define MINI_SIZE 16
+# define MAP_ZOOM 50
+# define SCREEN_W 950
+# define SCREEN_H 750
+# define MOVE_SPEED 0.5
+# define ROT_SPEED 0.02
+# define FOV 60
 
+/*########################
+#	 	Input key		 #
+########################*/
 
 //linux
-typedef enum e_key
-{
-	KEY_UP = 119,
-	KEY_DOWN = 115,
-	KEY_RIGHT = 100,
-	KEY_LEFT = 97,
-	KEY_ESC = 65307,
-	KEY_POV_RIGHT = 65363,
-	KEY_POV_LEFT = 65361,
-	KEY_MINIMAP = 65289,
-}	t_key;
-
-//macos
 // typedef enum e_key
 // {
-// 	KEY_UP = 13,
-// 	KEY_DOWN = 1,
-// 	KEY_RIGHT = 2,
-// 	KEY_LEFT = 0,
-// 	KEY_ESC = 53,
+// 	KEY_UP = 119,
+// 	KEY_DOWN = 115,
+// 	KEY_RIGHT = 100,
+// 	KEY_LEFT = 97,
+// 	KEY_ESC = 65307,
 // 	KEY_POV_RIGHT = 65363,
 // 	KEY_POV_LEFT = 65361,
-// 	KEY_MINIMAP = 48,
+// 	KEY_MINIMAP = 65289,
 // }	t_key;
+
+//macos
+typedef enum e_key
+{
+	KEY_UP = 13,
+	KEY_DOWN = 1,
+	KEY_LEFT = 0,
+	KEY_RIGHT = 2,
+	KEY_ESC = 53,
+	KEY_POV_RIGHT = 124,
+	KEY_POV_LEFT = 123,
+	KEY_MINIMAP = 48,
+}	t_key;
+
+typedef enum e_keypress
+{
+	KP_ERROR = -1,
+	KP_UP,
+	KP_DOWN,
+	KP_LEFT,
+	KP_RIGHT,
+	K_POV_R,
+	K_POV_L,
+}	t_keypress;
+
+/*########################
+#	 	   utils		 #
+########################*/
+
+typedef enum e_decor
+{
+	WALL = '1',
+	EMPTY = '0',
+}	t_decor;
+
+typedef struct s_pos
+{
+	double	x;
+	double	y;
+}	t_pos;
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE,
+}	t_bool;
+
+/*########################
+#	 	 struc_MLX		 #
+########################*/
 
 typedef struct s_image
 {
@@ -71,72 +110,130 @@ typedef struct s_image
 	int		h;
 }	t_image;
 
-typedef struct s_player
-{
-	double	x;
-	double	y;
-	double	dir_x;
-	double	dir_y;
-	double	angle;
-}	t_player;
-
 typedef struct s_mlx
 {
-	void		*mlx;
-	void		*win;
-	char		*addr;
-	void		*img;
-	void		*no;
-	void		*so;
-	void		*we;
-	void		*ea;
+	void	*mlx;
+	void	*win;
+	char	*addr;
+	void	*img;
 }	t_mlx;
+
+/*########################
+#	 struct_parsing		 #
+########################*/
+
+
+typedef struct s_parsing
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		floor;
+	int		ceil;
+	char	**map;
+	t_pos	map_max;
+}	t_parsing;
+
+/*########################
+#	 struct_raycasting	 #
+########################*/
+
+typedef struct s_raycast
+{
+	t_pos	dir;
+	t_pos	step;
+	t_pos	side_dist;
+	t_pos	delt_dist;
+}	t_raycast;
+
+
+/*########################
+#	 struct_player		 #
+########################*/
+
+typedef struct s_player
+{
+	t_pos	d;
+	t_pos	position;
+	t_pos	direction;
+	double	angle;
+	double	angle_fov;
+}	t_player;
+
+/*########################
+#	 struct_data		 #
+########################*/
 
 typedef struct s_data
 {
-	char		**map;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
 	bool		minimap;
-	int			floor;
-	int			ceil;
+	t_parsing	parsing;
 	t_mlx		mlx;
 	t_player	player;
+	t_bool		keypress[6];
 }	t_data;
 
-//	Raycast	//
-void	raycast(t_data *data);
+/*---------------------------------------*/
+typedef struct s_vector2_d
+{
+	double	x;
+	double	y;
+}	t_vector2_d;
 
-//	Movement	//
-void	move_up(t_data *data);
-void	move_down(t_data *data);
-void	move_right(t_data *data);
-void	move_left(t_data *data);
+typedef struct s_vector2_f
+{
+	float	x;
+	float	y;
+}	t_vector2_f;
 
-//	Look	//
+/*########################
+#	 	Movement		 #
+########################*/
+void	player_move(t_data *data);
+
+/*########################
+#	 	  Look	    	 #
+########################*/
 void	look_right(t_data *data);
 void	look_left(t_data *data);
 
-//	Start game	//
+/*########################
+#	 	Start game		 #
+########################*/
 void	start_game(t_data *data);
 
-//	Utils game	//
+/*########################
+#	 	Utils game		 #
+########################*/
 int		exit_game(t_data *data);
 
-//	Minimap	//
+
+/*########################
+#	 	Minimap 		 #
+########################*/
 void	minimap_full(t_data *data);
 void	minimap_player(t_data *data);
 double	draw_line(t_data *data, double x, double y);
 
-//	Draw utils	//
+/*########################
+#	 	Input_key		 #
+########################*/
+int		key_event_release(int keycode, t_data *data);
+int		key_press(int keycode, t_data *data);
+void	init_key(t_data *data);
+
+/*########################
+#	 	Draw utils		 #
+########################*/
 void	put_floor_ceiling(t_data *data);
 void	draw_square(t_data *data, int x, int y, int color);
-
+void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
 void	ft_exit(t_data *data);
-
+void	draw_fov(t_data *data);
+void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
+t_pos	dda(t_data *data, t_pos dest);
 #endif

@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:31:47 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/30 15:08:56 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/10/30 17:37:35 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,35 @@ double	d_coord(double x, double y, double xy, double yy)
 double	closest_x(t_data *data, double x, double angle)
 {
 	int		tempx;
-	double	anglec;
-	double	bc;
-	double	ac;
-	double	anglea;
 
-	anglec = 90 + (angle * 180 / M_PI);
-	if (anglec < -90)
-		anglec = 180 - anglec;
-	if (anglec < 0)
-		anglec = -anglec;
-	anglea = 90 - anglec;
-	tempx = data->player.x;
-	if (x > 0)
-		tempx += 1;
-	bc = data->player.x - tempx;
-	if (bc < 0)
-		bc = -bc;
-	ac = bc / sin(anglea * M_PI / 180);
-	printf("angle C = %f, angle A = %f\nBC = %f, AC = %f\n", anglec, anglea, bc, ac);
-	return (data->player.x);
 }
+
+// double	closest_x(t_data *data, double x, double angle)
+// {
+// 	int		tempx;
+// 	double	anglec;
+// 	double	bc;
+// 	double	ac;
+// 	double	anglea;
+
+// 	anglec = 90 + (angle * 180 / M_PI);
+// 	if (anglec < -90)
+// 		anglec = 180 - anglec;
+// 	if (anglec > 90 || anglec < -90)
+// 		anglec = 270 + (angle * 180 / M_PI);
+// 	if (anglec < 0)
+// 		anglec = -anglec;
+// 	anglea = 90 - anglec;
+// 	tempx = data->player.x;
+// 	if (x > 0)
+// 		tempx += 1;
+// 	bc = data->player.x - tempx;
+// 	if (bc < 0)
+// 		bc = -bc;
+// 	ac = bc / sin(anglea * M_PI / 180);
+// 	printf("angle C = %f\n", anglec);
+// 	return (data->player.x);
+// }
 
 double	draw_line(t_data *data, double x, double y)
 {
