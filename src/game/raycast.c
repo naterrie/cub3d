@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:31:47 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/30 18:19:03 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/10/31 16:50:10 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,31 +41,28 @@ double	d_coord(double x, double y, double xy, double yy)
 	return (sqrt(i * i + j * j));
 }
 
-double	closest_x(t_data *data, double x, double angle)
-{
-	int		tempx;
-	double	anglec;
-	double	bc;
-	double	ac;
-	double	anglea;
+/* Angles x par rapport a l'angle originale =
+	90 && 270
+	Donc separation a 0 et 180
+*/
 
-	anglec = 90 + (angle * 180 / M_PI);
-	if (anglec < -90)
-		anglec = 180 - anglec;
-	if (anglec > 90 || anglec < -90)
-		anglec = 270 + (angle * 180 / M_PI);
-	if (anglec < 0)
-		anglec = -anglec;
-	anglea = 90 - anglec;
-	tempx = data->player.position.x;
-	if (x > 0)
-		tempx += 1;
-	bc = data->player.position.x - tempx;
-	if (bc < 0)
-		bc = -bc;
-	ac = bc / sin(anglea * M_PI / 180);
-	printf("angle C = %f\n", anglec);
-	return (data->player.position.x);
+double	closest_x(t_data *data, double angle)
+{
+	double	cosa;
+	double	y;
+	double	x;
+
+	(void)data;
+	x = 1;
+	cosa = cos(angle);
+	printf("cosa %f\n", angle);
+	if (!cosa)
+		return (0);
+	if ((angle > 0 && angle < 180) || (angle > -0 && angle < -180))
+		x = -1;
+	y = x * tan(angle);
+	printf("y %f, x %f\n", y, x);
+	return (angle);
 }
 
 double	draw_line(t_data *data, double x, double y)
@@ -73,12 +70,12 @@ double	draw_line(t_data *data, double x, double y)
 	double	i;
 	double	j;
 
-	i = data->player.position.x * MAP_ZOOM;
-	j = data->player.position.y * MAP_ZOOM;
+	i = data->player.position.y;
+	j = data->player.position.x;
 	while (hit_wall(data, i, j) && (x != 0 || y != 0))
 	{
 		((int *)data->mlx.addr)[(int)i * \
-			(data->line_length >> 2) + (int)j] = 0x0831838;
+			(data->line_length >> 2) + (int)j] = 0x0000000;
 		i += x;
 		j += y;
 	}
@@ -86,15 +83,27 @@ double	draw_line(t_data *data, double x, double y)
 		data->player.position.y * MAP_ZOOM, i, j));
 }
 
+// static void	get_ray_dir(t_data *data, t_dda *dda, int i)
+// {
+// 	double	cam;
+
+// 	cam = 2 * i / SCREEN_W - 1;
+// 	dda->ray.x = data->player.direction.x + 0 * cam;
+// 	dda->ray.y = data->player.direction.y + 0 * cam;
+// }
+
 void	raycast(t_data *data)
 {
-	int	i;
+	int		i;
+	// t_dda	dda;
 
-	i = 0;
-	while (i < SCREEN_W)
-	{
-		closest_x(data, data->player.direction.x, data->player.angle);
-		draw_line(data, data->player.direction.x, data->player.direction.y);
-		i++;
-	}
+	i = 1;
+	// while (i < SCREEN_W)
+	// {
+		// get_ray_dir(data, &dda, i);
+		printf ("%f\n", closest_x(data, data->player.angle * 180 / M_PI));
+		draw_line(data, data->player.direction.y, data->player.direction.x);
+		//draw_line(data, dda.ray.y, dda.ray.x);
+	// 	i++;
+	// }
 }

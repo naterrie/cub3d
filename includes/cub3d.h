@@ -41,14 +41,14 @@ struct s_mlx
 
 struct s_parsing
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	int		floor;
-	int		ceil;
-	char	**map;
-	t_pos	map_max;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	int			floor;
+	int			ceil;
+	char		**map;
+	t_double	map_max;
 };
 
 int		parsing(char *file, t_data *data);
@@ -67,18 +67,31 @@ char	*get_texture(char *str);
 void	ft_split_atoi(char *s, char c, int t[3]);
 
 /*########################
+#	 struct_dda			 #
+########################*/
+
+struct s_dda
+{
+	double		wall_x;
+	double		wall_y;
+	t_double	ray;
+	double		dist_wall;
+	int			side;
+};
+
+/*########################
 #	 struct_raycasting	 #
 ########################*/
 
 struct s_ray
 {
-	t_pos	dist_player_to_side;
-	t_pos	step_dist;
-	t_pos	direction;
-	t_int	dda_position;
-	t_int	dda_step;
-	t_pos	dist_player_to_wall;
-	int		wall;
+	t_double	dist_player_to_side;
+	t_double	step_dist;
+	t_double	direction;
+	t_int		dda_position;
+	t_int		dda_step;
+	t_double	dist_player_to_wall;
+	int			wall;
 };
 
 
@@ -88,13 +101,13 @@ struct s_ray
 
 struct s_player
 {
-	t_pos	d;
-	t_pos	position;
-	t_pos	direction;
-	t_pos	map;
-	double	angle;
-	t_pos	fov;
-	double	angle_fov;
+	t_double	d;
+	t_double	position;
+	t_double	direction;
+	t_double	map;
+	double		angle;
+	t_double	fov;
+	double		angle_fov;
 };
 
 /*########################
@@ -110,7 +123,7 @@ struct s_data
 	t_parsing	parsing;
 	t_mlx		mlx;
 	t_player	player;
-	t_pos		cam;
+	t_double	cam;
 	t_bool		keypress[6];
 };
 

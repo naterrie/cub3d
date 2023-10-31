@@ -21,7 +21,7 @@ DIR_OBJS :=	.objs/
 
 NAME	=	cub3D
 
-CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3 -fsanitize=address
+CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3 #-fsanitize=address
 
 UNAME	=	$(shell uname -s)
 
@@ -100,7 +100,7 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(DIR_OBJS) $(MLX_PATH) $(OBJS) $(LIBFT)
 	cc $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(MLXFLAGS)
 	echo "$(GREEN)✅ $(NAME) compilated !"
-#	@norminette src/ | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+	@norminette src/ | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
 $(DIR_OBJS)%.o: $(DIR_SRCS)%.c $(INC) Makefile
 	echo "$(GREEN)⏳ Making $(NAME)"

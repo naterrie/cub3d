@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/10/29 17:10:03 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:37:02 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@
 # include <stdbool.h>
 # include <math.h>
 
-# define MINI_SIZE 16
-# define MAP_ZOOM 50
-# define SCREEN_W 1030
-# define SCREEN_H 950
-# define MOVE_SPEED 0.5
-# define ROT_SPEED 0.02
+# define MINI_SIZE 10
+# define MAP_ZOOM 10
+# define SCREEN_W 1470
+# define SCREEN_H 750
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.01
 # define FOV 90
 
 # define ERR_FILE			"Error : Wrong file name\n"
