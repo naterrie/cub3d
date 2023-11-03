@@ -48,7 +48,6 @@ struct s_parsing
 	int		floor;
 	int		ceil;
 	char	**map;
-	t_pos	map_max;
 };
 
 int		parsing(char *file, t_data *data);

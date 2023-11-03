@@ -74,10 +74,6 @@ int	check_start(t_data *data)
 		}
 		i++;
 	}
-	//trouver piexl max en x et y
-	data->parsing.map_max.x = (j - 1) * MAP_ZOOM;
-	data->parsing.map_max.y = i * MAP_ZOOM;
-
 	if (count != 1)
 		return (write(2, ERR_NO_PLAYER, 30), 1);
 	return (0);

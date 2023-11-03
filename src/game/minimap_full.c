@@ -12,35 +12,35 @@
 
 #include "cub3d.h"
 
-void	draw_li(t_data *data, double angle_fov)
-{
-	t_pos	dest;
-	double	new_x;
-	double	new_y;
-	int		step;
+// void	draw_li(t_data *data, double angle_fov)
+// {
+// 	t_pos	dest;
+// 	double	new_x;
+// 	double	new_y;
+// 	int		step;
 
-	dest.x = data->player.position.x;
-	dest.y = data->player.position.y;
-	//direction des laser.
-	data->player.d.x = cos(data->player.angle + angle_fov);
-	data->player.d.y = sin(data->player.angle + angle_fov);
-	step = 1;
-	new_x = 0;
-	new_y = 0;
-	//printf("p.x %f  p.x %f\n",data->player.d.x, data->player.d.y);
-	while (1)
-	{
-		//printf("x = %f  y = %f\n",dest.x, dest.y);
-		if (dest.x < MAP_ZOOM || dest.x >= data->parsing.map_max.x || dest.y < MAP_ZOOM || dest.y >= data->parsing.map_max.y)
-    		return ;
-		new_x += step * data->player.d.x;
-		new_y += step * data->player.d.y;
-		my_mlx_pixel_put(data, data->player.position.x + new_x, data->player.position.y + new_y, 0x00FF66FF);
-		//printf("new_x %f nex_y %f\n", data->player.position.x + new_x, data->player.position.y + new_y);
-		dest.x += data->player.d.x;
-		dest.y += data->player.d.y;
-	}
-}
+// 	dest.x = data->player.position.x;
+// 	dest.y = data->player.position.y;
+// 	//direction des laser.
+// 	data->player.d.x = cos(data->player.angle + angle_fov);
+// 	data->player.d.y = sin(data->player.angle + angle_fov);
+// 	step = 1;
+// 	new_x = 0;
+// 	new_y = 0;
+// 	//printf("p.x %f  p.x %f\n",data->player.d.x, data->player.d.y);
+// 	while (1)
+// 	{
+// 		//printf("x = %f  y = %f\n",dest.x, dest.y);
+// 		if (dest.x < MAP_ZOOM || dest.x >= data->parsing.map_max.x || dest.y < MAP_ZOOM || dest.y >= data->parsing.map_max.y)
+//     		return ;
+// 		new_x += step * data->player.d.x;
+// 		new_y += step * data->player.d.y;
+// 		my_mlx_pixel_put(data, data->player.position.x + new_x, data->player.position.y + new_y, 0x00FF66FF);
+// 		//printf("new_x %f nex_y %f\n", data->player.position.x + new_x, data->player.position.y + new_y);
+// 		dest.x += data->player.d.x;
+// 		dest.y += data->player.d.y;
+// 	}
+// }
 
 void	draw_squarelol(t_data *data, int x, int y, int color)
 {
