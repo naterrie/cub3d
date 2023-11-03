@@ -25,17 +25,17 @@ CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3 -fsanitize=addres
 
 UNAME	=	$(shell uname -s)
 
-ifeq ($(UNAME) , mac_Os)
+ifeq ($(UNAME) , Darwin)
 MLXFLAGS	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
-MLX_PATH	=	mlx_macos/libmlx.a
+MLX_PATH	=	./mlx_macos/libmlx.a
 MLX_PREFIX	=	mlx_macos
 endif
 
-ifeq ($(UNAME) , Linux)
-MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
-MLX_PATH	=	./mlx/libmlx.a
-MLX_PREFIX	=	mlx
-endif
+#ifeq ($(UNAME) , Linux)
+#MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
+#MLX_PATH	=	./mlx/libmlx.a
+#MLX_PREFIX	=	mlx
+#endif
 
 
 LIB_DIR	=	libft/
@@ -124,8 +124,8 @@ $(DIR_OBJS):
 	mkdir -p $@/$(PARS_DIR) $@/$(GAME_DIR)
 
 #Linux
-# 		$(DIR_OBJS):
-# 		mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
+#		$(DIR_OBJS):
+#		mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
 
 $(LIBFT): force
 	make -C libft

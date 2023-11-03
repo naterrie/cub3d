@@ -44,30 +44,30 @@
 ########################*/
 
 //linux
-typedef enum e_key
-{
-	KEY_UP = 119,
-	KEY_DOWN = 115,
-	KEY_RIGHT = 100,
-	KEY_LEFT = 97,
-	KEY_ESC = 65307,
-	KEY_POV_RIGHT = 65363,
-	KEY_POV_LEFT = 65361,
-	KEY_MINIMAP = 65289,
-}	t_key;
-
-//macos
 // typedef enum e_key
 // {
-// 	KEY_UP = 13,
-// 	KEY_DOWN = 1,
-// 	KEY_LEFT = 0,
-// 	KEY_RIGHT = 2,
-// 	KEY_ESC = 53,
-// 	KEY_POV_RIGHT = 124,
-// 	KEY_POV_LEFT = 123,
-// 	KEY_MINIMAP = 48,
+// 	KEY_UP = 119,
+// 	KEY_DOWN = 115,
+// 	KEY_RIGHT = 100,
+// 	KEY_LEFT = 97,
+// 	KEY_ESC = 65307,
+// 	KEY_POV_RIGHT = 65363,
+// 	KEY_POV_LEFT = 65361,
+// 	KEY_MINIMAP = 65289,
 // }	t_key;
+
+//macos
+typedef enum e_key
+{
+	KEY_UP = 13,
+	KEY_DOWN = 1,
+	KEY_LEFT = 0,
+	KEY_RIGHT = 2,
+	KEY_ESC = 53,
+	KEY_POV_RIGHT = 124,
+	KEY_POV_LEFT = 123,
+	KEY_MINIMAP = 48,
+}	t_key;
 
 typedef enum e_keypress
 {
@@ -83,6 +83,14 @@ typedef enum e_keypress
 /*########################
 #	 	   utils		 #
 ########################*/
+
+typedef enum	e_wall
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST,
+}	t_wall;
 
 typedef enum e_decor
 {
@@ -153,8 +161,13 @@ typedef struct s_ray
 	t_pos	dist_player_to_side;
 	t_pos	step_dist;
 	t_pos	direction;
+	double	ray_len;
+	double	ray_angle;
+	t_pos	wall_pos;
+	t_wall	wall;
 	t_int	dda_position;
 	t_int	dda_step;
+	double	distance;
 }   t_ray;
 
 

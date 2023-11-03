@@ -99,7 +99,7 @@ void	minimap_full(t_data *data)
 	//draw_li(data, 0);
 	//draw_linne(data, 0);
 	display_game(data);
-	//printf("map.x = %f   map.y = %f\n", lol.x, lol.y);
+	printf("map.x = %f   map.y = %f\n", data->player.fov.x, data->player.fov.y);
 	//my_mlx_pixel_put(data, lol.x, lol.y, 0x0099FFFF);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }
