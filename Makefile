@@ -25,9 +25,9 @@ CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3 #-fsanitize=addre
 
 UNAME	=	$(shell uname -s)
 
-ifeq ($(UNAME) , mac_Os)
+ifeq ($(UNAME) , Darwin)
 MLXFLAGS	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
-MLX_PATH	=	mlx_macos/libmlx.a
+MLX_PATH	=	./mlx_macos/libmlx.a
 MLX_PREFIX	=	mlx_macos
 endif
 
@@ -85,7 +85,8 @@ GAME_SRC =	start_game.c \
 			movement.c \
 			look.c \
 			input_key.c \
-			raycast.c
+			raycasting.c \
+			ray_shoot.c
 
 FILES	 +=	$(addprefix $(GAME_DIR), $(GAME_SRC))
 

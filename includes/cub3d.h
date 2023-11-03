@@ -16,6 +16,18 @@
 # include "processing.h"
 
 /*########################
+#	 	   utils		 #
+########################*/
+
+typedef enum	e_wall
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST,
+}	t_wall;
+
+/*########################
 #	 	 struc_MLX		 #
 ########################*/
 
@@ -88,10 +100,13 @@ struct s_ray
 	t_double	dist_player_to_side;
 	t_double	step_dist;
 	t_double	direction;
+	double		ray_len;
+	double		ray_angle;
+	t_double	wall_pos;
+	t_wall		wall;
 	t_int		dda_position;
 	t_int		dda_step;
-	t_double	dist_player_to_wall;
-	int			wall;
+	double		distance;
 };
 
 
@@ -154,7 +169,7 @@ int		exit_game(t_data *data);
 ########################*/
 void	minimap_full(t_data *data);
 void	minimap_player(t_data *data);
-double	draw_line(t_data *data, double x, double y);
+//double	draw_line(t_data *data, double x, double y);
 
 /*########################
 #	 	Input_key		 #
@@ -162,6 +177,18 @@ double	draw_line(t_data *data, double x, double y);
 int		key_event_release(int keycode, t_data *data);
 int		key_press(int keycode, t_data *data);
 void	init_key(t_data *data);
+
+/*########################
+#	 	Ray_Shoot		 #
+#########################*/
+void	set_ray_dist_player_side(t_data *data, t_ray *ray);
+void	ray_pos(t_ray	*ray, t_data *data);
+
+/*########################
+#	 	Raycasting		 #
+########################*/
+void	display_game(t_data *data);
+void	raycast(t_data *data);
 
 /*########################
 #	 	Draw utils		 #
@@ -172,5 +199,4 @@ void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
 void	ft_exit(t_data *data);
 void	draw_fov(t_data *data);
 void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
-void	raycast(t_data *data);
 #endif
