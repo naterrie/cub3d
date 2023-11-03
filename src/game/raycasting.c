@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 00:07:26 by nicolasbern       #+#    #+#             */
-/*   Updated: 2023/11/02 15:43:21 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/11/03 13:20:26 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,23 @@ void	draw_line(t_data *data, t_ray *ray, double angle_fov)
 
 double ray_len(t_pos src, t_pos dest)
 {
+	// double tmp;
+	// //printf("p.x %f  p.y %f\n",src.x, src.y);
+	// //printf("end.x %d  end.y %d\n",dest.x, dest.y);
+	// if (ray->wall == 1)
+	// {
+	// 	tmp = src.x - (int)src.x;
+	// 	ray->dist_player_to_wall.x = dest.x + tmp;
+	// 	ray->dist_player_to_wall.y = dest.y;
+	// }
+	// else
+	// {
+	// 	tmp = src.y - (int)src.y;
+	// 	ray->dist_player_to_wall.y = dest.y + tmp;
+	// 	ray->dist_player_to_wall.x = dest.x;
+	// }
+	//printf("tmp %f\n", tmp);
+	//printf("ray->dist_player_to_wall.x %f  ray->dist_player_to_wall.y %f\n",ray->dist_player_to_wall.x, ray->dist_player_to_wall.y);
     double  res_x;
     double  res_y;
     double  res_final;
@@ -179,7 +196,7 @@ void	display_game(t_data *data)
 		init_raycasting(data, &ray);
 		dda(data, &ray);
         ray_pos(&ray, data);
-        draw_line(data, &ray, ray.ray_angle);
+        draw_line(data, &ray, 0);
 	    //printf("ray->dda_position.x %d ray->dda_position.y %d\n", ray.dda_position.x, ray.dda_position.y);
         ray.ray_angle += data->player.angle_fov / (SCREEN_H * 0.5);
 	}

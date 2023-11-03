@@ -31,11 +31,11 @@ MLX_PATH	=	./mlx_macos/libmlx.a
 MLX_PREFIX	=	mlx_macos
 endif
 
-#ifeq ($(UNAME) , Linux)
-#MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
-#MLX_PATH	=	./mlx/libmlx.a
-#MLX_PREFIX	=	mlx
-#endif
+ifeq ($(UNAME) , Linux)
+MLXFLAGS	= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
+MLX_PATH	=	./mlx/libmlx.a
+MLX_PREFIX	=	mlx
+endif
 
 
 LIB_DIR	=	libft/
@@ -43,7 +43,11 @@ LIB_DIR	=	libft/
 LIBFT	= $(addprefix $(LIB_DIR), libft.a)
 
 HEADERS	=	cub3d.h\
-			pars.h
+			keypress.h\
+			processing.h\
+			typedef.h\
+			utils.h
+
 INC_DIR	=	includes/
 
 INC		=	$(addprefix $(INC_DIR), $(HEADERS))
@@ -119,13 +123,12 @@ $(DIR_OBJS)%.o: $(GNL_DIR)%.c $(INC) Makefile
 $(MLX_PATH):
 	make -C $(MLX_PREFIX)
 
-#mac_Os
 $(DIR_OBJS):
 	mkdir -p $@/$(PARS_DIR) $@/$(GAME_DIR)
 
 #Linux
-#		$(DIR_OBJS):
-#		mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
+		$(DIR_OBJS):
+		mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
 
 $(LIBFT): force
 	make -C libft

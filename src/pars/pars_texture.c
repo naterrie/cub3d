@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
+#include "cub3d.h"
 
 int	check_texture(t_data *data)
 {
 	if (data->parsing.ceil == -1 || data->parsing.floor == -1)
-		return (printf("Error : No color\n"), 1);
+		return (printf(ERR_COLOR_MISS), 1);
 	if (!data->parsing.no || !data->parsing.so || !data->parsing.we \
 	|| !data->parsing.ea)
-		return (printf("Error : No texture\n"), 1);
+		return (printf(ERR_TEXTURE), 1);
 	if (!data->parsing.map)
-		return (printf("Error : No map detected\n"), 1);
+		return (printf(ERR_MAP), 1);
 	return (0);
 }
 
@@ -102,19 +102,19 @@ int	file_texture(t_data *data)
 	replace_texture(data->parsing.ea);
 	i = open(data->parsing.no, O_RDONLY);
 	if (i < 0)
-		return (printf("Error : Wrong path NO\n"), 1);
+		return (printf(ERR_PATH_NO), 1);
 	close(i);
 	i = open(data->parsing.so, O_RDONLY);
 	if (i < 0)
-		return (printf("Error : Wrong path SO\n"), 1);
+		return (printf(ERR_PATH_SO), 1);
 	close(i);
 	i = open(data->parsing.we, O_RDONLY);
 	if (i < 0)
-		return (printf("Error : Wrong path WE\n"), 1);
+		return (printf(ERR_PATH_WE), 1);
 	close(i);
 	i = open(data->parsing.ea, O_RDONLY);
 	if (i < 0)
-		return (printf("Error : Wrong path EA\n"), 1);
+		return (printf(ERR_PATH_EA), 1);
 	close(i);
 	return (0);
 }

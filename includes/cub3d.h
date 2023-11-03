@@ -13,72 +13,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-
-# ifdef __APPLE__
-# include "../mlx_macos/mlx.h"
-#endif
-
-# ifdef __linux__
-# include "../mlx/mlx.h"
-#endif
-
-# include "../libft/libft.h"
-# include "get_next_line.h"
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdbool.h>
-# include <math.h>
-
-# define MINI_SIZE 16
-# define MAP_ZOOM 50
-# define SCREEN_W 1030
-# define SCREEN_H 950
-# define MOVE_SPEED 0.5
-# define ROT_SPEED 0.02
-# define FOV 90
-
-/*########################
-#	 	Input key		 #
-########################*/
-
-//linux
-// typedef enum e_key
-// {
-// 	KEY_UP = 119,
-// 	KEY_DOWN = 115,
-// 	KEY_RIGHT = 100,
-// 	KEY_LEFT = 97,
-// 	KEY_ESC = 65307,
-// 	KEY_POV_RIGHT = 65363,
-// 	KEY_POV_LEFT = 65361,
-// 	KEY_MINIMAP = 65289,
-// }	t_key;
-
-//macos
-typedef enum e_key
-{
-	KEY_UP = 13,
-	KEY_DOWN = 1,
-	KEY_LEFT = 0,
-	KEY_RIGHT = 2,
-	KEY_ESC = 53,
-	KEY_POV_RIGHT = 124,
-	KEY_POV_LEFT = 123,
-	KEY_MINIMAP = 48,
-}	t_key;
-
-typedef enum e_keypress
-{
-	KP_ERROR = -1,
-	KP_UP,
-	KP_DOWN,
-	KP_LEFT,
-	KP_RIGHT,
-	K_POV_R,
-	K_POV_L,
-}	t_keypress;
+# include "processing.h"
 
 /*########################
 #	 	   utils		 #
@@ -92,55 +27,31 @@ typedef enum	e_wall
 	EAST,
 }	t_wall;
 
-typedef enum e_decor
-{
-	WALL = '1',
-	EMPTY = '0',
-}	t_decor;
-
-typedef struct s_pos
-{
-	double	x;
-	double	y;
-}	t_pos;
-
-typedef struct s_int
-{
-	int	x;
-	int	y;
-}	t_int;
-
-typedef enum e_bool
-{
-	FALSE,
-	TRUE,
-}	t_bool;
-
 /*########################
 #	 	 struc_MLX		 #
 ########################*/
 
-typedef struct s_image
+struct s_image
 {
 	void	*img;
 	int		w;
 	int		h;
-}	t_image;
+};
 
-typedef struct s_mlx
+struct s_mlx
 {
 	void	*mlx;
 	void	*win;
 	char	*addr;
 	void	*img;
-}	t_mlx;
+};
 
 /*########################
 #	 struct_parsing		 #
 ########################*/
 
 
-typedef struct s_parsing
+struct s_parsing
 {
 	char	*no;
 	char	*so;
@@ -150,13 +61,28 @@ typedef struct s_parsing
 	int		ceil;
 	char	**map;
 	t_pos	map_max;
-}	t_parsing;
+};
+
+int		parsing(char *file, t_data *data);
+int		check_chars(char **map);
+int		check_start(t_data *data);
+int		ft_pars_floor_ceil(char *str);
+void	replace_texture(char *str);
+int		check_extension(t_data *data);
+int		file_texture(t_data *data);
+int		check_texture(t_data *data);
+void	split_file(char **map, t_data *data, char *file);
+int		nbline(char *file);
+int		line_null(char *str);
+char	**get_file(char *file);
+char	*get_texture(char *str);
+void	ft_split_atoi(char *s, char c, int t[3]);
 
 /*########################
 #	 struct_raycasting	 #
 ########################*/
 
-typedef struct s_ray
+struct s_ray
 {
 	t_pos	dist_player_to_side;
 	t_pos	step_dist;
@@ -168,14 +94,14 @@ typedef struct s_ray
 	t_int	dda_position;
 	t_int	dda_step;
 	double	distance;
-}   t_ray;
+};
 
 
 /*########################
 #	 struct_player		 #
 ########################*/
 
-typedef struct s_player
+struct s_player
 {
 	t_pos	d;
 	t_pos	position;
@@ -184,13 +110,13 @@ typedef struct s_player
 	double	angle;
 	t_pos	fov;
 	double	angle_fov;
-}	t_player;
+};
 
 /*########################
 #	 struct_data		 #
 ########################*/
 
-typedef struct s_data
+struct s_data
 {
 	int			bits_per_pixel;
 	int			line_length;
@@ -201,23 +127,8 @@ typedef struct s_data
 	t_player	player;
 	t_pos		cam;
 	t_bool		keypress[6];
-}	t_data;
+};
 
-/*---------------------------------------*/
-typedef struct {
-    double x;
-    double y;
-} t_vector2_d;
-
-typedef struct {
-    float x;
-    float y;
-} t_vector2_f;
-
-typedef struct {
-    int cell_size;
-    int tab[SCREEN_W][SCREEN_H]; // Remplacez GRID_HEIGHT et GRID_WIDTH par les dimensions réelles
-} t_lala;
 
 /*########################
 #	 	Movement		 #
