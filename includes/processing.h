@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/10/29 17:10:03 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/11/08 19:37:08 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

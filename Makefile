@@ -126,10 +126,6 @@ $(MLX_PATH):
 $(DIR_OBJS):
 	mkdir -p $@/$(PARS_DIR) $@/$(GAME_DIR)
 
-#Linux
-		$(DIR_OBJS):
-		mkdir -p $@$(PARS_DIR) $@$(GAME_DIR)
-
 $(LIBFT): force
 	make -C libft
 

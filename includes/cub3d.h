@@ -108,6 +108,8 @@ struct s_player
 	t_pos	direction;
 	t_pos	map;
 	double	angle;
+	double	angle_degre;
+	double	angle_radian;
 	t_pos	fov;
 	double	angle_fov;
 };
