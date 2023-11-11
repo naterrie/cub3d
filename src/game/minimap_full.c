@@ -94,7 +94,7 @@ void	minimap_full(t_data *data)
 		i++;
 	}
 	double t = (double)FOV * (M_PI / 180);
-	printf("radian map_fov %f\n", t);
+	//printf("radian map_fov %f\n", t);
 	data->player.fov.x = cosf(t) * data->player.direction.x + -sinf(t) * data->player.direction.y;
 	data->player.fov.y = sinf(t) * data->player.direction.x + cosf(t) * data->player.direction.x;
 	//draw_li(data, 0);

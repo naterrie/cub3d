@@ -96,6 +96,12 @@ struct s_ray
 	double	distance;
 };
 
+void	display_game(t_data *data);
+double	ray_len(t_pos src, t_pos dest);
+void    norm_cam_x(t_data *data, double x);
+double	degre_to_radian(double angle);
+void	wall_height(t_ray *ray);
+t_pos	t_pos_rotate(t_pos dir, double fov);
 
 /*########################
 #	 struct_player		 #
@@ -175,6 +181,5 @@ void	draw_square(t_data *data, int x, int y, int color);
 void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
 void	ft_exit(t_data *data);
 void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
-//t_pos 	dda(t_data *data, t_pos ray) ;
-void	display_game(t_data *data);
+void	draw_line(t_data *data, t_ray *ray);
 #endif

@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/08 19:37:08 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/11/09 16:12:51 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define SCREEN_H 950
 # define MOVE_SPEED 0.5
 # define ROT_SPEED 0.02
-# define FOV 90
+# define FOV 70
 
 # define ERR_FILE			"Error : Wrong file name\n"
 # define ERR_MAP_BORDER		"Error : wrong border\n"
