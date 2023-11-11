@@ -99,7 +99,7 @@ char	**get_file(char *file)
 	line = nbline(file);
 	map = malloc(sizeof(char *) * line);
 	if (!map)
-		return (NULL);
+		return (close(fd), NULL);
 	while (i < line)
 	{
 		temp = get_next_line(fd);

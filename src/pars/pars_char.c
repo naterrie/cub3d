@@ -28,24 +28,28 @@ static void	set_player_info(t_data *data, char c)
 	if (c == 'N')
 	{
 		data->player.angle = -M_PI_2;
+		data->player.angle_degre = 270;
 		data->player.direction.x = 0;
 		data->player.direction.y = -1;
 	}
 	else if (c == 'S')
 	{
 		data->player.angle = M_PI_2;
+		data->player.angle_degre = 90;
 		data->player.direction.x = 0;
 		data->player.direction.y = 1;
 	}
 	else if (c == 'E')
 	{
 		data->player.angle = 0;
+		data->player.angle_degre = 0;
 		data->player.direction.x = 1;
 		data->player.direction.y = 0;
 	}
 	else if (c == 'W')
 	{
 		data->player.angle += -M_PI;
+		data->player.angle_degre = 180;
 		data->player.direction.x = -1;
 		data->player.direction.y = 0;
 	}

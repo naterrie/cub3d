@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_shoot.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:54:42 by naterrie          #+#    #+#             */
-/*   Updated: 2023/11/03 13:57:54 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/11/09 16:51:45 by aviscogl         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,22 @@ static double	ray_len(t_double src, t_double dest)
 	return (res_final * MAP_ZOOM);
 }
 
-void	ray_pos(t_ray	*ray, t_data *data)
+void	ray_pos(t_ray *ray, t_data *data)
 {
 	if (ray->wall == WEST || ray->wall == EAST)
 	{
 		ray->distance = ray->dist_player_to_side.x - ray->step_dist.x;
-		ray->dda_position.y = data->player.position.x \
-			+ ray->distance * ray->direction.y;
+		ray->dda_position.y = data->player.position.y + \
+	ray->distance * ray->direction.y;
 	}
 	else
 	{
-		ray->distance = ray->dist_player_to_side.y - ray->step_dist.y;
-		ray->dda_position.x = data->player.position.x \
-					+ ray->distance * ray->direction.x;
+		ray->distance =  ray->dist_player_to_side.y - ray->step_dist.y;
+		ray->dda_position.x = data->player.position.x + \
+	ray->distance * ray->direction.x;
 	}
-	ray->wall_pos = (t_double){data->player.map.x + ray->distance * \
-	ray->direction.x, data->player.map.y + ray->distance * ray->direction.y};
+	ray->wall_pos.x = data->player.map.x + ray->distance * ray->direction.x;
+	ray->wall_pos.y = data->player.map.y + ray->distance * ray->direction.y;
 	ray->ray_len = ray_len(data->player.map, ray->wall_pos);
 }
 

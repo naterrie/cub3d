@@ -1,21 +1,47 @@
 /* ************************************************************************** */
-/*                                                                            */
+/*					                                                        */
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 00:07:26 by nicolasbern       #+#    #+#             */
-/*   Updated: 2023/11/03 13:58:18 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/11/09 16:47:22 by aviscogl         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	init_raycasting(t_data *data, t_ray *ray)
+void	norm_cam_x(t_data *data, double x)
 {
-	ray->direction.x = data->player.direction.x + 0 * data->cam.x;
-	ray->direction.y = data->player.direction.y + 0 * data->cam.x;
+	data->cam.x = 2.0 * x / SCREEN_W - 1;
+}
+
+double	degre_to_radian(double angle)
+{
+	return (angle * (M_PI / 180));
+}
+
+double	angle_to_degre(double angle)
+{
+	return (angle * (180 / M_PI));
+}
+
+t_double	t_pos_rotate(t_double co, double t)
+{
+	return ((t_double){cos(t) * co.x + -sin(t) * co.y, \
+		sin(t) * co.x + cos(t) * co.y});
+}
+
+void	init_raycasting(t_data *data, t_ray *ray)
+{
+	data->player.angle_degre = angle_to_degre(data->player.angle);
+	data->player.angle_radian = degre_to_radian(data->player.angle_degre);
+	data->player.d.x = cos(data->player.angle_radian + ray->ray_angle);
+	data->player.d.y = sin(data->player.angle_radian + ray->ray_angle);
+	data->player.fov = t_pos_rotate(data->player.d, degre_to_radian(FOV));
+	ray->direction.x = data->player.d.x + 0 * data->cam.x;
+	ray->direction.y = data->player.d.y + 0 * data->cam.x;
 	ray->dda_position.x = (int)data->player.position.x / MAP_ZOOM;
 	ray->dda_position.y = (int)data->player.position.y / MAP_ZOOM;
 	if (ray->direction.x == 0)
@@ -54,32 +80,42 @@ static void	dda(t_data *data, t_ray *ray)
 			ray->dda_position.y += ray->dda_step.y;
 			ray->wall = NORTH + (ray->dda_step.y == 1);
 		}
-		if (data->parsing.map[ray->dda_position.y][ray->dda_position.x] == WALL)
+		if (data->parsing.map[ray->dda_position.y] \
+		[ray->dda_position.x] == WALL)
 			break ;
 	}
 }
 
-void	draw_line(t_data *data, t_ray *ray, double angle_fov)
+void	draw_line(t_data *data, t_ray *ray)
 {
-	double	new_x;
-	double	new_y;
+	t_double	new;
 	int		step;
 	int		len;
 
-	data->player.d.x = cos(data->player.angle + angle_fov);
-	data->player.d.y = sin(data->player.angle + angle_fov);
 	step = 1;
-	new_x = 0;
-	new_y = 0;
+	new.x = 0;
+	new.y = 0;
 	len = 0;
 	while (len < ray->ray_len)
 	{
-		my_mlx_pixel_put(data, data->player.position.x \
-		+ new_x, data->player.position.y + new_y, 0x00FF66FF);
-		new_x += step * data->player.d.x;
-		new_y += step * data->player.d.y;
+		my_mlx_pixel_put(data, data->player.position.x + new.x, \
+	data->player.position.y + new.y, 0x00FF66FF);
+		new.x += step * data->player.d.x;
+		new.y += step * data->player.d.y;
 		len++;
 	}
+}
+
+double ray_len(t_double src, t_double dest)
+{
+	t_double	result;
+	double  res_final;
+
+	result.x = (src.x - dest.x);
+	result.y = (src.y - dest.y);
+	res_final = (result.x * result.x + result.y * result.y);
+	res_final = sqrt(res_final);
+	return (res_final * MAP_ZOOM);
 }
 
 void	display_game(t_data *data)
@@ -87,7 +123,7 @@ void	display_game(t_data *data)
 	double	x;
 	t_ray	ray;
 
-	x = 0;
+	x = 1;
 	ft_bzero(&ray, sizeof(t_ray));
 	ray.ray_angle = -data->player.angle_fov;
 	while (++x < SCREEN_W)
@@ -96,7 +132,7 @@ void	display_game(t_data *data)
 		init_raycasting(data, &ray);
 		dda(data, &ray);
 		ray_pos(&ray, data);
-		draw_line(data, &ray, 0);
+		draw_line(data, &ray);
 		ray.ray_angle += data->player.angle_fov / (SCREEN_H * 0.5);
 	}
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
