@@ -61,3 +61,23 @@ void	put_floor_ceiling(t_data *data)
 		i++;
 	}
 }
+
+void	draw_line(t_data *data, t_ray *ray)
+{
+	t_double	new;
+	int			step;
+	int			len;
+
+	step = 1;
+	new.x = 0;
+	new.y = 0;
+	len = 0;
+	while (len < ray->ray_len)
+	{
+		my_mlx_pixel_put(data, data->player.position.x + new.x, \
+	data->player.position.y + new.y, 0x00FF66FF);
+		new.x += step * data->player.d.x;
+		new.y += step * data->player.d.y;
+		len++;
+	}
+}

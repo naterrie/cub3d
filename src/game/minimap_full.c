@@ -33,8 +33,10 @@ void	minimap_full(t_data *data)
 		i++;
 	}
 	t = (double)FOV * (M_PI / 180);
-	data->player.fov.x = cosf(t) * data->player.direction.x + -sinf(t) * data->player.direction.y;
-	data->player.fov.y = sinf(t) * data->player.direction.x + cosf(t) * data->player.direction.x;
+	data->player.fov.x = cosf(t) * data->player.direction.x \
+		+ -sinf(t) * data->player.direction.y;
+	data->player.fov.y = sinf(t) * data->player.direction.x \
+		+ cosf(t) * data->player.direction.x;
 	display_game(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }

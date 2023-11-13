@@ -35,7 +35,7 @@ void	ray_pos(t_ray *ray, t_data *data)
 	}
 	else
 	{
-		ray->distance =  ray->dist_player_to_side.y - ray->step_dist.y;
+		ray->distance = ray->dist_player_to_side.y - ray->step_dist.y;
 		ray->dda_position.x = data->player.position.x + \
 	ray->distance * ray->direction.x;
 	}
