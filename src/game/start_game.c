@@ -25,7 +25,7 @@ void	start_game(t_data *data)
 	data->mlx.img = mlx_new_image(data->mlx.mlx, SCREEN_W, SCREEN_H);
 	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->bits_per_pixel, \
 			&data->line_length, &data->endian);
-	put_floor_ceiling(data);
+	//put_floor_ceiling(data);
 	init_key(data);
 	mlx_hook(data->mlx.win, 2, (1L << 0), key_press, data);
 	mlx_hook(data->mlx.win, 3, (1L << 1), key_event_release, data);
@@ -36,10 +36,10 @@ void	start_game(t_data *data)
 static int	render(t_data *data)
 {
 	player_move(data);
-	if (data->minimap == true)
-		minimap_player(data);
-	else
-		minimap_full(data);
+	// if (data->minimap == true)
+	// 	minimap_player(data);
+	// else
+	minimap_full(data);
 	usleep(350);
 	return (EXIT_SUCCESS);
 }

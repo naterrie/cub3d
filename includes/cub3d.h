@@ -100,7 +100,7 @@ void	display_game(t_data *data);
 double	ray_len(t_pos src, t_pos dest);
 void    norm_cam_x(t_data *data, double x);
 double	degre_to_radian(double angle);
-void	wall_height(t_ray *ray);
+int		wall_height(t_ray *ray);
 t_pos	t_pos_rotate(t_pos dir, double fov);
 
 /*########################
@@ -177,6 +177,7 @@ void	init_key(t_data *data);
 #	 	Draw utils		 #
 ########################*/
 void	put_floor_ceiling(t_data *data);
+void	draw_minimap(t_data *data);
 void	draw_square(t_data *data, int x, int y, int color);
 void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
 void	ft_exit(t_data *data);

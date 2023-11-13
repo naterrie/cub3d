@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_key.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:02:04 by nibernar          #+#    #+#             */
-/*   Updated: 2023/10/17 14:24:26 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/11/13 12:25:17 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	key_press(int keycode, t_data *data)
 		data->minimap = false;
 	else if (keycode == KEY_MINIMAP && data->minimap == false)
 		data->minimap = true;
-	put_floor_ceiling(data);
+	//put_floor_ceiling(data);
 	if (get_keypress(keycode) != KP_ERROR)
 		data->keypress[get_keypress(keycode)] = TRUE;
 	if (keycode == KEY_ESC)

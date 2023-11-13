@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 09:24:55 by nicolasbern       #+#    #+#             */
-/*   Updated: 2023/11/11 12:11:59 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/11/13 12:17:36 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_pos	t_pos_rotate(t_pos dir, double fov)
 		sin(fov) * dir.x + cos(fov) * dir.y});
 }
 
-void	wall_height(t_ray *ray)
+int	wall_height(t_ray *ray)
 {
 	int		line_height;
 	int		len_wall;
@@ -50,5 +50,5 @@ void	wall_height(t_ray *ray)
 		len_wall = SCREEN_H ;
 	else
 		len_wall = line_height;
-	printf("taille du mur %d", len_wall);
+	return (len_wall);
 }

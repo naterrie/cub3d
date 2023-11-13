@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 00:07:26 by nicolasbern       #+#    #+#             */
-/*   Updated: 2023/11/11 12:09:16 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/11/13 15:16:23 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,27 @@ static void	init_raycasting(t_data *data, t_ray *ray);
 static void	dda(t_data *data, t_ray *ray);
 static void	ray_pos(t_ray   *ray, t_data *data);
 
+void	draw_raycasting(t_data *data, t_ray *ray, int wall_len, int index_ray)
+{
+	int			j;
+
+	j = 0;
+	while (j < SCREEN_H)
+	{
+		if (j <= ray->ray_len)
+			my_mlx_pixel_put(data, index_ray, j, data->parsing.floor);
+		else if (j >= ray->ray_len && j <= (wall_len + ray->ray_len))
+			my_mlx_pixel_put(data, index_ray, j, 0XBDB76B);
+		else
+			my_mlx_pixel_put(data, index_ray, j, data->parsing.ceil);
+		j++;
+	}
+}
+
 void	display_game(t_data *data)
 {
 	int	x;
+	int	len_wall;
 	t_ray	ray;
 
 	x = 1;
@@ -31,11 +49,16 @@ void	display_game(t_data *data)
 		init_raycasting(data, &ray);
 		dda(data, &ray);
         ray_pos(&ray, data);
+		len_wall = wall_height(&ray);
+		draw_raycasting(data, &ray, len_wall, x);
         draw_line(data, &ray);
-		wall_height(&ray);
+		//draw_minimap(data, &ray);
+		// printf("taille du rayon %f\n", ray.ray_len);
+		// printf("taille du mur %d\n", len_wall);
+		// printf("total %f\n", ray.ray_len + len_wall);
         ray.ray_angle += data->player.angle_fov / (SCREEN_W * 0.5);
 	}
-	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
+	//mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }
 
 static void	dda(t_data *data, t_ray *ray)
@@ -132,3 +155,4 @@ static void	ray_pos(t_ray   *ray, t_data *data)
     ray->wall_pos.y = data->player.map.y + ray->distance * ray->direction.y;
     ray->ray_len = ray_len(data->player.map, ray->wall_pos);
 }
+

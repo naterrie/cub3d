@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/09 16:12:51 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/11/13 14:47:38 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # include <math.h>
 
 # define MINI_SIZE 16
-# define MAP_ZOOM 50
+# define MAP_ZOOM 15
 # define SCREEN_W 1030
 # define SCREEN_H 950
 # define MOVE_SPEED 0.5

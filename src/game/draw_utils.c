@@ -39,28 +39,50 @@ void	draw_square(t_data *data, int x, int y, int color)
 	}
 }
 
-void	put_floor_ceiling(t_data *data)
+
+void	draw_minimap(t_data *data)
 {
-	int			i;
-	int			j;
+	int		i;
+	int		j;
 
 	i = 0;
-	while (i < SCREEN_H)
+	while (data->parsing.map[i])
 	{
 		j = 0;
-		while (j < SCREEN_W)
+		while (data->parsing.map[i][j])
 		{
-			if (i < (SCREEN_H >> 1))
-				((int *)data->mlx.addr)[i * \
-				(data->line_length >> 2) + j] = data->parsing.ceil;
-			else
-				((int *)data->mlx.addr)[i * \
-				(data->line_length >> 2) + j] = data->parsing.floor;
+			if (data->parsing.map[i][j] == WALL)
+				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0xFFFF00);
+			// else if (data->parsing.map[i][j] == EMPTY)
+			// 	draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0x00FFFFFF);
 			j++;
 		}
 		i++;
 	}
 }
+
+// void	put_floor_ceiling(t_data *data)
+// {
+// 	int			i;
+// 	int			j;
+
+// 	i = 0;
+// 	while (i < SCREEN_H)
+// 	{
+// 		j = 0;
+// 		while (j < SCREEN_W)
+// 		{
+// 			if (i < (SCREEN_H >> 1))
+// 				((int *)data->mlx.addr)[i * \
+// 				(data->line_length >> 2) + j] = data->parsing.ceil;
+// 			else
+// 				((int *)data->mlx.addr)[i * \
+// 				(data->line_length >> 2) + j] = data->parsing.floor;
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 void	draw_line(t_data *data, t_ray *ray)
 {
