@@ -43,4 +43,3 @@ static int	render(t_data *data)
 	usleep(350);
 	return (EXIT_SUCCESS);
 }
-

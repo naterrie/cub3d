@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 00:07:26 by nicolasbern       #+#    #+#             */
-/*   Updated: 2023/11/13 15:16:23 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/11/13 19:21:23 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	display_game(t_data *data)
 		len_wall = wall_height(&ray);
 		draw_raycasting(data, &ray, len_wall, x);
         draw_line(data, &ray);
-		//draw_minimap(data, &ray);
+		draw_minimap(data);
 		// printf("taille du rayon %f\n", ray.ray_len);
 		// printf("taille du mur %d\n", len_wall);
 		// printf("total %f\n", ray.ray_len + len_wall);

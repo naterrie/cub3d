@@ -6,13 +6,13 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:02:04 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/13 12:25:17 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/11/13 19:15:11 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void init_key(t_data *data)
+void	init_key(t_data *data)
 {
 	data->keypress[0] = FALSE;
 	data->keypress[1] = FALSE;
@@ -24,7 +24,8 @@ void init_key(t_data *data)
 
 static t_keypress	get_keypress(int keycode)
 {
-	const int	key_tab[6] = {KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_POV_RIGHT, KEY_POV_LEFT};
+	const int	key_tab[6] = \
+		{KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_POV_RIGHT, KEY_POV_LEFT};
 	t_keypress	key;
 
 	key = KP_UP;

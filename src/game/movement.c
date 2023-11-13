@@ -45,24 +45,60 @@ void	player_move(t_data *data)
 
 static void	move_up(t_data *data)
 {
-	data->player.position.x += data->player.direction.x * MOVE_SPEED;
-	data->player.position.y += data->player.direction.y * MOVE_SPEED;
+	double	tempx;
+	double	tempy;
+
+	tempx = data->player.position.x + data->player.direction.x * MOVE_SPEED;
+	tempy = data->player.position.y + data->player.direction.y * MOVE_SPEED;
+	if (data->parsing.map[(int)(tempy / MAP_ZOOM)] \
+				[(int)(tempx / MAP_ZOOM)] != WALL)
+	{
+		data->player.position.x = tempx;
+		data->player.position.y = tempy;
+	}
 }
 
 static void	move_down(t_data *data)
 {
-	data->player.position.x -= data->player.direction.x * MOVE_SPEED;
-	data->player.position.y -= data->player.direction.y * MOVE_SPEED;
+	double	tempx;
+	double	tempy;
+
+	tempx = data->player.position.x - data->player.direction.x * MOVE_SPEED;
+	tempy = data->player.position.y - data->player.direction.y * MOVE_SPEED;
+	if (data->parsing.map[(int)(tempy / MAP_ZOOM)] \
+				[(int)(tempx / MAP_ZOOM)] != WALL)
+	{
+		data->player.position.x = tempx;
+		data->player.position.y = tempy;
+	}
 }
 
 static void	move_left(t_data *data)
 {
-	data->player.position.x += data->player.direction.y * MOVE_SPEED;
-	data->player.position.y -= data->player.direction.x * MOVE_SPEED;
+	double	tempx;
+	double	tempy;
+
+	tempx = data->player.position.x + data->player.direction.y * MOVE_SPEED;
+	tempy = data->player.position.y - data->player.direction.x * MOVE_SPEED;
+	if (data->parsing.map[(int)(tempy / MAP_ZOOM)] \
+				[(int)(tempx / MAP_ZOOM)] != WALL)
+	{
+		data->player.position.x = tempx;
+		data->player.position.y = tempy;
+	}
 }
 
 static void	move_right(t_data *data)
 {
-	data->player.position.x -= data->player.direction.y * MOVE_SPEED;
-	data->player.position.y += data->player.direction.x * MOVE_SPEED;
+	double	tempx;
+	double	tempy;
+
+	tempx = data->player.position.x - data->player.direction.y * MOVE_SPEED;
+	tempy = data->player.position.y + data->player.direction.x * MOVE_SPEED;
+	if (data->parsing.map[(int)(tempy / MAP_ZOOM)] \
+				[(int)(tempx / MAP_ZOOM)] != WALL)
+	{
+		data->player.position.x = tempx;
+		data->player.position.y = tempy;
+	}
 }
