@@ -1,7 +1,7 @@
-NO texture/test.xpm
-SO texture/test.xpm
-WE texture/test.xpm
-EA texture/test.xpm
+NO texture/no.xpm
+SO texture/so.xpm
+WE texture/we.xpm
+EA texture/ea.xpm
 
 F 175,139,199
 C 144,139,255
