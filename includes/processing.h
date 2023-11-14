@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/13 14:49:41 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/11/14 18:18:39 by aviscogl         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 # define MAP_ZOOM 10
 # define SCREEN_W 1400
 # define SCREEN_H 800
-# define MOVE_SPEED 0.15
-# define ROT_SPEED 0.005
+# define MOVE_SPEED 0.2
+# define ROT_SPEED 0.01
 # define FOV 90
 
 # define ERR_FILE			"Error : Wrong file name\n"

@@ -19,9 +19,11 @@ void	ray_pos(t_ray *ray, t_data *data);
 
 void	put_wall(t_data *data, int pos, int height)
 {
-	int		i;
+	int	i;
 
 	i = 0;
+	if (height < 0)
+		height = SCREEN_H;
 	while (i < (SCREEN_H / 2) - (height / 2))
 	{
 		my_mlx_pixel_put(data, pos, i, data->parsing.ceil);
@@ -54,6 +56,7 @@ void	display_game(t_data *data)
 		dda(data, &ray);
 		ray_pos(&ray, data);
 		draw_line(data, &ray);
+		wall_height(&ray);
 		put_wall(data, x, wall_height(&ray));
 		ray.ray_angle += data->player.angle_fov / (SCREEN_W * 0.5);
 	}

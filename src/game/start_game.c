@@ -35,6 +35,7 @@ void	start_game(t_data *data)
 static int	render(t_data *data)
 {
 	player_move(data);
+	display_game(data);
 	if (data->minimap == true)
 		minimap_player(data);
 	else
