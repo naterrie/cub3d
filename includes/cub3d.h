@@ -201,7 +201,6 @@ void		raycast(t_data *data);
 /*########################
 #	 	Draw utils		 #
 ########################*/
-void		put_floor_ceiling(t_data *data);
 void		draw_square(t_data *data, int x, int y, int color);
 void		my_mlx_pixel_put(t_data	*data, int x, int y, int color);
 void		ft_exit(t_data *data);

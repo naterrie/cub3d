@@ -51,7 +51,6 @@ int	key_press(int keycode, t_data *data)
 		data->minimap = false;
 	else if (keycode == KEY_MINIMAP && data->minimap == false)
 		data->minimap = true;
-	put_floor_ceiling(data);
 	if (get_keypress(keycode) != KP_ERROR)
 		data->keypress[get_keypress(keycode)] = TRUE;
 	if (keycode == KEY_ESC)

@@ -39,29 +39,6 @@ void	draw_square(t_data *data, int x, int y, int color)
 	}
 }
 
-void	put_floor_ceiling(t_data *data)
-{
-	int			i;
-	int			j;
-
-	i = 0;
-	while (i < SCREEN_H)
-	{
-		j = 0;
-		while (j < SCREEN_W)
-		{
-			if (i < (SCREEN_H >> 1))
-				((int *)data->mlx.addr)[i * \
-				(data->line_length >> 2) + j] = data->parsing.ceil;
-			else
-				((int *)data->mlx.addr)[i * \
-				(data->line_length >> 2) + j] = data->parsing.floor;
-			j++;
-		}
-		i++;
-	}
-}
-
 void	draw_line(t_data *data, t_ray *ray)
 {
 	t_double	new;
@@ -75,7 +52,7 @@ void	draw_line(t_data *data, t_ray *ray)
 	while (len < ray->ray_len)
 	{
 		my_mlx_pixel_put(data, data->player.position.x + new.x, \
-	data->player.position.y + new.y, 0x00FF66FF);
+			data->player.position.y + new.y, 0x00FF66FF);
 		new.x += step * data->player.d.x;
 		new.y += step * data->player.d.y;
 		len++;

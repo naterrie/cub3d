@@ -17,6 +17,28 @@ void	init_raycasting(t_data *data, t_ray *ray);
 void	dda(t_data *data, t_ray *ray);
 void	ray_pos(t_ray *ray, t_data *data);
 
+void	put_wall(t_data *data, int pos, int height)
+{
+	int		i;
+
+	i = 0;
+	while (i < (SCREEN_H / 2) - (height / 2))
+	{
+		my_mlx_pixel_put(data, pos, i, data->parsing.ceil);
+		i++;
+	}
+	while (i < (SCREEN_H / 2) + (height / 2))
+	{
+		my_mlx_pixel_put(data, pos, i, 0xFF56A0);
+		i++;
+	}
+	while (i < SCREEN_H)
+	{
+		my_mlx_pixel_put(data, pos, i, data->parsing.floor);
+		i++;
+	}
+}
+
 void	display_game(t_data *data)
 {
 	int		x;
@@ -32,7 +54,7 @@ void	display_game(t_data *data)
 		dda(data, &ray);
 		ray_pos(&ray, data);
 		draw_line(data, &ray);
-		wall_height(&ray);
+		put_wall(data, x, wall_height(&ray));
 		ray.ray_angle += data->player.angle_fov / (SCREEN_W * 0.5);
 	}
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
