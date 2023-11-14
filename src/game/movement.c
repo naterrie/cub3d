@@ -43,6 +43,19 @@ void	player_move(t_data *data)
 	}
 }
 
+static void	check_wall(t_data *data, double posy, double posx)
+{
+	if (data->parsing.map[(int)(posy / MAP_ZOOM)][(int)(posx / MAP_ZOOM)] != WALL)
+	{
+		data->player.position.x = posx;
+		data->player.position.y = posy;
+	}
+	else if (data->parsing.map[(int)(posy / MAP_ZOOM)][(int)(data->player.position.x / MAP_ZOOM)] != WALL)
+		data->player.position.y = posy;
+	else if (data->parsing.map[(int)(data->player.position.y / MAP_ZOOM)][(int)(posx / MAP_ZOOM)] != WALL)
+		data->player.position.x = posx;
+}
+
 static void	move_up(t_data *data)
 {
 	double	tempx;
@@ -50,12 +63,7 @@ static void	move_up(t_data *data)
 
 	tempx = data->player.position.x + data->player.direction.x * MOVE_SPEED;
 	tempy = data->player.position.y + data->player.direction.y * MOVE_SPEED;
-	if (data->parsing.map[(int)(tempy / MAP_ZOOM)] \
-				[(int)(tempx / MAP_ZOOM)] != WALL)
-	{
-		data->player.position.x = tempx;
-		data->player.position.y = tempy;
-	}
+	check_wall(data, tempy, tempx);
 }
 
 static void	move_down(t_data *data)
@@ -65,12 +73,7 @@ static void	move_down(t_data *data)
 
 	tempx = data->player.position.x - data->player.direction.x * MOVE_SPEED;
 	tempy = data->player.position.y - data->player.direction.y * MOVE_SPEED;
-	if (data->parsing.map[(int)(tempy / MAP_ZOOM)] \
-				[(int)(tempx / MAP_ZOOM)] != WALL)
-	{
-		data->player.position.x = tempx;
-		data->player.position.y = tempy;
-	}
+	check_wall(data, tempy, tempx);
 }
 
 static void	move_left(t_data *data)
@@ -80,12 +83,7 @@ static void	move_left(t_data *data)
 
 	tempx = data->player.position.x + data->player.direction.y * MOVE_SPEED;
 	tempy = data->player.position.y - data->player.direction.x * MOVE_SPEED;
-	if (data->parsing.map[(int)(tempy / MAP_ZOOM)] \
-				[(int)(tempx / MAP_ZOOM)] != WALL)
-	{
-		data->player.position.x = tempx;
-		data->player.position.y = tempy;
-	}
+	check_wall(data, tempy, tempx);
 }
 
 static void	move_right(t_data *data)
@@ -95,10 +93,5 @@ static void	move_right(t_data *data)
 
 	tempx = data->player.position.x - data->player.direction.y * MOVE_SPEED;
 	tempy = data->player.position.y + data->player.direction.x * MOVE_SPEED;
-	if (data->parsing.map[(int)(tempy / MAP_ZOOM)] \
-				[(int)(tempx / MAP_ZOOM)] != WALL)
-	{
-		data->player.position.x = tempx;
-		data->player.position.y = tempy;
-	}
+	check_wall(data, tempy, tempx);
 }

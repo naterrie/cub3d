@@ -113,7 +113,7 @@ void		display_game(t_data *data);
 double		ray_len(t_double src, t_double dest);
 void		norm_cam_x(t_data *data, double x);
 double		degre_to_radian(double angle);
-void		wall_height(t_ray *ray);
+int			wall_height(t_ray *ray);
 t_double	t_double_rotate(t_double dir, double fov);
 
 /*########################

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_raycasting.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 09:24:55 by nicolasbern       #+#    #+#             */
-/*   Updated: 2023/11/13 14:43:46 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/11/14 14:40:29 by aviscogl         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_double	t_pos_rotate(t_double dir, double fov)
 		sin(fov) * dir.x + cos(fov) * dir.y});
 }
 
-void	wall_height(t_ray *ray)
+int	wall_height(t_ray *ray)
 {
 	int		line_height;
 	int		len_wall;
@@ -50,4 +50,5 @@ void	wall_height(t_ray *ray)
 		len_wall = SCREEN_H ;
 	else
 		len_wall = line_height;
+	return (len_wall);
 }
