@@ -55,7 +55,6 @@ void	display_game(t_data *data)
 		init_raycasting(data, &ray);
 		dda(data, &ray);
 		ray_pos(&ray, data);
-		draw_line(data, &ray);
 		wall_height(&ray);
 		put_wall(data, x, wall_height(&ray));
 		ray.ray_angle += data->player.angle_fov / (SCREEN_W * 0.5);
