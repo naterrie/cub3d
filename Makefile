@@ -86,7 +86,8 @@ GAME_SRC =	start_game.c \
 			look.c \
 			input_key.c \
 			raycasting.c \
-			utils_raycasting.c
+			utils_raycasting.c \
+			walls.c
 
 FILES	 +=	$(addprefix $(GAME_DIR), $(GAME_SRC))
 

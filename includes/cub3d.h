@@ -169,6 +169,7 @@ void		start_game(t_data *data);
 /*########################
 #	 	Utils game		 #
 ########################*/
+void		check_wall_move(t_data *data, double posy, double posx);
 int			exit_game(t_data *data);
 
 
@@ -212,5 +213,10 @@ void		draw_line(t_data *data, t_ray *ray);
 #	 	raycast utils	 #
 ########################*/
 t_double	t_pos_rotate(t_double dir, double fov);
+
+/*########################
+#			Walls		 #
+########################*/
+void	put_wall(t_data *data, int pos, int height);
 
 #endif

@@ -22,3 +22,19 @@ int	exit_game(t_data *data)
 	ft_exit(data);
 	return (0);
 }
+
+void	check_wall_move(t_data *data, double posy, double posx)
+{
+	if (data->parsing.map[(int)(posy / MAP_ZOOM)] \
+		[(int)(posx / MAP_ZOOM)] != WALL)
+	{
+		data->player.position.x = posx;
+		data->player.position.y = posy;
+	}
+	else if (data->parsing.map[(int)(posy / MAP_ZOOM)] \
+		[(int)(data->player.position.x / MAP_ZOOM)] != WALL)
+		data->player.position.y = posy;
+	else if (data->parsing.map[(int)(data->player.position.y \
+		/ MAP_ZOOM)][(int)(posx / MAP_ZOOM)] != WALL)
+		data->player.position.x = posx;
+}
