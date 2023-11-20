@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/14 18:18:39 by aviscogl         ###   ########lyon.fr   */
+/*   Updated: 2023/11/20 17:46:35 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define MAP_ZOOM 10
 # define SCREEN_W 1400
 # define SCREEN_H 800
-# define MOVE_SPEED 0.2
+# define MOVE_SPEED 0.201
 # define ROT_SPEED 0.01
 # define FOV 90
 

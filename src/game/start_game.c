@@ -29,6 +29,24 @@ static int	xpm_check(t_data *data)
 	return (0);
 }
 
+static void	set_angle_ray(t_data *data)
+{
+	double	opposite;
+	double	adjacent;
+	int		i;
+
+	i = 0;
+	data->player.angle_fov = (FOV * (M_PI / 180));
+	adjacent = (double)SCREEN_W / (2 * tan(data->player.angle_fov / 2));
+	opposite = (double)SCREEN_W / 2;
+	while (i < SCREEN_W)
+	{
+		data->ray.ray_angle[i] = -atan(opposite / adjacent);
+		opposite--;
+		i++;
+	}
+}
+
 void	start_game(t_data *data)
 {
 	data->mlx.mlx = mlx_init();
@@ -39,6 +57,7 @@ void	start_game(t_data *data)
 	data->mlx.win = mlx_new_window(data->mlx.mlx, SCREEN_W, SCREEN_H, "Cub3D");
 	if (!data->mlx.win)
 		ft_exit(data);
+	set_angle_ray(data);
 	data->mlx.img = mlx_new_image(data->mlx.mlx, SCREEN_W, SCREEN_H);
 	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->bits_per_pixel, \
 			&data->line_length, &data->endian);

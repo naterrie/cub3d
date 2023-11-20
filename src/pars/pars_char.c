@@ -34,7 +34,7 @@ static void	set_player(t_data *data, char c)
 	}
 	else if (c == 'W')
 	{
-		data->player.angle += -M_PI;
+		data->player.angle = M_PI;
 		data->player.angle_degre = 180;
 		data->player.direction.x = -1;
 		data->player.direction.y = 0;
@@ -45,7 +45,7 @@ static void	set_player_info(t_data *data, char c)
 {
 	if (c == 'N')
 	{
-		data->player.angle = -M_PI_2;
+		data->player.angle = 3 * M_PI_2;
 		data->player.angle_degre = 270;
 		data->player.direction.x = 0;
 		data->player.direction.y = -1;

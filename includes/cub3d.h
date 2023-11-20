@@ -101,7 +101,7 @@ struct s_ray
 	t_double	step_dist;
 	t_double	direction;
 	double		ray_len;
-	double		ray_angle;
+	double		ray_angle[SCREEN_W];
 	t_double	wall_pos;
 	t_wall		wall;
 	t_int		dda_position;
@@ -109,11 +109,10 @@ struct s_ray
 	double		distance;
 };
 
-void		display_game(t_data *data);
 double		ray_len(t_double src, t_double dest);
 void		norm_cam_x(t_data *data, double x);
 double		degre_to_radian(double angle);
-int			wall_height(t_ray *ray);
+int			wall_height(t_ray ray, int i);
 t_double	t_double_rotate(t_double dir, double fov);
 
 /*########################
@@ -143,6 +142,7 @@ struct s_data
 	int			line_length;
 	int			endian;
 	bool		minimap;
+	t_ray		ray;
 	t_image		no;
 	t_image		so;
 	t_image		we;
@@ -182,7 +182,6 @@ int			exit_game(t_data *data);
 ########################*/
 void		minimap_full(t_data *data);
 void		minimap_player(t_data *data);
-//double	draw_line(t_data *data, double x, double y);
 
 /*########################
 #	 	Input_key		 #
@@ -194,8 +193,8 @@ void		init_key(t_data *data);
 /*########################
 #	 	Ray_Shoot		 #
 #########################*/
-void		set_ray_dist_player_side(t_data *data, t_ray *ray);
-void		ray_pos(t_ray	*ray, t_data *data);
+void		set_ray_dist_player_side(t_data *data);
+void		ray_pos(t_data *data);
 
 /*########################
 #	 	Raycasting		 #

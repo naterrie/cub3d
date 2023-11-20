@@ -19,7 +19,6 @@ void	minimap_full(t_data *data)
 	double	t;
 
 	i = 0;
-	data->player.angle_fov = (FOV * (M_PI / 180) / 2);
 	while (data->parsing.map[i])
 	{
 		j = -1;
