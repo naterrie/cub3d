@@ -14,10 +14,27 @@
 
 static int	render(t_data *data);
 
+static int	xpm_check(t_data *data)
+{
+	data->so.img = mlx_xpm_file_to_image(data->mlx.mlx, \
+			data->parsing.so, &data->so.w, &data->so.h);
+	data->no.img = mlx_xpm_file_to_image(data->mlx.mlx, \
+			data->parsing.no, &data->no.w, &data->no.h);
+	data->we.img = mlx_xpm_file_to_image(data->mlx.mlx, \
+			data->parsing.we, &data->we.w, &data->we.h);
+	data->ea.img = mlx_xpm_file_to_image(data->mlx.mlx, \
+			data->parsing.ea, &data->ea.w, &data->ea.h);
+	if (!data->so.img || !data->no.img || !data->we.img || !data->ea.img)
+		return (printf(ERR_TEXTURE), 1);
+	return (0);
+}
+
 void	start_game(t_data *data)
 {
 	data->mlx.mlx = mlx_init();
 	if (!data->mlx.mlx)
+		ft_exit(data);
+	if (xpm_check(data))
 		ft_exit(data);
 	data->mlx.win = mlx_new_window(data->mlx.mlx, SCREEN_W, SCREEN_H, "Cub3D");
 	if (!data->mlx.win)

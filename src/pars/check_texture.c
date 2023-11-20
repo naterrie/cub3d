@@ -41,39 +41,3 @@ void	replace_texture(char *str)
 		i++;
 	}
 }
-
-static int	file_extention(char *file)
-{
-	int	i;
-
-	i = 0;
-	while (file[i])
-		i++;
-	i--;
-	if (file[i] == 'm')
-	{
-		i--;
-		if (file[i] == 'p')
-		{
-			i--;
-			if (file[i] == 'x')
-				i--;
-			if (file[i] == '.')
-				return (0);
-		}
-	}
-	return (1);
-}
-
-int	check_extension(t_data *data)
-{
-	if (file_extention(data->parsing.no))
-		return (printf(ERR_EXTENTION), 1);
-	if (file_extention(data->parsing.so))
-		return (printf(ERR_EXTENTION), 1);
-	if (file_extention(data->parsing.ea))
-		return (printf(ERR_EXTENTION), 1);
-	if (file_extention(data->parsing.we))
-		return (printf(ERR_EXTENTION), 1);
-	return (0);
-}

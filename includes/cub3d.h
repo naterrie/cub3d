@@ -143,6 +143,10 @@ struct s_data
 	int			line_length;
 	int			endian;
 	bool		minimap;
+	t_image		no;
+	t_image		so;
+	t_image		we;
+	t_image		ea;
 	t_parsing	parsing;
 	t_mlx		mlx;
 	t_player	player;
@@ -217,6 +221,6 @@ t_double	t_pos_rotate(t_double dir, double fov);
 /*########################
 #			Walls		 #
 ########################*/
-void	put_wall(t_data *data, int pos, int height);
+void		put_wall(t_data *data, int pos, int height);
 
 #endif
