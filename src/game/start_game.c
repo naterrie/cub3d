@@ -14,6 +14,21 @@
 
 static int	render(t_data *data);
 
+static int	set_addr_img(t_data *data)
+{
+	data->no.addr = (int *)mlx_get_data_addr(data->no.img, \
+		&data->no.bits_per_pixel, &data->no.line_length, &data->no.endian);
+	data->so.addr = (int *)mlx_get_data_addr(data->so.img, \
+		&data->so.bits_per_pixel, &data->so.line_length, &data->so.endian);
+	data->we.addr = (int *)mlx_get_data_addr(data->we.img, \
+		&data->we.bits_per_pixel, &data->we.line_length, &data->we.endian);
+	data->ea.addr = (int *)mlx_get_data_addr(data->ea.img, \
+		&data->ea.bits_per_pixel, &data->ea.line_length, &data->ea.endian);
+	if (!data->no.addr || !data->so.addr || !data->we.addr || !data->ea.addr)
+		return (printf(ERR_TEXTURE), 1);
+	return (0);
+}
+
 static int	xpm_check(t_data *data)
 {
 	data->so.img = mlx_xpm_file_to_image(data->mlx.mlx, \
@@ -24,7 +39,8 @@ static int	xpm_check(t_data *data)
 			data->parsing.we, &data->we.w, &data->we.h);
 	data->ea.img = mlx_xpm_file_to_image(data->mlx.mlx, \
 			data->parsing.ea, &data->ea.w, &data->ea.h);
-	if (!data->so.img || !data->no.img || !data->we.img || !data->ea.img)
+	if (!data->so.img || !data->no.img || !data->we.img || \
+				!data->ea.img || set_addr_img(data))
 		return (printf(ERR_TEXTURE), 1);
 	return (0);
 }
