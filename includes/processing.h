@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/22 18:36:22 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/11/22 19:04:13 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 # define MINI_SIZE 10
 # define MAP_ZOOM 10
-# define SCREEN_W 1400
+# define SCREEN_W 1600
 # define SCREEN_H 800
 # define MOVE_SPEED 0.051
 # define ROT_SPEED 0.02

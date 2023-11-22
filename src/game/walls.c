@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 09:51:05 by naterrie          #+#    #+#             */
-/*   Updated: 2023/11/22 17:33:54 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/11/22 19:05:21 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	put_wall(t_data *data, int pos, int height)
 				+ (pos)] = data->parsing.ceil;
 		i++;
 	}
-	while (i < (SCREEN_H / 2) + (height / 2))
+	while (i < (SCREEN_H / 2) + (height / 2) && i < SCREEN_H)
 	{
 		((int *)data->mlx.addr)[(i) * (data->line_length >> 2) \
 				+ (pos)] = wall_color(data, pos, i, height);
