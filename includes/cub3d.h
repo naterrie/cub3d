@@ -19,7 +19,7 @@
 #	 	   utils		 #
 ########################*/
 
-typedef enum	e_wall
+typedef enum e_wall
 {
 	NORTH,
 	SOUTH,
@@ -33,6 +33,7 @@ typedef enum	e_wall
 
 struct s_image
 {
+	char	*addr;
 	void	*img;
 	int		w;
 	int		h;
