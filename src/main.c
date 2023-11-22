@@ -39,6 +39,8 @@ static void	set_data(t_data *data)
 	data->parsing.we = NULL;
 	data->parsing.ea = NULL;
 	data->minimap = false;
+	data->parsing.floor = -1;
+	data->parsing.ceil = -1;
 }
 
 int	main(int argc, char **argv)
