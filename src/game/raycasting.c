@@ -61,8 +61,8 @@ void	init_raycasting(t_data *data, int x)
 	data->player.fov = t_pos_rotate(data->player.d, degre_to_radian(FOV));
 	data->ray.direction.x = data->player.d.x + 0 * data->cam.x;
 	data->ray.direction.y = data->player.d.y + 0 * data->cam.x;
-	data->ray.dda_position.x = (int)data->player.position.x / MAP_ZOOM;
-	data->ray.dda_position.y = (int)data->player.position.y / MAP_ZOOM;
+	data->ray.dda_position.x = (int)data->player.position.x;
+	data->ray.dda_position.y = (int)data->player.position.y;
 	if (data->ray.direction.x == 0)
 		data->ray.step_dist.x = 1e30;
 	else if (data->ray.direction.x > 0)
@@ -75,8 +75,8 @@ void	init_raycasting(t_data *data, int x)
 		data->ray.step_dist.y = 1 / data->ray.direction.y;
 	else
 		data->ray.step_dist.y = -1 / data->ray.direction.y;
-	data->player.map.x = data->player.position.x / MAP_ZOOM;
-	data->player.map.y = data->player.position.y / MAP_ZOOM;
+	data->player.map.x = data->player.position.x;
+	data->player.map.y = data->player.position.y;
 	set_ray_dist_player_side(data);
 }
 

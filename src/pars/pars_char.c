@@ -16,8 +16,8 @@ static int	char_start(char c, int j, int i, t_data *data)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
-		data->player.position.x = i * MAP_ZOOM + MAP_ZOOM * 0.5;
-		data->player.position.y = j * MAP_ZOOM + MAP_ZOOM * 0.5;
+		data->player.position.x = i + 0.5;
+		data->player.position.y = j + 0.5;
 		return (1);
 	}
 	return (0);
@@ -83,8 +83,8 @@ int	check_start(t_data *data)
 		}
 		i++;
 	}
-	data->parsing.map_max.x = (j - 1) * MAP_ZOOM;
-	data->parsing.map_max.y = i * MAP_ZOOM;
+	data->parsing.map_max.x = (j - 1);
+	data->parsing.map_max.y = i;
 	if (count != 1)
 		return (write(2, ERR_NO_PLAYER, 30), 1);
 	return (0);

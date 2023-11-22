@@ -35,16 +35,19 @@ int	exit_game(t_data *data)
 
 void	check_wall_move(t_data *data, double posy, double posx)
 {
-	if (data->parsing.map[(int)(posy / MAP_ZOOM)] \
-		[(int)(posx / MAP_ZOOM)] != WALL)
+	if (data->parsing.map[(int)(posy)] \
+		[(int)(posx)] != WALL && data->parsing.map[(int)(posy \
+		)][(int)(data->player.position.x)] != WALL \
+			&& data->parsing.map[(int)(data->player.position.y \
+		)][(int)(posx)] != WALL)
 	{
 		data->player.position.x = posx;
 		data->player.position.y = posy;
 	}
-	else if (data->parsing.map[(int)(posy / MAP_ZOOM)] \
-		[(int)(data->player.position.x / MAP_ZOOM)] != WALL)
+	else if (data->parsing.map[(int)(posy)] \
+		[(int)(data->player.position.x)] != WALL)
 		data->player.position.y = posy;
 	else if (data->parsing.map[(int)(data->player.position.y \
-		/ MAP_ZOOM)][(int)((posx / MAP_ZOOM))] != WALL)
+		)][(int)((posx))] != WALL)
 		data->player.position.x = posx;
 }
