@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:02:04 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/13 19:15:11 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/11/22 09:07:09 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	key_press(int keycode, t_data *data)
 		data->minimap = false;
 	else if (keycode == KEY_MINIMAP && data->minimap == false)
 		data->minimap = true;
-	//put_floor_ceiling(data);
 	if (get_keypress(keycode) != KP_ERROR)
 		data->keypress[get_keypress(keycode)] = TRUE;
 	if (keycode == KEY_ESC)

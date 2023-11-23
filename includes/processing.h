@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/13 19:06:13 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/11/22 09:06:34 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@
 # include <stdbool.h>
 # include <math.h>
 
-# define MINI_SIZE 16
-# define MAP_ZOOM 15
-# define SCREEN_W 1030
-# define SCREEN_H 950
-# define MOVE_SPEED 0.5
-# define ROT_SPEED 0.02
-# define FOV 70
+# define MINI_SIZE 10
+# define MAP_ZOOM 10
+# define SCREEN_W 1400
+# define SCREEN_H 800
+# define MOVE_SPEED 0.201
+# define ROT_SPEED 0.01
+# define FOV 90
 
 # define ERR_FILE			"Error : Wrong file name\n"
 # define ERR_MAP_BORDER		"Error : wrong border\n"

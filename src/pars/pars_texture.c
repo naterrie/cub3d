@@ -91,30 +91,3 @@ void	split_file(char **map, t_data *data, char *file)
 	ft_set_map(data, map, file);
 	free_str(map);
 }
-
-int	file_texture(t_data *data)
-{
-	int	i;
-
-	replace_texture(data->parsing.no);
-	replace_texture(data->parsing.so);
-	replace_texture(data->parsing.we);
-	replace_texture(data->parsing.ea);
-	i = open(data->parsing.no, O_RDONLY);
-	if (i < 0)
-		return (printf(ERR_PATH_NO), 1);
-	close(i);
-	i = open(data->parsing.so, O_RDONLY);
-	if (i < 0)
-		return (printf(ERR_PATH_SO), 1);
-	close(i);
-	i = open(data->parsing.we, O_RDONLY);
-	if (i < 0)
-		return (printf(ERR_PATH_WE), 1);
-	close(i);
-	i = open(data->parsing.ea, O_RDONLY);
-	if (i < 0)
-		return (printf(ERR_PATH_EA), 1);
-	close(i);
-	return (0);
-}

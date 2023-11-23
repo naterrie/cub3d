@@ -15,12 +15,26 @@
 void	minimap_full(t_data *data)
 {
 	double	t;
+	int		i;
+	int		j;
 
+	i = 0;
+	while (data->parsing.map[i])
+	{
+		j = -1;
+		while (data->parsing.map[i][++j])
+		{
+			if (data->parsing.map[i][j] == WALL)
+				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0xFF9E9E9E);
+			else if (data->parsing.map[i][j] == EMPTY)
+				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0x00FFFFFF);
+		}
+		i++;
+	}
 	t = (double)FOV * (M_PI / 180);
-	data->player.angle_fov = (FOV * (M_PI / 180) / 2);
-	data->player.fov.x = cosf(t) * data->player.direction.x + -sinf(t) * data->player.direction.y;
-	data->player.fov.y = sinf(t) * data->player.direction.x + cosf(t) * data->player.direction.x;
-	display_game(data);
-	draw_minimap(data);
+	data->player.fov.x = cosf(t) * data->player.direction.x \
+		+ -sinf(t) * data->player.direction.y;
+	data->player.fov.y = sinf(t) * data->player.direction.x \
+		+ cosf(t) * data->player.direction.x;
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }
