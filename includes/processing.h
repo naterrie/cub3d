@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/22 19:04:13 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/11/23 11:12:40 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define PROCESSING_H
 
 # ifdef __APPLE__
-# include "../mlx_macos/mlx.h"
-#endif
+#  include "../mlx_macos/mlx.h"
+# endif
 
 # ifdef __linux__
-# include "../mlx/mlx.h"
-#endif
+#  include "../mlx/mlx.h"
+# endif
 
 # include "keypress.h"
 # include "utils.h"

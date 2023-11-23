@@ -54,7 +54,6 @@ struct s_mlx
 #	 struct_parsing		 #
 ########################*/
 
-
 struct s_parsing
 {
 	char		*no;
@@ -67,20 +66,20 @@ struct s_parsing
 	t_double	map_max;
 };
 
-int		parsing(char *file, t_data *data);
-int		check_chars(char **map);
-int		check_start(t_data *data);
-int		ft_pars_floor_ceil(char *str);
-void	replace_texture(char *str);
-int		check_extension(t_data *data);
-int		file_texture(t_data *data);
-int		check_texture(t_data *data);
-void	split_file(char **map, t_data *data, char *file);
-int		nbline(char *file);
-int		line_null(char *str);
-char	**get_file(char *file);
-char	*get_texture(char *str);
-void	ft_split_atoi(char *s, char c, int t[3]);
+int			parsing(char *file, t_data *data);
+int			check_chars(char **map);
+int			check_start(t_data *data);
+int			ft_pars_floor_ceil(char *str);
+void		replace_texture(char *str);
+int			check_extension(t_data *data);
+int			file_texture(t_data *data);
+int			check_texture(t_data *data);
+void		split_file(char **map, t_data *data, char *file);
+int			nbline(char *file);
+int			line_null(char *str);
+char		**get_file(char *file);
+char		*get_texture(char *str);
+void		ft_split_atoi(char *s, char c, int t[3]);
 
 /*########################
 #	 struct_dda			 #
@@ -179,7 +178,6 @@ void		start_game(t_data *data);
 ########################*/
 void		check_wall_move(t_data *data, double posy, double posx);
 int			exit_game(t_data *data);
-
 
 /*########################
 #	 	Minimap 		 #
