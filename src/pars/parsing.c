@@ -110,6 +110,8 @@ int	parsing(char *file, t_data *data)
 		ft_exit(data);
 	if (check_border(data->parsing.map))
 		ft_exit(data);
+	if (pars_island(data->parsing.map))
+		ft_exit(data);
 	replace_texture(data->parsing.no);
 	replace_texture(data->parsing.so);
 	replace_texture(data->parsing.we);

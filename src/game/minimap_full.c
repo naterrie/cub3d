@@ -39,10 +39,10 @@ void	minimap_full(t_data *data)
 	double	t;
 
 	i = 0;
-	while (data->parsing.map[i])
+	while (data->parsing.map[i] && i < SCREEN_H / MINI_SIZE)
 	{
 		j = -1;
-		while (data->parsing.map[i][++j])
+		while (data->parsing.map[i][++j] && j < SCREEN_W / MINI_SIZE)
 		{
 			if (data->parsing.map[i][j] == WALL)
 				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0xFF9E9E9E);

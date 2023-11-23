@@ -66,6 +66,7 @@ struct s_parsing
 	t_double	map_max;
 };
 
+int			pars_island(char **map);
 int			parsing(char *file, t_data *data);
 int			check_chars(char **map);
 int			check_start(t_data *data);
