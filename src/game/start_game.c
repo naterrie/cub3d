@@ -88,9 +88,7 @@ static int	render(t_data *data)
 {
 	player_move(data);
 	display_game(data);
-	if (data->minimap == true)
-		minimap_player(data);
-	else
+	if (data->minimap == FALSE)
 		minimap_full(data);
 	usleep(350);
 	return (EXIT_SUCCESS);

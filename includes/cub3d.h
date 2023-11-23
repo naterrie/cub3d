@@ -184,7 +184,6 @@ int			exit_game(t_data *data);
 #	 	Minimap 		 #
 ########################*/
 void		minimap_full(t_data *data);
-void		minimap_player(t_data *data);
 
 /*########################
 #	 	Input_key		 #
