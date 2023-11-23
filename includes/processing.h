@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
+/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/22 09:06:34 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/11/23 09:48:21 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@
 
 # define MINI_SIZE 10
 # define MAP_ZOOM 10
-# define SCREEN_W 1400
+# define SCREEN_W 1600
 # define SCREEN_H 800
-# define MOVE_SPEED 0.201
-# define ROT_SPEED 0.01
+# define MOVE_SPEED 0.051
+# define ROT_SPEED 0.02
 # define FOV 90
 
 # define ERR_FILE			"Error : Wrong file name\n"

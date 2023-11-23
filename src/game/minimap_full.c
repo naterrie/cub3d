@@ -12,6 +12,26 @@
 
 #include "cub3d.h"
 
+static void	draw_player(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = -MINI_SIZE;
+	while (i < MINI_SIZE)
+	{
+		j = -MINI_SIZE;
+		while (j < MINI_SIZE)
+		{
+			if (i == 0 && j == 0)
+				draw_square(data, (data->player.position.y - 0.5) * MAP_ZOOM \
+					, (data->player.position.x - 0.5) * MAP_ZOOM, 0x00FF0000);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	minimap_full(t_data *data)
 {
 	double	t;
@@ -36,5 +56,6 @@ void	minimap_full(t_data *data)
 		+ -sinf(t) * data->player.direction.y;
 	data->player.fov.y = sinf(t) * data->player.direction.x \
 		+ cosf(t) * data->player.direction.x;
+	draw_player(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }
