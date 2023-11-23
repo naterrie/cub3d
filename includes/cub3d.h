@@ -16,6 +16,18 @@
 # include "processing.h"
 
 /*########################
+#	 	   utils		 #
+########################*/
+
+typedef enum	e_wall
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST,
+}	t_wall;
+
+/*########################
 #	 	 struc_MLX		 #
 ########################*/
 
@@ -74,10 +86,13 @@ struct s_ray
 	t_pos	dist_player_to_side;
 	t_pos	step_dist;
 	t_pos	direction;
+	double	ray_len;
+	double	ray_angle;
+	t_pos	wall_pos;
+	t_wall	wall;
 	t_int	dda_position;
 	t_int	dda_step;
-	t_pos	dist_player_to_wall;
-	int		wall;
+	double	distance;
 };
 
 
@@ -157,6 +172,5 @@ void	draw_square(t_data *data, int x, int y, int color);
 void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
 void	ft_exit(t_data *data);
 void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
-//t_pos 	dda(t_data *data, t_pos ray) ;
 void	display_game(t_data *data);
 #endif

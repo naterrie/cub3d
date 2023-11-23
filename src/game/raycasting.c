@@ -6,13 +6,12 @@
 /*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 00:07:26 by nicolasbern       #+#    #+#             */
-/*   Updated: 2023/10/31 17:59:02 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:38:50 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//utils raycast
 void    norm_cam_x(t_data *data, double x)
 {
     data->cam.x = 2 * x / SCREEN_W - 1;
@@ -48,8 +47,12 @@ void	set_ray_dist_player_side(t_data *data, t_ray *ray)
 
 void	init_raycasting(t_data *data, t_ray *ray)
 {
-    ray->direction.x = data->player.direction.x + 0 * data->cam.x; // 0 ==> data->player.fov.x
-    ray->direction.y = data->player.direction.y + 0 * data->cam.x; // 0 ==> data->player.fov.y
+    // ray->direction.x = data->player.direction.x + 0 * data->cam.x; // 0 ==> data->player.fov.x
+    // ray->direction.y = data->player.direction.y + 0 * data->cam.x;
+	printf("map.x = %f   map.y = %f  cam %f\n", data->player.fov.x, data->player.fov.y, data->cam.x);
+    ray->direction.x = data->player.direction.x + (data->player.fov.x * data->cam.x); // 0 ==> data->player.fov.x
+    ray->direction.y = data->player.direction.y + (data->player.fov.y * data->cam.x);
+	//printf("ray->direction.x = %f   ray->direction.y = %f\n", ray->direction.x, ray->direction.y);
 	ray->dda_position.x = (int)data->player.position.x / MAP_ZOOM;
 	ray->dda_position.y = (int)data->player.position.y / MAP_ZOOM;
 	if (ray->direction.x == 0)
@@ -73,9 +76,6 @@ void	dda(t_data *data, t_ray *ray)
 {
 	t_bool	hit;
 
-    // data->player.map.x = data->player.position.x + ray->step_dist.x;
-    // data->player.map.y = data->player.position.y + ray->step_dist.y;
-	// printf("data->player.map.x %f  data->player.map.y %f\n", data->player.map.x, data->player.map.y);
 	hit = FALSE;
 	while (hit == 0)
 	{
@@ -83,101 +83,70 @@ void	dda(t_data *data, t_ray *ray)
 		{
 			ray->dist_player_to_side.x += ray->step_dist.x;
 			ray->dda_position.x += ray->dda_step.x;
-			ray->wall = 0;
+            ray->wall = EAST - (ray->dda_step.x == 1);
 		}
 		else
 		{
 			ray->dist_player_to_side.y += ray->step_dist.y;
 			ray->dda_position.y += ray->dda_step.y;
-			ray->wall = 1;
+            ray->wall = NORTH + (ray->dda_step.y == 1);
 		}
 		if (data->parsing.map[ray->dda_position.y][ray->dda_position.x] == WALL)
-			break ;
+            break ; 
 	}
 }
 
-// void	rotate_view(double rotSpeed, t_player *player)
-// {
-// 	t_pos	dir;
-
-// 	dir.x = player->dir.x;
-// 	dir.y = player->dir.y;
-// 	player->dir.x = dir.x * cos(rotSpeed) - dir.y * sin(rotSpeed);
-// 	player->dir.y = dir.x * sin(rotSpeed) + dir.y * cos(rotSpeed);
-// 	player->cam.plane = point_value(-player->dir.y * FOV, player->dir.x * FOV);
-// }
-
-double ray_dist(t_pos src, t_int dest)
+void	draw_line(t_data *data, t_ray *ray, double angle_fov)
 {
-	t_pos	tmp;
-    double	res_final;
-	// printf("p.x %f  p.y %f\n",src.x, src.y);
-	// printf("end.x %d  end.y %d\n",dest.x, dest.y);
-	// if (ray->wall == 1)
-	// {
-	// 	tmp = src.x - (int)src.x;
-	// 	ray->dist_player_to_wall.x = dest.x + tmp;
-	// 	ray->dist_player_to_wall.y = dest.y;
-	// }
-	// else
-	// {
-	// 	tmp = src.y - (int)src.y;
-	// 	ray->dist_player_to_wall.y = dest.y + tmp;
-	// 	ray->dist_player_to_wall.x = dest.x;
-	// }
-	// //printf("tmp %f\n", tmp);
-	// printf("wall.x %f  wall.y %f\n",ray->dist_player_to_wall.x, ray->dist_player_to_wall.y);
-
-    tmp.x = (src.x - dest.x);
-    tmp.y = (src.y - dest.y);
-    res_final = ((tmp.x * tmp.x) + (tmp.y * tmp.y));
-    res_final = sqrt(res_final);
-    return (res_final);
-}
-
-void	draw_line(t_data *data, t_int end, double angle_fov,t_ray *ray)
-{
-	double	dest;
-    t_pos   src;
 	double	new_x;
 	double	new_y;
 	int		step;
+    int     len;
 
-	(void)ray;
-	// dest.x = (double)end.x * MAP_ZOOM;
-	// dest.y = (double)end.y * MAP_ZOOM;
 	//direction des laser.
 	data->player.d.x = cos(data->player.angle + angle_fov);
 	data->player.d.y = sin(data->player.angle + angle_fov);
 	step = 1;
 	new_x = 0;
 	new_y = 0;
-    src.x = data->player.position.x / 50;
-    src.y = data->player.position.y / 50;
-	//printf("data->player.map.x %f  data->player.map.y %f\n", data->player.map.x, data->player.map.y);
-    dest = ray_dist(src, end);
-	//printf("p.x %f  p.x %f\n",data->player.position.x, data->player.position.y);
-    //printf("truc = %f\n", truc);
-	//printf("dist = %f\n",dest);
-	// printf("new_end.x %f new_end.y %d]f\n", new_end.x, new_end.y);
-    // printf("posx %d posy %d\n", src.x, src.y);
-	//printf("src.x = %d  src.y = %d\n",src.x, src.y);
-	// double step_x = 0;
-	int l = 60;
-	while (l > 0)
+    len = 0;
+	while (len < ray->ray_len)
 	{
-		// if (dest == step_x)
-        // {   
-    	// 	return ;
-        // }
+		my_mlx_pixel_put(data, data->player.position.x + new_x, data->player.position.y + new_y, 0x00FF66FF);
 		new_x += step * data->player.d.x;
 		new_y += step * data->player.d.y;
-		my_mlx_pixel_put(data, data->player.position.x + new_x, data->player.position.y + new_y, 0x00FF66FF);
-		//step_x += step;
-		//printf("step_x %f\n", step_x);
-		l--;
+        len++;
 	}
-	//printf("new_x = %f  new_y = %f\n",data->player.position.x + new_x, data->player.position.y + new_y);
+}
+
+double ray_len(t_pos src, t_pos dest)
+{
+    double  res_x;
+    double  res_y;
+    double  res_final;
+
+    res_x = (src.x - dest.x);
+    res_y = (src.y - dest.y);
+    res_final = ((res_x * res_x) + (res_y * res_y));
+    res_final = sqrt(res_final);
+    return (res_final * MAP_ZOOM);
+}
+
+void    ray_pos(t_ray   *ray, t_data *data)
+{
+    if (ray->wall == WEST || ray->wall == EAST)
+	{
+        ray->distance =  ray->dist_player_to_side.x - ray->step_dist.x;
+        ray->dda_position.y = data->player.position.x + ray->distance * ray->direction.y;
+	}
+	else
+	{
+        ray->distance =  ray->dist_player_to_side.y - ray->step_dist.y;
+        ray->dda_position.x = data->player.position.x + ray->distance * ray->direction.x;
+	}
+    ray->wall_pos = (t_pos){data->player.map.x + ray->distance * ray->direction.x, \
+        data->player.map.y + ray->distance * ray->direction.y};
+    ray->ray_len = ray_len(data->player.map, ray->wall_pos);
 }
 
 void	display_game(t_data *data)
@@ -186,18 +155,26 @@ void	display_game(t_data *data)
 	t_ray	ray;
 
 
-	x = 1;
+
+    // ray.ray_angle = -data->player.angle_fov;
+	// data->player.d.x = cos(data->player.angle + ray.ray_angle);
+	// data->player.d.y = sin(data->player.angle + ray.ray_angle);
+	// data->player.angle_fov = (FOV * (M_PI / 180) / 2);
+	// double t = (double)FOV * (M_PI / 180);
+	// data->player.fov.x = cosf(t) * data->player.direction.x + -sinf(t) * data->player.direction.y;
+	// data->player.fov.y = sinf(t) * data->player.direction.x + cosf(t) * data->player.direction.x;
+	x = 0;
 	ft_bzero(&ray, sizeof(t_ray));
-	// while (++x < SCREEN_W)
-	// {
+	while (++x < SCREEN_W)
+	{
 		norm_cam_x(data, x);
 		init_raycasting(data, &ray);
 		dda(data, &ray);
-	    // printf("ray->dda_position.x %f ray->dda_position.y %f\n", ray.dist_player_to_side.x, ray.dist_player_to_side.y);
-        draw_line(data, ray.dda_position, 0, &ray);
-	    //printf("ray->dda_position.x %f ray->dda_position.y %f\n", data->player.map.x, data->player.map.y);
-        
-	//}
+        ray_pos(&ray, data);
+        draw_line(data, &ray, ray.ray_angle);
+	    //printf("ray->dda_position.x %d ray->dda_position.y %d\n", ray.dda_position.x, ray.dda_position.y);
+        ray.ray_angle += data->player.angle_fov / (SCREEN_H * 0.5);
+	}
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }
 

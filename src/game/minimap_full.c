@@ -64,8 +64,8 @@ void	draw_squarelol(t_data *data, int x, int y, int color)
 
 
 //planeX et planeY
-// 	data->player.d.x = cos(data->player.angle + angle_fov);
-// 	data->player.d.y = sin(data->player.angle + angle_fov);
+	// data->player.d.x = cos(data->player.angle + angle_fov);
+	// data->player.d.y = sin(data->player.angle + angle_fov);
 //cameraX = 2 * x / double(w) - 1;  si cameraX = 0 ca veux dire que je regarde au milieu.
 //double dirX = -1, dirY = 0; -> direction du rayon.
 //calcule de la direction des rayons en fonction de la place en orizontale
@@ -88,18 +88,18 @@ void	minimap_full(t_data *data)
 				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0xFF9E9E9E);
 			else if (data->parsing.map[i][j] == EMPTY)
 				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0x00FFFFFF);
-			draw_squarelol(data, i * MAP_ZOOM, j * MAP_ZOOM, 0xFF9E9E9E);
+			//draw_squarelol(data, i * MAP_ZOOM, j * MAP_ZOOM, 0xFF9E9E9E);
 			j++;
 		}
 		i++;
 	}
 	double t = (double)FOV * (M_PI / 180);
 	data->player.fov.x = cosf(t) * data->player.direction.x + -sinf(t) * data->player.direction.y;
-	data->player.fov.y = sinf(t) * data->player.direction.x + cosf(t) * data->player.direction.x;
+	data->player.fov.y = sinf(t) * data->player.direction.x + cosf(t) * data->player.direction.y;
 	//draw_li(data, 0);
 	//draw_linne(data, 0);
 	display_game(data);
-	//printf("map.x = %f   map.y = %f\n", lol.x, lol.y);
+	// printf("map.x = %f   map.y = %f\n", data->player.fov.x, data->player.fov.y);
 	//my_mlx_pixel_put(data, lol.x, lol.y, 0x0099FFFF);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }

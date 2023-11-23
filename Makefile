@@ -25,9 +25,9 @@ CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3 -fsanitize=addres
 
 UNAME	=	$(shell uname -s)
 
-ifeq ($(UNAME) , mac_Os)
+ifeq ($(UNAME) , Darwin)
 MLXFLAGS	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
-MLX_PATH	=	mlx_macos/libmlx.a
+MLX_PATH	=	./mlx_macos/libmlx.a
 MLX_PREFIX	=	mlx_macos
 endif
 
