@@ -53,13 +53,14 @@ struct s_mlx
 
 struct s_parsing
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	int		floor;
-	int		ceil;
-	char	**map;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	int			floor;
+	int			ceil;
+	char		**map;
+	t_double	map_max;
 };
 
 int		parsing(char *file, t_data *data);
@@ -78,23 +79,41 @@ char	*get_texture(char *str);
 void	ft_split_atoi(char *s, char c, int t[3]);
 
 /*########################
+#	 struct_dda			 #
+########################*/
+
+struct s_dda
+{
+	double		wall_x;
+	double		wall_y;
+	t_double	ray;
+	double		dist_wall;
+	int			side;
+};
+
+/*########################
 #	 struct_raycasting	 #
 ########################*/
 
 struct s_ray
 {
-	t_pos	dist_player_to_side;
-	t_pos	step_dist;
-	t_pos	direction;
-	double	ray_len;
-	double	ray_angle;
-	t_pos	wall_pos;
-	t_wall	wall;
-	t_int	dda_position;
-	t_int	dda_step;
-	double	distance;
+	t_double	dist_player_to_side;
+	t_double	step_dist;
+	t_double	direction;
+	double		ray_len;
+	double		ray_angle[SCREEN_W];
+	t_double	wall_pos;
+	t_wall		wall;
+	t_int		dda_position;
+	t_int		dda_step;
+	double		distance;
 };
 
+double		ray_len(t_double src, t_double dest);
+void		norm_cam_x(t_data *data, double x);
+double		degre_to_radian(double angle);
+int			wall_height(t_ray ray, int i);
+t_double	t_double_rotate(t_double dir, double fov);
 
 /*########################
 #	 struct_player		 #
@@ -102,13 +121,15 @@ struct s_ray
 
 struct s_player
 {
-	t_pos	d;
-	t_pos	position;
-	t_pos	direction;
-	t_pos	map;
-	double	angle;
-	t_pos	fov;
-	double	angle_fov;
+	t_double	d;
+	t_double	position;
+	t_double	direction;
+	t_double	map;
+	double		angle;
+	double		angle_degre;
+	double		angle_radian;
+	t_double	fov;
+	double		angle_fov;
 };
 
 /*########################
@@ -121,56 +142,84 @@ struct s_data
 	int			line_length;
 	int			endian;
 	bool		minimap;
+	t_ray		ray;
+	t_image		no;
+	t_image		so;
+	t_image		we;
+	t_image		ea;
 	t_parsing	parsing;
 	t_mlx		mlx;
 	t_player	player;
-	t_pos		cam;
+	t_double	cam;
 	t_bool		keypress[6];
 };
-
 
 /*########################
 #	 	Movement		 #
 ########################*/
-void	player_move(t_data *data);
+void		player_move(t_data *data);
 
 /*########################
 #	 	  Look	    	 #
 ########################*/
-void	look_right(t_data *data);
-void	look_left(t_data *data);
+void		look_right(t_data *data);
+void		look_left(t_data *data);
 
 /*########################
 #	 	Start game		 #
 ########################*/
-void	start_game(t_data *data);
+void		start_game(t_data *data);
 
 /*########################
 #	 	Utils game		 #
 ########################*/
-int		exit_game(t_data *data);
+void		check_wall_move(t_data *data, double posy, double posx);
+int			exit_game(t_data *data);
 
 
 /*########################
 #	 	Minimap 		 #
 ########################*/
-void	minimap_full(t_data *data);
-void	minimap_player(t_data *data);
+void		minimap_full(t_data *data);
+void		minimap_player(t_data *data);
 
 /*########################
 #	 	Input_key		 #
 ########################*/
-int		key_event_release(int keycode, t_data *data);
-int		key_press(int keycode, t_data *data);
-void	init_key(t_data *data);
+int			key_event_release(int keycode, t_data *data);
+int			key_press(int keycode, t_data *data);
+void		init_key(t_data *data);
+
+/*########################
+#	 	Ray_Shoot		 #
+#########################*/
+void		set_ray_dist_player_side(t_data *data);
+void		ray_pos(t_data *data);
+
+/*########################
+#	 	Raycasting		 #
+########################*/
+void		display_game(t_data *data);
+void		raycast(t_data *data);
 
 /*########################
 #	 	Draw utils		 #
 ########################*/
-void	put_floor_ceiling(t_data *data);
-void	draw_square(t_data *data, int x, int y, int color);
-void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
-void	ft_exit(t_data *data);
-void	my_mlx_pixel_put(t_data	*data, int x, int y, int color);
-void	display_game(t_data *data);
+void		draw_square(t_data *data, int x, int y, int color);
+void		my_mlx_pixel_put(t_data	*data, int x, int y, int color);
+void		ft_exit(t_data *data);
+//void		draw_fov(t_data *data);
+void		my_mlx_pixel_put(t_data	*data, int x, int y, int color);
+void		draw_line(t_data *data, t_ray *ray);
+
+/*########################
+#	 	raycast utils	 #
+########################*/
+t_double	t_pos_rotate(t_double dir, double fov);
+
+/*########################
+#			Walls		 #
+########################*/
+void		put_wall(t_data *data, int pos, int height);
+
 #endif

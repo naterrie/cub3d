@@ -45,24 +45,40 @@ void	player_move(t_data *data)
 
 static void	move_up(t_data *data)
 {
-	data->player.position.x += data->player.direction.x * MOVE_SPEED;
-	data->player.position.y += data->player.direction.y * MOVE_SPEED;
+	double	tempx;
+	double	tempy;
+
+	tempx = data->player.position.x + data->player.direction.x * MOVE_SPEED;
+	tempy = data->player.position.y + data->player.direction.y * MOVE_SPEED;
+	check_wall_move(data, tempy, tempx);
 }
 
 static void	move_down(t_data *data)
 {
-	data->player.position.x -= data->player.direction.x * MOVE_SPEED;
-	data->player.position.y -= data->player.direction.y * MOVE_SPEED;
+	double	tempx;
+	double	tempy;
+
+	tempx = data->player.position.x - data->player.direction.x * MOVE_SPEED;
+	tempy = data->player.position.y - data->player.direction.y * MOVE_SPEED;
+	check_wall_move(data, tempy, tempx);
 }
 
 static void	move_left(t_data *data)
 {
-	data->player.position.x += data->player.direction.y * MOVE_SPEED;
-	data->player.position.y -= data->player.direction.x * MOVE_SPEED;
+	double	tempx;
+	double	tempy;
+
+	tempx = data->player.position.x + data->player.direction.y * MOVE_SPEED;
+	tempy = data->player.position.y - data->player.direction.x * MOVE_SPEED;
+	check_wall_move(data, tempy, tempx);
 }
 
 static void	move_right(t_data *data)
 {
-	data->player.position.x -= data->player.direction.y * MOVE_SPEED;
-	data->player.position.y += data->player.direction.x * MOVE_SPEED;
+	double	tempx;
+	double	tempy;
+
+	tempx = data->player.position.x - data->player.direction.y * MOVE_SPEED;
+	tempy = data->player.position.y + data->player.direction.x * MOVE_SPEED;
+	check_wall_move(data, tempy, tempx);
 }

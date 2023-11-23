@@ -104,15 +104,15 @@ int	parsing(char *file, t_data *data)
 	split_file(map, data, file);
 	if (check_texture(data))
 		ft_exit(data);
-	if (file_texture(data))
-		ft_exit(data);
-	if (check_extension(data))
-		ft_exit(data);
 	if (check_start(data))
 		ft_exit(data);
 	if (check_chars(data->parsing.map))
 		ft_exit(data);
 	if (check_border(data->parsing.map))
 		ft_exit(data);
+	replace_texture(data->parsing.no);
+	replace_texture(data->parsing.so);
+	replace_texture(data->parsing.we);
+	replace_texture(data->parsing.ea);
 	return (0);
 }

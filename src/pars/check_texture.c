@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:21:48 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/29 17:08:33 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:00:21 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,40 +40,4 @@ void	replace_texture(char *str)
 		}
 		i++;
 	}
-}
-
-static int	file_extention(char *file)
-{
-	int	i;
-
-	i = 0;
-	while (file[i])
-		i++;
-	i--;
-	if (file[i] == 'm')
-	{
-		i--;
-		if (file[i] == 'p')
-		{
-			i--;
-			if (file[i] == 'x')
-				i--;
-			if (file[i] == '.')
-				return (0);
-		}
-	}
-	return (1);
-}
-// ne rentre jamais ici, quit a file texture
-int	check_extension(t_data *data)
-{
-	if (file_extention(data->parsing.no))
-		return (printf(ERR_EXTENTION), 1);
-	if (file_extention(data->parsing.so))
-		return (printf(ERR_EXTENTION), 1);
-	if (file_extention(data->parsing.ea))
-		return (printf(ERR_EXTENTION), 1);
-	if (file_extention(data->parsing.we))
-		return (printf(ERR_EXTENTION), 1);
-	return (0);
 }

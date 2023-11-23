@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   input_key.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:02:04 by nibernar          #+#    #+#             */
-/*   Updated: 2023/10/17 14:24:26 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/11/22 09:07:09 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void init_key(t_data *data)
+void	init_key(t_data *data)
 {
 	data->keypress[0] = FALSE;
 	data->keypress[1] = FALSE;
@@ -24,7 +24,8 @@ void init_key(t_data *data)
 
 static t_keypress	get_keypress(int keycode)
 {
-	const int	key_tab[6] = {KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_POV_RIGHT, KEY_POV_LEFT};
+	const int	key_tab[6] = \
+		{KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_POV_RIGHT, KEY_POV_LEFT};
 	t_keypress	key;
 
 	key = KP_UP;
@@ -50,7 +51,6 @@ int	key_press(int keycode, t_data *data)
 		data->minimap = false;
 	else if (keycode == KEY_MINIMAP && data->minimap == false)
 		data->minimap = true;
-	put_floor_ceiling(data);
 	if (get_keypress(keycode) != KP_ERROR)
 		data->keypress[get_keypress(keycode)] = TRUE;
 	if (keycode == KEY_ESC)
