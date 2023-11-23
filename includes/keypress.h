@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:17:50 by naterrie          #+#    #+#             */
-/*   Updated: 2023/10/29 16:04:57 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:12:56 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ enum e_key
 	KEY_POV_LEFT = 123,
 	KEY_MINIMAP = 48,
 };
-#endif
+# endif
 
 # ifdef __linux__
 
@@ -52,6 +52,6 @@ enum e_key
 	KEY_POV_LEFT = 65361,
 	KEY_MINIMAP = 65289,
 };
-#endif
+# endif
 
 #endif

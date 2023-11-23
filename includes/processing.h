@@ -6,7 +6,7 @@
 /*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/23 09:48:21 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:24:53 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define PROCESSING_H
 
 # ifdef __APPLE__
-# include "../mlx_macos/mlx.h"
-#endif
+#  include "../mlx_macos/mlx.h"
+# endif
 
 # ifdef __linux__
-# include "../mlx/mlx.h"
-#endif
+#  include "../mlx/mlx.h"
+# endif
 
 # include "keypress.h"
 # include "utils.h"

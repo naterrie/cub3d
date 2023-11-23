@@ -67,6 +67,69 @@ static void	ft_set_map(t_data *data, char **map, char *file)
 	data->parsing.map[j] = NULL;
 }
 
+
+//============================================
+
+void	ft_print_map(char **str)
+{
+	int i = 0;
+	int j;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			printf("%c", str[i][j]);
+			j++;
+		}
+		i++;
+	}
+}
+
+int	if_is_space_in_column(char **str, int j, int c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i + 1])
+	{
+		if ((str[i + 1][j] != ' ') && (str[i + 1][j] != '\0') && (str[i + 1][j] != '\n'))
+		{
+			printf("char = |%c| c= %d  j = %d\n", str[i + 1][j], c, j);
+			return (0);
+		}
+		i++;
+	}
+	printf("j = %d  c = %d\n", j, c);
+	return (1); 
+}
+
+int	ft_check_double_map(char **str)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if (str[i][j] == ' ')
+			{
+				if (if_is_space_in_column(str, j, i) == 1)
+				{
+					printf("double map\n");
+					return (-1);
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 void	split_file(char **map, t_data *data, char *file)
 {
 	int	i;
@@ -89,5 +152,8 @@ void	split_file(char **map, t_data *data, char *file)
 		i++;
 	}
 	ft_set_map(data, map, file);
+	//ft_print_map(data->parsing.map);
+	if (ft_check_double_map(data->parsing.map) != 0)
+		printf("err double map \n");
 	free_str(map);
 }
