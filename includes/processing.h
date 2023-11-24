@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/24 16:08:32 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/11/24 18:50:05 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # include <stdbool.h>
 # include <math.h>
 
-# define MAP_ZOOM 5
+# define MAP_ZOOM 10
 # define SCREEN_W 1600
 # define SCREEN_H 800
 # define MOVE_SPEED 0.051

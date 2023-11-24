@@ -103,7 +103,7 @@ int	split_file(char **map, t_data *data, char *file)
 	i = -1;
 	while (map[++i])
 	{
-		if (map[i][0] == 'N' && map[i][1] == 'O' && map[i][2] ==)
+		if (map[i][0] == 'N' && map[i][1] == 'O' && map[i][2] == ' ')
 			data->parsing.no = get_texture(map[i]);
 		else if (map[i][0] == 'S' && map[i][1] == 'O' && map[i][2] == ' ')
 			data->parsing.so = get_texture(map[i]);
