@@ -69,12 +69,9 @@ struct s_parsing
 int			onlywall(char *str);
 int			pars_island(char **map);
 int			parsing(char *file, t_data *data);
-int			check_chars(char **map);
 int			check_start(t_data *data);
 int			ft_pars_floor_ceil(char *str);
 void		replace_texture(char *str);
-int			check_extension(t_data *data);
-int			file_texture(t_data *data);
 int			check_texture(t_data *data);
 int			split_file(char **map, t_data *data, char *file);
 int			nbline(char *file);
@@ -113,12 +110,6 @@ struct s_ray
 	t_int		dda_step;
 	double		distance;
 };
-
-double		ray_len(t_double src, t_double dest);
-void		norm_cam_x(t_data *data, double x);
-double		degre_to_radian(double angle);
-int			wall_height(t_ray ray, int i);
-t_double	t_double_rotate(t_double dir, double fov);
 
 /*########################
 #	 struct_player		 #
@@ -197,14 +188,12 @@ void		init_key(t_data *data);
 /*########################
 #	 	Ray_Shoot		 #
 #########################*/
-void		set_ray_dist_player_side(t_data *data);
 void		ray_pos(t_data *data);
 
 /*########################
 #	 	Raycasting		 #
 ########################*/
 void		display_game(t_data *data);
-void		raycast(t_data *data);
 
 /*########################
 #	 	Draw utils		 #
@@ -212,18 +201,19 @@ void		raycast(t_data *data);
 void		draw_square(t_data *data, int x, int y, int color);
 void		my_mlx_pixel_put(t_data	*data, int x, int y, int color);
 void		ft_exit(t_data *data);
-void		draw_fov(t_data *data);
-void		my_mlx_pixel_put(t_data	*data, int x, int y, int color);
-void		draw_line(t_data *data, t_ray *ray);
 
 /*########################
 #	 	raycast utils	 #
 ########################*/
 t_double	t_pos_rotate(t_double dir, double fov);
+void		norm_cam_x(t_data *data, double x);
+double		degre_to_radian(double angle);
 
 /*########################
 #			Walls		 #
 ########################*/
 void		put_wall(t_data *data, int pos, int height);
+double		ray_len(t_double src, t_double dest);
+int			wall_height(t_ray ray, int i);
 
 #endif

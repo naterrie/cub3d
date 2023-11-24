@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-void	set_ray_dist_player_side(t_data *data);
-void	init_raycasting(t_data *data, int x);
-void	dda(t_data *data);
+static void		set_ray_dist_player_side(t_data *data);
+static void		init_raycasting(t_data *data, int x);
+static void		dda(t_data *data);
 
 void	display_game(t_data *data)
 {
@@ -32,7 +32,7 @@ void	display_game(t_data *data)
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }
 
-void	dda(t_data *data)
+static void	dda(t_data *data)
 {
 	while (1)
 	{
@@ -54,7 +54,7 @@ void	dda(t_data *data)
 	}
 }
 
-void	init_raycasting(t_data *data, int x)
+static void	init_raycasting(t_data *data, int x)
 {
 	data->player.d.x = cos(data->player.angle + data->ray.ray_angle[x]);
 	data->player.d.y = sin(data->player.angle + data->ray.ray_angle[x]);
@@ -80,7 +80,7 @@ void	init_raycasting(t_data *data, int x)
 	set_ray_dist_player_side(data);
 }
 
-void	set_ray_dist_player_side(t_data *data)
+static void	set_ray_dist_player_side(t_data *data)
 {
 	if (data->ray.direction.x > 0)
 	{

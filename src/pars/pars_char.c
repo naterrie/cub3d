@@ -86,29 +86,6 @@ int	check_start(t_data *data)
 	data->parsing.map_max.x = (j - 1);
 	data->parsing.map_max.y = i;
 	if (count != 1)
-		return (write(2, ERR_NO_PLAYER, 30), 1);
-	return (0);
-}
-
-int	check_chars(char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] != EMPTY && map[i][j] != WALL && \
-			map[i][j] != 'N' && map[i][j] != 'S' && \
-			map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] \
-			!= ' ' && map[i][j] != 10 && map[i][j] != 13)
-				return (write(2, ERR_CHAR, 22), 1);
-			j++;
-		}
-		i++;
-	}
+		return (write(2, "Error : Wrong number of player\n", 30), 1);
 	return (0);
 }

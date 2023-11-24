@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/24 15:22:34 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/11/24 16:08:32 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,12 @@
 
 # include "../libft/libft.h"
 # include "get_next_line.h"
-# include <unistd.h>
 # include <stdio.h>
-# include <stdlib.h>
 # include <fcntl.h>
 # include <stdbool.h>
 # include <math.h>
 
-# define MINI_SIZE 10
-# define MAP_ZOOM 10
+# define MAP_ZOOM 5
 # define SCREEN_W 1600
 # define SCREEN_H 800
 # define MOVE_SPEED 0.051

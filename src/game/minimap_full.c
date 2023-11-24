@@ -17,11 +17,11 @@ static void	draw_player(t_data *data)
 	int	i;
 	int	j;
 
-	i = -MINI_SIZE;
-	while (i < MINI_SIZE)
+	i = -MAP_ZOOM;
+	while (i < MAP_ZOOM)
 	{
-		j = -MINI_SIZE;
-		while (j < MINI_SIZE)
+		j = -MAP_ZOOM;
+		while (j < MAP_ZOOM)
 		{
 			if (i == 0 && j == 0)
 				draw_square(data, (data->player.position.y - 0.5) * MAP_ZOOM \
@@ -39,10 +39,10 @@ void	minimap_full(t_data *data)
 	double	t;
 
 	i = 0;
-	while (data->parsing.map[i] && i < SCREEN_H / MINI_SIZE)
+	while (data->parsing.map[i] && i < SCREEN_H / MAP_ZOOM)
 	{
 		j = -1;
-		while (data->parsing.map[i][++j] && j < SCREEN_W / MINI_SIZE)
+		while (data->parsing.map[i][++j] && j < SCREEN_W / MAP_ZOOM)
 		{
 			if (data->parsing.map[i][j] == WALL)
 				draw_square(data, i * MAP_ZOOM, j * MAP_ZOOM, 0xFF9E9E9E);

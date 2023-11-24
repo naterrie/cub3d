@@ -107,8 +107,6 @@ int	parsing(char *file, t_data *data)
 		ft_exit(data);
 	if (check_start(data))
 		ft_exit(data);
-	if (check_chars(data->parsing.map))
-		ft_exit(data);
 	if (check_border(data->parsing.map))
 		ft_exit(data);
 	if (pars_island(data->parsing.map))
