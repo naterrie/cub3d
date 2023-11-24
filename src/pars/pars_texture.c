@@ -111,9 +111,9 @@ int	split_file(char **map, t_data *data, char *file)
 			data->parsing.we = get_texture(map[i]);
 		else if (map[i][0] == 'E' && map[i][1] == 'A' && map[i][2] == ' ')
 			data->parsing.ea = get_texture(map[i]);
-		else if (map[i][0] == 'F')
+		else if (map[i][0] == 'F' && map[i][1] == ' ')
 			data->parsing.floor = ft_pars_floor_ceil(map[i]);
-		else if (map[i][0] == 'C')
+		else if (map[i][0] == 'C' && map[i][1] == ' ')
 			data->parsing.ceil = ft_pars_floor_ceil(map[i]);
 		else if (ft_strlen(map[i]) > 2 && onlywall(map[i]) == 1)
 			return (printf("Error, wrong line in file\n"), free_str(map), 1);
