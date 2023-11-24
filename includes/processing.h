@@ -6,7 +6,7 @@
 /*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:40:23 by nibernar          #+#    #+#             */
-/*   Updated: 2023/11/23 11:12:40 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/11/24 15:22:34 by naterrie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 # define ERR_COLOR			"Error : Wrong color\n"
 # define ERR_EXTENTION		"Error : Wrong extention\n"
 # define ERR_CHAR			"Error : Invalid char\n"
-# define ERR_NO_PLAYER		"Error : No player in the map\n"
+# define ERR_NO_PLAYER		"Error : Wrong number of player\n"
 # define ERR_MAP			"Error : No map detected\n"
 # define ERR_COLOR_MISS		"Error : No color\n"
 # define ERR_TEXTURE		"Error : No texture\n"

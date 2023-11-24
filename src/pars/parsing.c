@@ -101,7 +101,8 @@ int	parsing(char *file, t_data *data)
 	map = get_file(file);
 	if (!map)
 		return (1);
-	split_file(map, data, file);
+	if (split_file(map, data, file) == 1)
+		ft_exit(data);
 	if (check_texture(data))
 		ft_exit(data);
 	if (check_start(data))

@@ -96,7 +96,7 @@ static void	ft_set_map(t_data *data, char **map, char *file)
 	data->parsing.map[j] = NULL;
 }
 
-void	split_file(char **map, t_data *data, char *file)
+int	split_file(char **map, t_data *data, char *file)
 {
 	int	i;
 
@@ -115,8 +115,14 @@ void	split_file(char **map, t_data *data, char *file)
 			data->parsing.floor = ft_pars_floor_ceil(map[i]);
 		else if (map[i][0] == 'C')
 			data->parsing.ceil = ft_pars_floor_ceil(map[i]);
+		else if (ft_strlen(map[i]) > 2 && onlywall(map[i]) == 1)
+		{
+			printf("%s %d\n", map[i], ft_strlen(map[i]));
+			return (write(1, "Error, wrong line in file\n", 26), 1);
+		}
 		i++;
 	}
 	ft_set_map(data, map, file);
 	free_str(map);
+	return (0);
 }

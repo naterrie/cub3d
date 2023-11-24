@@ -12,6 +12,22 @@
 
 #include "cub3d.h"
 
+int	onlywall(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '1' && str[i] != 10 && str[i] != 13 \
+			&& str[i] != '0' && str[i] != 'N' \
+			&& str[i] != 'S' && str[i] != 'E' && str[i] != 'W')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	ft_pars_floor_ceil(char *str)
 {
 	int	temp[3];

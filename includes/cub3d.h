@@ -66,6 +66,7 @@ struct s_parsing
 	t_double	map_max;
 };
 
+int			onlywall(char *str);
 int			pars_island(char **map);
 int			parsing(char *file, t_data *data);
 int			check_chars(char **map);
@@ -75,7 +76,7 @@ void		replace_texture(char *str);
 int			check_extension(t_data *data);
 int			file_texture(t_data *data);
 int			check_texture(t_data *data);
-void		split_file(char **map, t_data *data, char *file);
+int			split_file(char **map, t_data *data, char *file);
 int			nbline(char *file);
 int			line_null(char *str);
 char		**get_file(char *file);
