@@ -100,10 +100,10 @@ int	split_file(char **map, t_data *data, char *file)
 {
 	int	i;
 
-	i = 0;
-	while (map[i])
+	i = -1;
+	while (map[++i])
 	{
-		if (map[i][0] == 'N' && map[i][1] == 'O' && map[i][2] == ' ')
+		if (map[i][0] == 'N' && map[i][1] == 'O' && map[i][2] ==)
 			data->parsing.no = get_texture(map[i]);
 		else if (map[i][0] == 'S' && map[i][1] == 'O' && map[i][2] == ' ')
 			data->parsing.so = get_texture(map[i]);
@@ -117,7 +117,6 @@ int	split_file(char **map, t_data *data, char *file)
 			data->parsing.ceil = ft_pars_floor_ceil(map[i]);
 		else if (ft_strlen(map[i]) > 2 && onlywall(map[i]) == 1)
 			return (printf("Error, wrong line in file\n"), free_str(map), 1);
-		i++;
 	}
 	ft_set_map(data, map, file);
 	free_str(map);
