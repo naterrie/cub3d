@@ -116,7 +116,7 @@ int	split_file(char **map, t_data *data, char *file)
 		else if (map[i][0] == 'C')
 			data->parsing.ceil = ft_pars_floor_ceil(map[i]);
 		else if (ft_strlen(map[i]) > 2 && onlywall(map[i]) == 1)
-			return (write(1, "Error, wrong line in file\n", 26), 1);
+			return (printf("Error, wrong line in file\n"), free_str(map), 1);
 		i++;
 	}
 	ft_set_map(data, map, file);
