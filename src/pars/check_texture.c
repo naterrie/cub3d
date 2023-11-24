@@ -17,8 +17,11 @@ int	ft_pars_floor_ceil(char *str)
 	int	temp[3];
 
 	ft_split_atoi(str, ' ', temp);
-	if (temp[0] < 0 || temp[0] > 255 || temp[1] < 0 || temp[1] > 255 || \
-		temp[2] < 0 || temp[2] > 255)
+	// dprintf(2, "%d\n", temp[0]);
+	// dprintf(2, "%d\n", temp[1]);
+	// dprintf(2, "%d\n", temp[2]);
+	if (!(temp[0] >= 0 && temp[0] <= 255) || !(temp[1] >= 0 && temp[1] <= 255) || \
+		!(temp[2] >= 0 && temp[2] <= 255))
 	{
 		write(2, ERR_COLOR, 21);
 		return (-1);

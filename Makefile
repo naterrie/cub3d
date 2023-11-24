@@ -21,6 +21,7 @@ DIR_OBJS :=	.objs/
 
 NAME	=	cub3D
 
+
 CFLAGS	=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(GNL_DIR) -g3 -fsanitize=address
 
 UNAME	=	$(shell uname -s)

@@ -12,23 +12,57 @@
 
 #include "cub3d.h"
 
+int	ft_isdigit_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!(str[i] >= '0' && str[i] <= '9') && str[i] != 13 && str[i] != 10 \
+			&& str[i] != ' ' && str[i] != '\t')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	ft_split_atoi(char *s, char c, int t[3])
 {
 	char	**temp;
 	int		i;
 	int		j;
+	int		k;
 
 	i = 0;
 	j = 0;
+	k = 0;
+	while (s[i])
+	{
+		if (s[i] == ',')
+			k++;
+		i++;
+	}
+	i = 0;
 	while (s[i] != c)
 		i++;
 	i++;
 	temp = ft_split(s + i, ',');
 	while (temp[j])
 		j++;
-	if (j != 3)
+	if ((j != 3) || (k != 2) || (ft_isdigit_str(temp[0]) == 1 || \
+		ft_isdigit_str(temp[1]) == 1 || ft_isdigit_str(temp[2]) == 1))
 	{
 		write(2, ERR_COLOR, 21);
+		free_str(temp);
+		// return mais ne quite pas le prog
+		return ;
+	}
+	if (temp[0][0] == 13 || temp[1][0] == 13 || temp[2][0] == 13)
+	{
+		write(2, ERR_COLOR, 21);
+		free_str(temp);
+		// return mais ne quite pas le prog
 		return ;
 	}
 	t[0] = ft_atoi(temp[0]);
