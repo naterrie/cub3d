@@ -177,6 +177,7 @@ void		start_game(t_data *data);
 /*########################
 #	 	Utils game		 #
 ########################*/
+char		**cpymap(char **map);
 void		check_wall_move(t_data *data, double posy, double posx);
 int			exit_game(t_data *data);
 

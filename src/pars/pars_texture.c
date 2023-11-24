@@ -12,6 +12,35 @@
 
 #include "cub3d.h"
 
+char	**cpymap(char **map)
+{
+	char	**tmp;
+	int		i;
+	int		j;
+
+	i = 0;
+	while (map[i])
+		i++;
+	tmp = malloc(sizeof(char *) * (i + 1));
+	if (!tmp)
+		return (NULL);
+	i = -1;
+	while (map[++i])
+	{
+		j = 0;
+		while (map[i][j])
+			j++;
+		tmp[i] = malloc(sizeof(char) * (j + 1));
+		if (!tmp[i])
+			return (NULL);
+		j = -1;
+		while (map[i][++j])
+			tmp[i][j] = map[i][j];
+		tmp[i][j] = '\0';
+	}
+	return (tmp);
+}
+
 int	check_texture(t_data *data)
 {
 	if (data->parsing.ceil == -1 || data->parsing.floor == -1)
