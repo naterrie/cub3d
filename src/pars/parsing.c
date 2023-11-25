@@ -12,59 +12,43 @@
 
 #include "cub3d.h"
 
-static int	border_char(char **map, int x, int y)
+static int	split_file(char **map, t_data *data, char *file)
 {
 	int	i;
 
-	i = 0;
-	while (map[i])
-		i++;
-	if (x < 0 || y < 0 || x >= i || y >= ft_strlen(map[x]) || \
-	(map[x][y] != WALL && map[x][y] != EMPTY && map[x][y] != 'E' \
-	&& map[x][y] != 'N' && map[x][y] != 'S' && map[x][y] != 'W'))
-		return (write(2, ERR_MAP_BORDER, 22), 1);
-	return (0);
-}
-
-static int	check_wall(char **map, int x, int y)
-{
-	if (border_char(map, x + 1, y))
-		return (1);
-	if (border_char(map, x - 1, y))
-		return (1);
-	if (border_char(map, x, y + 1))
-		return (1);
-	if (border_char(map, x, y - 1))
-		return (1);
-	if (border_char(map, x + 1, y + 1))
-		return (1);
-	if (border_char(map, x - 1, y - 1))
-		return (1);
-	if (border_char(map, x + 1, y - 1))
-		return (1);
-	if (border_char(map, x - 1, y + 1))
-		return (1);
-	return (0);
-}
-
-static int	check_border(char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
+	i = -1;
+	while (map[++i])
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == EMPTY)
-				if (check_wall(map, i, j))
-					return (1);
-			j++;
-		}
-		i++;
+		if (map[i][0] == 'N' && map[i][1] == 'O' && map[i][2] == ' ')
+			data->parsing.no = get_texture(map[i], data);
+		else if (map[i][0] == 'S' && map[i][1] == 'O' && map[i][2] == ' ')
+			data->parsing.so = get_texture(map[i], data);
+		else if (map[i][0] == 'W' && map[i][1] == 'E' && map[i][2] == ' ')
+			data->parsing.we = get_texture(map[i], data);
+		else if (map[i][0] == 'E' && map[i][1] == 'A' && map[i][2] == ' ')
+			data->parsing.ea = get_texture(map[i], data);
+		else if (map[i][0] == 'F' && map[i][1] == ' ')
+			data->parsing.floor = ft_pars_floor_ceil(map[i], \
+						data->parsing.floor);
+		else if (map[i][0] == 'C' && map[i][1] == ' ')
+			data->parsing.ceil = ft_pars_floor_ceil(map[i], data->parsing.ceil);
+		else if (ft_strlen(map[i]) > 2 && onlywall(map[i]) == 1)
+			return (printf("Error, wrong line in file\n"), free_str(map), 1);
 	}
+	ft_set_map(data, map, file);
+	free_str(map);
+	return (0);
+}
+
+static int	check_texture(t_data *data)
+{
+	if (data->parsing.ceil < 0 || data->parsing.floor < 0)
+		return (printf(ERR_COLOR_MISS), 1);
+	if (!data->parsing.no || !data->parsing.so || !data->parsing.we \
+	|| !data->parsing.ea)
+		return (printf(ERR_TEXTURE), 1);
+	if (!data->parsing.map)
+		return (printf(ERR_MAP), 1);
 	return (0);
 }
 

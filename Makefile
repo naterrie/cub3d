@@ -50,8 +50,6 @@ HEADERS	=	cub3d.h\
 
 INC_DIR	=	includes/
 
-INC		=	$(addprefix $(INC_DIR), $(HEADERS))
-
 GNL_DIR =	getnextline/
 
 GNL_SRC =	get_next_line.c \
@@ -68,12 +66,14 @@ DIR_SRCS	=	src/
 FILES		=	main.c
 
 PARS_DIR =	pars/
-PARS_SRC =	pars_char.c \
-			pars_texture.c \
+PARS_SRC =	pars_start.c \
 			parsing.c \
 			utils_pars.c \
-			check_texture.c \
-			pars_island.c
+			pars_island.c \
+			check_map.c \
+			set_map.c \
+			pars_colors.c \
+			pars_texture.c \
 
 FILES	+=	$(addprefix $(PARS_DIR), $(PARS_SRC))
 
@@ -89,9 +89,11 @@ GAME_SRC =	start_game.c \
 			utils_raycasting.c \
 			walls.c
 
-FILES	 +=	$(addprefix $(GAME_DIR), $(GAME_SRC))
+FILES	+=	$(addprefix $(GAME_DIR), $(GAME_SRC))
 
 OBJS	+=	$(addprefix $(DIR_OBJS), $(FILES:.c=.o))
+
+DEPS	=	$(OBJS:.o=.d)
 
 #########################
 # 		RULES			#
@@ -104,22 +106,16 @@ $(NAME): $(LIBFT) $(DIR_OBJS) $(MLX_PATH) $(OBJS) $(LIBFT)
 	echo "$(GREEN)✅ $(NAME) compilated !"
 	@norminette src/ | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
-$(DIR_OBJS)%.o: $(DIR_SRCS)%.c $(INC) Makefile
+$(DIR_OBJS)%.o: $(DIR_SRCS)%.c Makefile
 	echo "$(GREEN)⏳ Making $(NAME)"
 	printf "$(BLEU) ⮡ Making $(RESET)$@$(RED)"
-	cc $(CFLAGS) -c $< -o $@
+	cc $(CFLAGS) -MMD -c $< -o $@
 	printf "$(ERASE)"
 
-$(DIR_OBJS)%.o: $(DIR_SRCS)%.c $(INC) Makefile
+$(DIR_OBJS)%.o: $(GNL_DIR)%.c Makefile
 	echo "$(GREEN)⏳ Making $(NAME)"
 	printf "$(BLEU) ⮡ Making $(RESET)$@$(RED)"
-	cc $(CFLAGS) -c $< -o $@
-	printf "$(ERASE)"
-
-$(DIR_OBJS)%.o: $(GNL_DIR)%.c $(INC) Makefile
-	echo "$(GREEN)⏳ Making $(NAME)"
-	printf "$(BLEU) ⮡ Making $(RESET)$@$(RED)"
-	cc $(CFLAGS) -c $< -o $@
+	cc $(CFLAGS) -MMD -c $< -o $@
 	printf "$(ERASE)"
 
 $(MLX_PATH):
@@ -130,6 +126,8 @@ $(DIR_OBJS):
 
 $(LIBFT): force
 	make -C libft
+
+-include $(DEPS)
 
 #########################
 # 	CLEAN COMMANDS		#

@@ -60,6 +60,8 @@ OBJS		= $(addprefix $(DIR_OBJS)/, $(SRCS:.c=.o))
 OBJS_BONUS	= $(addprefix $(DIR_OBJS)/, $(BONUS:.c=.o)) \
 				$(addprefix $(DIR_OBJS)/, $(SRCS:.c=.o))
 
+DEPS		= $(OBJS:.o=.d)
+
 HEADER = libft.h
 DIR_SRCS = src
 FLAGS	= -Wall -Wextra -Werror
@@ -90,11 +92,13 @@ $(NAME): $(DIR_OBJS) $(OBJS)
 $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c $(HEADER) Makefile
 	echo "$(GREEN)⏳ Making $(NAME)"
 	printf "$(BLEU) ⮡ Making $(RESET)$@$(RED)"
-	cc $(CFLAGS) -c $< -o $@
+	cc $(CFLAGS) -MMD -c $< -o $@
 	printf "$(ERASE)"
 
 $(DIR_OBJS):
 	mkdir -p $@
+
+-include $(DEPS)
 
 clean:
 	rm -rf .objs

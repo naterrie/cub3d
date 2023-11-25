@@ -69,7 +69,7 @@ void	start_game(t_data *data)
 	if (!data->mlx.mlx)
 		ft_exit(data);
 	if (xpm_check(data))
-		ft_exit(data);
+		exit_game(data);
 	data->mlx.win = mlx_new_window(data->mlx.mlx, SCREEN_W, SCREEN_H, "Cub3D");
 	if (!data->mlx.win)
 		ft_exit(data);

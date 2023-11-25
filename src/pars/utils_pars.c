@@ -12,44 +12,6 @@
 
 #include "cub3d.h"
 
-void	ft_split_atoi(char *s, char c, int t[3])
-{
-	char	**temp;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while (s[i] != c)
-		i++;
-	i++;
-	temp = ft_split(s + i, ',');
-	while (temp[j])
-		j++;
-	if (j != 3)
-	{
-		write(2, ERR_COLOR, 21);
-		return ;
-	}
-	t[0] = ft_atoi(temp[0]);
-	t[1] = ft_atoi(temp[1]);
-	t[2] = ft_atoi(temp[2]);
-	free_str(temp);
-}
-
-char	*get_texture(char *str)
-{
-	char	**split;
-	char	*temp;
-
-	split = ft_split(str, ' ');
-	if (!split || !split[1])
-		return (NULL);
-	temp = ft_strdup(split[1]);
-	free_str(split);
-	return (temp);
-}
-
 int	nbline(char *file)
 {
 	int		line;

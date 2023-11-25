@@ -53,7 +53,6 @@ struct s_mlx
 /*########################
 #	 struct_parsing		 #
 ########################*/
-
 struct s_parsing
 {
 	char		*no;
@@ -66,24 +65,49 @@ struct s_parsing
 	t_double	map_max;
 };
 
+/*########################
+#		check_map		 #
+########################*/
 int			onlywall(char *str);
+int			check_border(char **map);
+
+/*########################
+#		pars_colors		 #
+########################*/
+int			ft_pars_floor_ceil(char *str, int color);
+
+/*########################
+#		pars_island		 #
+########################*/
 int			pars_island(char **map);
-int			parsing(char *file, t_data *data);
+
+/*########################
+#		pars_start		 #
+########################*/
 int			check_start(t_data *data);
-int			ft_pars_floor_ceil(char *str);
+
+/*########################
+#		pars_texture	 #
+########################*/
+char		*get_texture(char *str, t_data *data);
 void		replace_texture(char *str);
-int			check_texture(t_data *data);
-int			split_file(char **map, t_data *data, char *file);
+
+/*########################
+#		parsing			 #
+########################*/
+int			parsing(char *file, t_data *data);
+void		ft_set_map(t_data *data, char **map, char *file);
+
+/*########################
+#		utils_pars		 #
+########################*/
+char		**get_file(char *file);
 int			nbline(char *file);
 int			line_null(char *str);
-char		**get_file(char *file);
-char		*get_texture(char *str);
-void		ft_split_atoi(char *s, char c, int t[3]);
 
 /*########################
 #	 struct_dda			 #
 ########################*/
-
 struct s_dda
 {
 	double		wall_x;
@@ -96,7 +120,6 @@ struct s_dda
 /*########################
 #	 struct_raycasting	 #
 ########################*/
-
 struct s_ray
 {
 	t_double	dist_player_to_side;
@@ -114,7 +137,6 @@ struct s_ray
 /*########################
 #	 struct_player		 #
 ########################*/
-
 struct s_player
 {
 	t_double	d;
@@ -131,7 +153,6 @@ struct s_player
 /*########################
 #	 struct_data		 #
 ########################*/
-
 struct s_data
 {
 	int			bits_per_pixel;
