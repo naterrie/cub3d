@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   pars_colors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 12:13:40 by naterrie          #+#    #+#             */
-/*   Updated: 2023/11/25 16:08:59 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/11/26 13:22:11 by aviscogl         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	no_color(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i][0] == 13 || str[i][0] == 10)
+			return (1);
+		i++;
+	}
+	if (i != 3)
+		return (1);
+	return (0);
+}
 
 static int	check_color(char **str)
 {
@@ -52,7 +68,7 @@ static char	**split_atoi(char *str)
 		return (free_str(split), NULL);
 	temp = ft_split(split[1], ',');
 	i = -1;
-	if (check_color(temp) == -1)
+	if (no_color(temp) == 1 || check_color(temp) == -1)
 		return (free_str(split), free_str(temp), NULL);
 	free_str(split);
 	return (temp);
